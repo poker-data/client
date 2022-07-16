@@ -91,7 +91,7 @@ export default function MenuAppBar({ handleBtnClick }) {
             }}
             onClick={handleBrandClick}
           >
-            HPM GENERADOR DE COTIZACIONES
+           Poker Data
           </Typography>
           {auth && (
             <div className="avatar-container">
