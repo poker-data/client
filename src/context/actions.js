@@ -57,8 +57,19 @@ export async function logout(dispatch) {
     alert("Error al cerrar sesión");
   }
 }
+export async function getPlayerStats(dispatch, name) {
+  const requestOptions = {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  };
+  let response = await fetch(`${ROOT_URL}/api/playerData/${name}`, requestOptions);
+  let data = await response.json();
+  console.log(data);
+  dispatch({ type: "GET_USER", payload: data });
+  return data;
+}
 
-export async function getClients(dispatch) {
+/* export async function getClients(dispatch) {
   const requestOptions = {
     method: "GET",
     headers: { "Content-Type": "application/json" },
@@ -297,4 +308,4 @@ export async function deleteInvoiceById(id) {
   let response = await fetch(`${ROOT_URL}/api/invoice/${id}`, requestOptions);
   let data = await response.json();
   return data;
-}
+} */

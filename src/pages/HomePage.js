@@ -4,8 +4,17 @@ import MenuAppBar from "../components/MenuAppBar";
 import "./HomePage.css";
 import Box from '@mui/material/Box';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid'
+ import  { getPlayerStats,useAuthDispatch , useAuthState} from '../Context'
 
 function HomePage() {
+  const state = useAuthState();
+  const dispatch = useAuthDispatch();
+useEffect(async() => {
+  let response = await getPlayerStats(dispatch, "TacoAlPastor");
+  //console.log(response);
+  //console.log(state)
+}, []);
+
    const rows = [
     { id: 1, col1: 'Hello', col2: 'World' },
     { id: 2, col1: 'DataGridPro', col2: 'is Awesome' },
