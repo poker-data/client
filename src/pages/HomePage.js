@@ -4,27 +4,16 @@ import MenuAppBar from "../components/MenuAppBar";
 import "./HomePage.css";
 import Box from '@mui/material/Box';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid'
- import  { getPlayerStats,useAuthDispatch , useAuthState} from '../Context'
+import { getPlayerStats, useAuthDispatch, useAuthState } from '../Context'
+import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
+import PlayerStats from "../components/playerStats/PlayerStats";
 
 function HomePage() {
   const state = useAuthState();
   const dispatch = useAuthDispatch();
-useEffect(async() => {
-  let response = await getPlayerStats(dispatch, "TacoAlPastor");
-  //console.log(response);
-  //console.log(state)
-}, []);
 
-   const rows = [
-    { id: 1, col1: 'Hello', col2: 'World' },
-    { id: 2, col1: 'DataGridPro', col2: 'is Awesome' },
-    { id: 3, col1: 'MUI', col2: 'is Amazing' },
-  ];
-  
-   const columns = [
-    { field: 'col1', headerName: 'Column 1', width: 150 },
-    { field: 'col2', headerName: 'Column 2', width: 150 },
-  ];
+
   const [sidebarVisible, setSidebarVisible] = React.useState(false);
 
   const toggleSidebar = () => {
@@ -38,10 +27,10 @@ useEffect(async() => {
   return (
     <>
       <MenuAppBar handleBtnClick={toggleSidebar} />
-
-      <div style={{ height: 300, width: '100%' }}>
-      <DataGrid rows={rows} columns={columns} />
-    </div>
+      <Grid container spacing={3}>
+        <PlayerStats/>
+        
+      </Grid>
 
       {/*  <Grid
         container
