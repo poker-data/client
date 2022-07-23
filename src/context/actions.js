@@ -41,6 +41,7 @@ export async function logout(dispatch) {
   const requestOptions = {
     method: "GET",
     headers: { "Content-Type": "application/json" },
+    
   };
   let response = await fetch(`${ROOT_URL}/logout`, requestOptions);
   let data = await response.json();
@@ -58,14 +59,22 @@ export async function logout(dispatch) {
   }
 }
 export async function getPlayerStats(dispatch, name) {
+
   const requestOptions = {
     method: "GET",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json" }
   };
+
+  console.log("name: ", name);
+
   let response = await fetch(`${ROOT_URL}/api/playerData/${name}`, requestOptions);
   let data = await response.json();
-  console.log(data);
+  const finalData = []
+  data.info.Response.PlayerResponse.PlayerView.Player.Statistics.StatisticalDataSet[0].Data.map(stat => finalData.push(stat["Y"]));
+  //finalData.sort(( a, b )=> b - a );
+  console.log("finalData: ", finalData);
   dispatch({ type: "GET_USER", payload: data });
+
   return data;
 }
 

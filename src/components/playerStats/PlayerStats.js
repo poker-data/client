@@ -10,7 +10,7 @@ export default function PlayerStats() {
 
     const resetPlayerStats = async () => {
         let response = await getPlayerStats(dispatch, "TacoAlPastor");
-        console.log(response);
+        //console.log(response);
         //console.log(state)
         return response
       }

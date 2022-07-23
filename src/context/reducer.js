@@ -24,7 +24,7 @@ export const initialState = {
   customer: [],
   invoices: [],
   usersList: [],
-  oneUser: '',
+  oneUser: [],
   newInvoice: [],
 };
 

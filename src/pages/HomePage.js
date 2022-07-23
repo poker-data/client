@@ -27,7 +27,7 @@ function HomePage() {
   return (
     <>
       <MenuAppBar handleBtnClick={toggleSidebar} />
-      <Grid container spacing={3}>
+      <Grid container spacing={3} sx={{ marginLeft: "2%", marginTop: "2%" }}>
         <PlayerStats/>
         
       </Grid>
