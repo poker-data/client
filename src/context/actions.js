@@ -70,13 +70,18 @@ export async function getPlayerStats(dispatch, name) {
   let response = await fetch(`${ROOT_URL}/api/playerData/${name}`, requestOptions);
   let data = await response.json();
   const finalData = []
-  data.info.Response.PlayerResponse.PlayerView.Player.Statistics.StatisticalDataSet[0].Data.map(stat => finalData.push(stat["Y"]));
+  
+  data.info.Response.PlayerResponse.PlayerView.Player.Statistics.StatisticalDataSet[0].Data.map(subArray => subArray["Y"].map(obj => 
+    obj['@id'] == 'FirstDate' ||  obj['@id'] == 'LastDate' ? finalData.push({ '@id': obj['@id'],'$':  new Date (  Number( obj['$'] * 1000 ) ).toUTCString() })  : finalData.push(obj)
+    ));
   //finalData.sort(( a, b )=> b - a );
   console.log("finalData: ", finalData);
+  
   dispatch({ type: "GET_USER", payload: data });
 
   return data;
 }
+
 
 /* export async function getClients(dispatch) {
   const requestOptions = {
