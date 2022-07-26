@@ -69,13 +69,33 @@ export async function getPlayerStats(dispatch, name) {
 
   let response = await fetch(`${ROOT_URL}/api/playerData/${name}`, requestOptions);
   let data = await response.json();
-  const finalData = []
-  
-  data.info.Response.PlayerResponse.PlayerView.Player.Statistics.StatisticalDataSet[0].Data.map(subArray => subArray["Y"].map(obj => 
-    obj['@id'] == 'FirstDate' ||  obj['@id'] == 'LastDate' ? finalData.push({ '@id': obj['@id'],'$':  new Date (  Number( obj['$'] * 1000 ) ).toUTCString() })  : finalData.push(obj)
-    ));
+  const finalData =  data.info.Response.PlayerResponse.PlayerView.Player.Statistics//.StatisticalDataSet[0].Data.map(subArray => subArray["Y"].map(obj => 
+   // obj['@id'] == 'FirstDate' ||  obj['@id'] == 'LastDate' ? finalData.push({ '@id': obj['@id'],'$':  new Date (  Number( obj['$'] * 1000 ) ).toUTCString() })  : obj
+   // ));
   //finalData.sort(( a, b )=> b - a );
-  console.log("finalData: ", finalData);
+  console.log("finalData: ", finalData );
+  
+  dispatch({ type: "GET_USER", payload: data });
+
+  return data;
+}
+
+export async function getPlayerStatsWithFilters(dispatch, name, filters) {
+
+  const requestOptions = {
+    method: "GET",
+    headers: { "Content-Type": "application/json" }
+  };
+
+  console.log("name: ", name);
+
+  let response = await fetch(`${ROOT_URL}/api/playerData/${name}?filter=${filters}`, requestOptions);
+  let data = await response.json();
+  const finalData =  data.info.Response.PlayerResponse.PlayerView.Player.Statistics//.StatisticalDataSet[0].Data.map(subArray => subArray["Y"].map(obj => 
+   // obj['@id'] == 'FirstDate' ||  obj['@id'] == 'LastDate' ? finalData.push({ '@id': obj['@id'],'$':  new Date (  Number( obj['$'] * 1000 ) ).toUTCString() })  : obj
+   // ));
+  //finalData.sort(( a, b )=> b - a );
+  console.log("finalData: ", finalData );
   
   dispatch({ type: "GET_USER", payload: data });
 

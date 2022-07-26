@@ -1,7 +1,9 @@
 import {
     loginUser,
     logout,
-    getPlayerStats
+    getPlayerStats,
+    getPlayerStatsWithFilters
+
   } from "./actions";
   
   import { AuthProvider, useAuthDispatch, useAuthState } from "./context";
@@ -12,5 +14,6 @@ import {
     useAuthDispatch,
     loginUser,
     logout,
-    getPlayerStats
+    getPlayerStats,
+    getPlayerStatsWithFilters
   };

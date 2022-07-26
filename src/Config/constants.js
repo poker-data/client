@@ -12,3 +12,5 @@ export const STATUS = [
 export const COMISSIONSTATUS = ["POR PAGAR", "PAGADO", "CANCELADO", ""];
 export const COMISSIONAUTHORIZATION = ["APROBADO", "NO APROBADO", ""];
 export const WORK = ["Maquinado", "Soldadura", "Suministro"];
+
+export const FILTERS = []
