@@ -78,22 +78,60 @@ export async function getPlayerStats(dispatch, name) {
   return data;
 }
 
-/* export async function getClients(dispatch) {
+export async function getPlayers(dispatch) {
   const requestOptions = {
     method: "GET",
     headers: { "Content-Type": "application/json" },
   };
   try {
-    let response = await fetch(`${ROOT_URL}/api/customers`, requestOptions);
+    let response = await fetch(`${ROOT_URL}/api/getPlayers`, requestOptions);
     let data = await response.json();
-    // console.log(data);
-    dispatch({ type: "GET_CUSTOMERS", payload: data });
+     console.log(data);
+    dispatch({ type: "GET_PLAYERS", payload: data });
     return data;
   } catch (error) {
     // dispatch({ type: "LOGIN_ERROR", error: error });
     // console.log(error + "try catch actions getClients");
   }
 }
+
+export  const getPlayerByFilter = async (dispatch, options) => {
+  const name = options.playerName;
+  const _id = options._id;
+  const dateFrom = options.dateFrom || null;
+  const dateTo = options.dateTo || null;
+  console.log(options)
+
+  try {
+    const dateNow = new Date();
+    let dateNowToFilter =  dateNow.getTime()
+    dateNowToFilter = dateTo ? dateTo : dateNowToFilter
+
+    let url = `${ROOT_URL}/api/playerData/${name}`;
+    let body = { filter: null, _id: _id }
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body)
+    };
+    if (dateFrom && dateTo) {
+    let filterString = `?filter=Date:${dateFrom}~${dateNowToFilter}`
+    body.filter = filterString
+  }
+
+    console.log("body: ", body);
+
+
+/*     let response = await fetch(url, requestOptions);
+    let data = await response.json();
+     console.log(data);
+    dispatch({ type: "GET_PLAYER_BY_FILTER", payload: data }); */
+}
+catch (error) {
+  console.log(error)
+}
+}
+/* 
 export async function getClient(dispatch, id) {
   const requestOptions = {
     method: "GET",

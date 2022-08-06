@@ -20,8 +20,8 @@ export const initialState = {
   loading: false,
   errorMessage: null,
   users: [],
-  customers: [],
-  customer: [],
+  players: [],
+  playerWithFilter: [],
   invoices: [],
   usersList: [],
   oneUser: [],
@@ -58,45 +58,15 @@ export const AuthReducer = (initialState, action) => {
         loading: false,
         errorMessage: action.error,
       };
-    case "GET_USERS":
+    case "GET_PLAYERS":
       return {
         ...initialState,
-        users: action.payoad,
+        players: action.payload.info,
       };
-    case "GET_USER":
+    case "GET_PLAYER_BY_FILTER":
       return {
         ...initialState,
-        oneUser: action.payoad,
-      };
-    case "GET_CUSTOMERS":
-      return {
-        ...initialState,
-        customers: action.payload.customers,
-      };
-    case "GET_CUSTOMER":
-      return {
-        ...initialState,
-        customer: action.payload.info[0],
-      };
-    case "CUSTOMER_BY_ID":
-      return {
-        ...initialState,
-        customers: action.payload.customerByID,
-      };
-    case "GET_INVOICES":
-      return {
-        ...initialState,
-        invoices: action.payload.filteredInvoices,
-      };
-    case "NEW_INVOICE":
-      return {
-        ...initialState,
-        newInvoice: action.payload.invoice_id,
-      };
-    case "GET_USERS_LIST":
-      return {
-        ...initialState,
-        usersList: action.payload.filteredUsers,
+        playerWithFilter: action.payload.info,
       };
 
     default:
