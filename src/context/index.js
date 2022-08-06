@@ -3,7 +3,8 @@ import {
     logout,
     getPlayerStats,
     getPlayers,
-    getPlayerByFilter
+    getPlayerByFilter,
+    getRooms
   } from "./actions";
   
   import { AuthProvider, useAuthDispatch, useAuthState } from "./context";
@@ -16,5 +17,6 @@ import {
     logout,
     getPlayerStats,
     getPlayers,
-    getPlayerByFilter
+    getPlayerByFilter,
+    getRooms
   };

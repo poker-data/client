@@ -15,17 +15,14 @@ let imageLink = localStorage.getItem("currentUser")
 export const initialState = {
   user: "" || user,
   token: "" || token,
-  role: "" || role,
-  imageLink: "" || imageLink,
   loading: false,
   errorMessage: null,
   users: [],
   players: [],
   playerWithFilter: [],
-  invoices: [],
+  rooms: [],
   usersList: [],
   oneUser: [],
-  newInvoice: [],
 };
 
 export const AuthReducer = (initialState, action) => {
@@ -68,7 +65,11 @@ export const AuthReducer = (initialState, action) => {
         ...initialState,
         playerWithFilter: action.payload.info,
       };
-
+    case "GET ROOMS":
+      return {
+        ...initialState,
+        rooms: action.payload.info,
+      };
     default:
       throw new Error(`Unhandled action type: ${action.type}`);
   }
