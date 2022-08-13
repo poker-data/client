@@ -65,7 +65,7 @@ export const AuthReducer = (initialState, action) => {
         ...initialState,
         playerWithFilter: action.payload.info,
       };
-    case "GET ROOMS":
+    case "GET_ROOMS":
       return {
         ...initialState,
         rooms: action.payload.info,

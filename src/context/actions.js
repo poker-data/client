@@ -83,12 +83,12 @@ export async function getPlayers(dispatch) {
   try {
     let response = await fetch(`${ROOT_URL}/api/getPlayers`, requestOptions);
     let data = await response.json();
-     console.log(data);
+    console.log("Players: ",data);
     dispatch({ type: "GET_PLAYERS", payload: data });
     return data;
   } catch (error) {
-    // dispatch({ type: "LOGIN_ERROR", error: error });
-    // console.log(error + "try catch actions getClients");
+     dispatch({ type: "LOGIN_ERROR", error: error });
+     console.log(error + "try catch actions getPlayers");
   }
 }
 
@@ -129,22 +129,18 @@ catch (error) {
 }
 }
 
-export  const getRooms = async (dispatch) => {
+export async function getRooms (dispatch){
+  const requestOptions = {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  };
   try {
-  
-    const url = `${ROOT_URL}/api/getRooms`;
-   
-    const requestOptions = {
-      method: "GET",
-      headers: { "Content-Type": "application/json" }
-    };
-
-    const response = await fetch(url, requestOptions);
-    const data = await response.json();
-     console.log(data);
+    let response = await fetch(`${ROOT_URL}/api/getRooms`, requestOptions);
+    let data = await response.json();
     dispatch({ type: "GET_ROOMS", payload: data }); 
-}
-catch (error) {
-  console.log(error)
-}
+    return data;
+} catch (error) {
+    dispatch({ type: "LOGIN_ERROR", error: error });
+    console.log(error + "try catch actions getRooms");
+  }
 }

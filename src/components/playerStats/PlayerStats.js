@@ -16,12 +16,14 @@ import Checkbox from '@mui/material/Checkbox';
 
 export default function PlayerStats() {
   const initialPlayerState = Object.freeze({ playerName: "", _id: "" })
+  const initialRoomState = Object.freeze({ roomName: "", _id: "" })
   const initialDateState = Object.freeze({ from: '', to: '' })
 
   const [playerList, setPlayerList] = React.useState([]);
+  const [roomList, setRoomList] = React.useState([]);
   const [selectedDate, setSelectedDate] = React.useState(initialDateState);
   const [player, setPlayer] = React.useState(initialPlayerState);
-  const [rooms, setRooms] = React.useState([]);
+  const [room, setRoom] = React.useState(initialRoomState);
   const [selectedRoomToFilter, setSelectedRoomToFilter] = React.useState('');
 
   const state = useAuthState();
@@ -36,14 +38,23 @@ export default function PlayerStats() {
     })
   };
 
+  
   const handleRoomChange = (e) => {
-    if (selectedRoomToFilter.length > 0) {
-      const addRoom = selectedRoomToFilter.concat(e.target.value);
-      setSelectedRoomToFilter(addRoom);
-    } else {
-      setSelectedRoomToFilter(e.target.value);
-    }
-  };
+    const filterSelectedRoom = roomList.filter(room => room.room=== e.target.value);
+    setRoom({
+      ...room,
+      roomName: filterSelectedRoom[0].room
+    })
+  }
+  // const handleRoomChange = (e) => {
+    
+  //   if (selectedRoomToFilter.length > 0) {
+  //     const addRoom = selectedRoomToFilter.concat(e.target.value);
+  //     setSelectedRoomToFilter(addRoom);
+  //   } else {
+  //     setSelectedRoomToFilter(e.target.value);
+  //   }
+  // };
 
 
   React.useEffect(async () => {
@@ -51,9 +62,18 @@ export default function PlayerStats() {
 
   }, []);
 
+  React.useEffect(async () => {
+    await getRooms(dispatch);
+
+  }, []);
+
   React.useEffect(() => {
     state.players.length ? setPlayerList(state.players) : setPlayerList([]);
   }, [state, selectedDate, player]);
+
+  React.useEffect(() => {
+    state.rooms.length ? setRoomList(state.rooms) : setRoomList([]);
+  }, [state, room]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -63,7 +83,8 @@ export default function PlayerStats() {
       _id: player._id,
       playerName: player.playerName,
       dateFrom: dateFrom,
-      dateTo: dateTo
+      dateTo: dateTo,
+      roomName: room.roomName
     }
     console.log("objectTodb: ", options);
     const response = await getPlayerByFilter(dispatch, options);
@@ -76,10 +97,9 @@ export default function PlayerStats() {
   })
 
 
-
   const columns = [
     { field: 'Name', headerName: 'Name', width: 150 },
-    { field: 'shkUsername', headerName: 'shkUsername', width: 150 },
+    { field: 'Username', headerName: 'Username', width: 150 },
   ];
 
   return (
@@ -104,7 +124,6 @@ export default function PlayerStats() {
             sx={{ margin: "3%", padding: '3%', color: 'black' }}
           >
             {playerList.length > 1 ? playerList.map((player) => { return (<option key={player._id} value={player._id}> {player.playerName} </option>) }) : <option value="">No hay jugadores (actualizar)</option>}
-
           </NativeSelect>
           <Stack>
             <Stack sx={{ display: "flex", flexDirection: "row", margin:"3%" }}>
@@ -113,7 +132,7 @@ export default function PlayerStats() {
               dateAdapter={AdapterDateFns}>
                 <DatePicker
                   label="Seleccionar fecha desde"
-                  value={selectedDate.from}
+                  value={selectedDate.from ? selectedDate.from : null}
                   onChange={(newDate) => {
                     setSelectedDate({ ...selectedDate, from: newDate })
                   }}
@@ -123,7 +142,7 @@ export default function PlayerStats() {
               <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <DatePicker
                   label="Seleccionar fecha hasta"
-                  value={selectedDate.to}
+                  value={selectedDate.to ? selectedDate.to : null}
                   onChange={(newDate) => {
                     setSelectedDate({ ...selectedDate, to: newDate })
                   }}
@@ -132,8 +151,9 @@ export default function PlayerStats() {
               </LocalizationProvider>
               </Stack>
               <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label"> Sala</InputLabel>
+                <InputLabel id="demo-simple-select-label">Sala</InputLabel>
                 <NativeSelect
+                  defaultValue=""
                   inputProps={{
                     name: 'Salas',
                     id: 'uncontrolled-native',
@@ -142,7 +162,7 @@ export default function PlayerStats() {
                   onChange={handleRoomChange}
                   sx={{ margin: "3%", padding: '3%', color: 'black' }}
                 >
-                  {rooms.length > 1 ? rooms.map((room) => { return (<option key={room._id} value={room._id}> {room.name} </option>) }) : <option value="">No hay salas (seleccionar)</option>}
+                  {roomList.length > 0 ? roomList.map((room) => { return (<option key={room.room} value={room.room}> {room.room} </option>) }) : <option value="">No hay salas (seleccionar)</option>}
 
                 </NativeSelect>
               </FormControl>
@@ -156,7 +176,6 @@ export default function PlayerStats() {
             </Button>
             </Stack>
           </Stack>
-
         </FormControl>
       </Box>
     </Grid>
