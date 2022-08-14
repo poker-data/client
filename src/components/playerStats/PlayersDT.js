@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+
 import {Box,
         Table,
         TableBody, 
@@ -10,15 +11,27 @@ import {Box,
         TableFooter,
         TablePagination} from '@mui/material';
 import Notification from '../utils/Notification';
+import { useAuthState } from '../../Context';
+import { setDate } from 'date-fns';
 
 const PlayersDT = () => {
+  const state = useAuthState();
     const [data, setData] = React.useState([]);
     const [error, setError] = React.useState('');
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
     const [notify, setNotify] = React.useState({isOpen:false, message:'', type:'error'})
-
-   
+  const dataTable = []
+   useEffect(() => {
+    console.log(state.playerWithFilter, 'state en tabla')
+    state.playerWithFilter.map(player => {
+     const asd = player["@id"] 
+     const amount = player["$"]
+     const obj = {[asd] : amount}
+    dataTable.push(obj)
+    })
+    console.log(dataTable, 'dataTable')
+   }, [state])
 
     const datos = [{
       playerName: 'John Doe',

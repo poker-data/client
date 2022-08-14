@@ -16,11 +16,12 @@ import Checkbox from '@mui/material/Checkbox';
 import AddIcon from '@mui/icons-material/Add';
 import Popup from '../utils/Popup';
 import PlayerForm from './PlayerForm';
+import { useHistory } from 'react-router-dom';
 
 export default function PlayerStats() {
+  const history = useHistory();
   const [openPopup, setOpenPopup] = React.useState(false)
   const [notify, setNotify] = React.useState({isOpen:false, message:'', type:'error'})
-
   const initialPlayerState = Object.freeze({ playerName: "", _id: "" , shkUsername : ""})
   const initialRoomState = Object.freeze({ roomName: "", _id: "" })
   const initialDateState = Object.freeze({ from: '', to: '' })
@@ -34,7 +35,7 @@ export default function PlayerStats() {
 
   const state = useAuthState();
   let dispatch = useAuthDispatch();
-
+  
   const handlePlayerIDChange = (e) => {
     const filterSelectedPlayer = playerList.filter(player => player._id === e.target.value);
     setPlayer({
@@ -86,6 +87,7 @@ export default function PlayerStats() {
     e.preventDefault();
     const dateFrom = selectedDate.from !== "" ? selectedDate.from.getTime() : null;
     const dateTo = selectedDate.to !== "" ? selectedDate.to.getTime() : null;
+   
     const options = {
       _id: player._id,
       playerName: player.playerName,
@@ -95,6 +97,7 @@ export default function PlayerStats() {
       roomName: room.roomName
     }
     const response = await getPlayerByFilter(dispatch, options);
+    history.push('/info');
   }
 
 
@@ -136,7 +139,7 @@ export default function PlayerStats() {
         <FormControl fullWidth>
           <InputLabel id="demo-simple-select-label"> Jugador</InputLabel>
           <NativeSelect
-            defaultValue={player.playerName}
+            defaultValue= ""
             inputProps={{
               name: 'Jugador',
               id: 'uncontrolled-native',
