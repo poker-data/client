@@ -5,7 +5,7 @@ import { Button, Stack, Select, TextField } from "@mui/material";
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
-import { getPlayerStats, useAuthDispatch, getPlayers, useAuthState, getPlayerByFilter, getRooms } from "../../Context";
+import { getPlayerStats, useAuthDispatch, getPlayers, useAuthState, getPlayerByFilter, getRooms, setNewPlayer } from "../../Context";
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -13,9 +13,15 @@ import NativeSelect from '@mui/material/NativeSelect';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import AddIcon from '@mui/icons-material/Add';
+import Popup from '../utils/Popup';
+import PlayerForm from './PlayerForm';
 
 export default function PlayerStats() {
-  const initialPlayerState = Object.freeze({ playerName: "", _id: "" })
+  const [openPopup, setOpenPopup] = React.useState(false)
+  const [notify, setNotify] = React.useState({isOpen:false, message:'', type:'error'})
+
+  const initialPlayerState = Object.freeze({ playerName: "", _id: "" , shkUsername : ""})
   const initialRoomState = Object.freeze({ roomName: "", _id: "" })
   const initialDateState = Object.freeze({ from: '', to: '' })
 
@@ -34,7 +40,8 @@ export default function PlayerStats() {
     setPlayer({
       ...player,
       playerName: filterSelectedPlayer[0].playerName,
-      _id: filterSelectedPlayer[0]._id
+      _id: filterSelectedPlayer[0]._id,
+      shkUsername: filterSelectedPlayer[0].shkUsername,
     })
   };
 
@@ -82,13 +89,12 @@ export default function PlayerStats() {
     const options = {
       _id: player._id,
       playerName: player.playerName,
+      shkUsername: player.shkUsername,
       dateFrom: dateFrom,
       dateTo: dateTo,
       roomName: room.roomName
     }
-    console.log("objectTodb: ", options);
     const response = await getPlayerByFilter(dispatch, options);
-    console.log("response: ", response);
   }
 
 
@@ -102,10 +108,26 @@ export default function PlayerStats() {
     { field: 'Username', headerName: 'Username', width: 150 },
   ];
 
+  //addPlayer
+  const addPlayer = (values) => {
+
+        if(window.confirm('Esta seguro que desea crear el usuario?'))
+        {
+          setNewPlayer(values);
+        }
+          else{
+            setNotify({
+              isOpen: true,
+              message: 'Usuario no agregado',
+              type: 'error'
+            })
+         }     
+}
+
   return (
     <Grid >
       <Stack sx={{margin:"%"}}>
-      <h1>Filtrados</h1>
+      <h1>Players</h1>
       <div style={{ height: 300, width: '100%' }}>
         <DataGrid rows={rows} columns={columns} />
       </div>
@@ -121,9 +143,9 @@ export default function PlayerStats() {
             }}
             label="Jugadores"
             onChange={handlePlayerIDChange}
-            sx={{ margin: "3%", padding: '3%', color: 'black' }}
+            sx={{ margin: "3%", padding: '3%', color: 'black' }} 
           >
-            {playerList.length > 1 ? playerList.map((player) => { return (<option key={player._id} value={player._id}> {player.playerName} </option>) }) : <option value="">No hay jugadores (actualizar)</option>}
+            {playerList.length > 1 ? playerList.map((player) => { return (<option key={player._id} value={player._id}> {player.shkUsername} </option>) }) : <option value="">No hay jugadores (actualizar)</option>}
           </NativeSelect>
           <Stack>
             <Stack sx={{ display: "flex", flexDirection: "row", margin:"3%" }}>
@@ -169,14 +191,30 @@ export default function PlayerStats() {
             </Stack >
             <Stack sx={{display:"flex", flexDirection:"row",padding:"2%", margin:"3%"}}>
             <FormGroup>
-              <FormControlLabel control={<Checkbox defaultChecked />} label="limpiar filtros" />
+              <FormControlLabel control={<Checkbox defaultChecked />} label="Clear Filter" />
              </FormGroup>
-            <Button variant="contained" color="primary" sx={{ margin: "3%" }} onClick={handleSubmit} disabled={player._id ? false : true}>
-              aplicar filtro
+            <Button variant="contained" color="primary" sx={{ margin: "3%", backgroundColor:'black', color:'lightgreen' }} onClick={handleSubmit} disabled={player._id ? false : true}>
+              Apply
             </Button>
+            <Button 
+              className="add" 
+              variant="contained" 
+              color="primary"
+              sx={{ margin: "3%", backgroundColor:'black', color:'lightgreen'}} 
+              startIcon={<AddIcon/>}
+              onClick={() => setOpenPopup(true)}
+              >Add Player</Button>
             </Stack>
           </Stack>
         </FormControl>
+        <Popup
+          title="Ingresar Datos"
+          openPopup={openPopup}
+          setOpenPopup={setOpenPopup}>
+            <PlayerForm
+              addPlayer={addPlayer}
+            />
+        </Popup>
       </Box>
     </Grid>
   );

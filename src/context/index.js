@@ -4,7 +4,8 @@ import {
     getPlayerStats,
     getPlayers,
     getPlayerByFilter,
-    getRooms
+    getRooms,
+    setNewPlayer,
   } from "./actions";
   
   import { AuthProvider, useAuthDispatch, useAuthState } from "./context";
@@ -18,5 +19,6 @@ import {
     getPlayerStats,
     getPlayers,
     getPlayerByFilter,
-    getRooms
+    getRooms,
+    setNewPlayer
   };

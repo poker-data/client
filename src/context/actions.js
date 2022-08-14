@@ -83,7 +83,6 @@ export async function getPlayers(dispatch) {
   try {
     let response = await fetch(`${ROOT_URL}/api/getPlayers`, requestOptions);
     let data = await response.json();
-    console.log("Players: ",data);
     dispatch({ type: "GET_PLAYERS", payload: data });
     return data;
   } catch (error) {
@@ -142,5 +141,23 @@ export async function getRooms (dispatch){
 } catch (error) {
     dispatch({ type: "LOGIN_ERROR", error: error });
     console.log(error + "try catch actions getRooms");
+  }
+}
+
+
+export async function setNewPlayer(values){
+
+  const requestOptions = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(values)
+  };
+  console.log(values)
+  try {
+    let response = await fetch(`${ROOT_URL}/api/setPlayerData`, requestOptions);
+    let data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error + "try catch actions setPlayer");
   }
 }
