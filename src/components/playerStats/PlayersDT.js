@@ -28,7 +28,6 @@ const PlayersDT = () => {
       
 
     React.useEffect(() => {
-      console.log(state)
       const dataTable = []
       dataTable.push(state.playerWithFilter)
       setData(dataTable);
@@ -104,15 +103,15 @@ const PlayersDT = () => {
 
 
     return (
-      <Box sx={{ width: '100%' }}>
-        <Paper sx={{ background:"black", color:"lightgreen" }}>
+      <Box sx={{ width: '100%'}}>
+        <Paper sx={{ background:"black", color:"lightgreen" , border: 1, borderColor:"black"}}>
         <Typography
-          sx={{ flex: '1 1 100%', fontWeight:'bold', textAlign:'left'}}
+          sx={{ flex: '1 1 100%', fontWeight:'bold', textAlign:'center', background:"lightgreen", color:"black"}}
           variant="h4"
           id="tableTitle"
           component="div"
         >
-          SS Player Statistics
+          SharkScope Statistics
         </Typography>
         {(error !== "") ? ( <div className = "error">{error}</div>) : ""} 
         <Notification

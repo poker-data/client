@@ -55,7 +55,7 @@ export default function MenuAppBar({ handleBtnClick }) {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ bgcolor: "#E2DFDF", padding: "0.5% 0" }}>
+      <AppBar position="static" sx={{ bgcolor: "black", padding: "0.5% 0" }}>
         <Toolbar>
           <div onClick={handleBtnClick}>
             <IconButton
@@ -66,8 +66,8 @@ export default function MenuAppBar({ handleBtnClick }) {
               sx={{
                 "& svg": {
                   fontSize: "35px",
-                  color: "black",
-                  fill: "black",
+                  color: "lightgreen",
+                  fill: "lightgreen",
                 },
                 mr: 2,
               }}
@@ -84,7 +84,7 @@ export default function MenuAppBar({ handleBtnClick }) {
               flexGrow: 1,
               fontFamily: "Poppins",
               fontSize: "30px",
-              fontStyle: "SemiBold",
+              color:"lightgreen",
               "@media screen and (max-width: 768px)": {
                 fontSize: "14px",
               },
