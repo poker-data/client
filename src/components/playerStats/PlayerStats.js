@@ -48,11 +48,16 @@ export default function PlayerStats() {
 
   
   const handleRoomChange = (e) => {
+    console.log(room)
+    if (room !== '') {
     const filterSelectedRoom = roomList.filter(room => room.room=== e.target.value);
     setRoom({
       ...room,
       roomName: filterSelectedRoom[0].room
     })
+  }else{
+    setRoom('')
+  }
   }
   // const handleRoomChange = (e) => {
     
@@ -108,7 +113,7 @@ export default function PlayerStats() {
 
   const columns = [
     { field: 'Name', headerName: 'Name', width: 200 },
-    { field: 'shkUsername', headerName: 'Username (SharkScope)', width: 200 }
+    { field: 'shkUsername', headerName: 'Username (SharkScope)', width: 200 },
   ];
 
   //addPlayer
@@ -189,6 +194,7 @@ export default function PlayerStats() {
                   onChange={handleRoomChange}
                   sx={{ margin: "3%", padding: '3%', color: 'black' }}
                 >
+                  {<option value=''>None</option>}
                   {roomList.length > 0 ? roomList.map((room) => { return (<option key={room.room} value={room.room}> {room.room} </option>) }) : <option value="">No hay salas (seleccionar)</option>}
 
                 </NativeSelect>
