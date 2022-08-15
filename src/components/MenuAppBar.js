@@ -55,7 +55,7 @@ export default function MenuAppBar({ handleBtnClick }) {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ bgcolor: "#E2DFDF", padding: "2% 0" }}>
+      <AppBar position="static" sx={{ bgcolor: "#E2DFDF", padding: "0.5% 0" }}>
         <Toolbar>
           <div onClick={handleBtnClick}>
             <IconButton

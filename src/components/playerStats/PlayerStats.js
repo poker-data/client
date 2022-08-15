@@ -48,16 +48,12 @@ export default function PlayerStats() {
 
   
   const handleRoomChange = (e) => {
-    console.log(room)
-    if (room !== '') {
     const filterSelectedRoom = roomList.filter(room => room.room=== e.target.value);
     setRoom({
       ...room,
       roomName: filterSelectedRoom[0].room
     })
-  }else{
-    setRoom('')
-  }
+ 
   }
   // const handleRoomChange = (e) => {
     
@@ -155,6 +151,7 @@ export default function PlayerStats() {
             onChange={handlePlayerIDChange}
             sx={{ margin: "3%", padding: '3%', color: 'black' }} 
           >
+            {<option value={playerList.shkUsername}></option>}
             {playerList.length > 1 ? playerList.map((player) => { return (<option key={player._id} value={player._id}> {player.shkUsername} </option>) }) : <option value="">No hay jugadores (actualizar)</option>}
           </NativeSelect>
           <Stack>
@@ -185,7 +182,7 @@ export default function PlayerStats() {
               <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">Sala</InputLabel>
                 <NativeSelect
-                  defaultValue=""
+                  defaultValue=''
                   inputProps={{
                     name: 'Salas',
                     id: 'uncontrolled-native',
@@ -194,7 +191,7 @@ export default function PlayerStats() {
                   onChange={handleRoomChange}
                   sx={{ margin: "3%", padding: '3%', color: 'black' }}
                 >
-                  {<option value=''>None</option>}
+                  {<option value={room.roomName}></option>}
                   {roomList.length > 0 ? roomList.map((room) => { return (<option key={room.room} value={room.room}> {room.room} </option>) }) : <option value="">No hay salas (seleccionar)</option>}
 
                 </NativeSelect>

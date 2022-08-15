@@ -7,9 +7,9 @@ import {Box,
         TableRow, 
         Paper,
         Typography,
-        TableFooter,
         TablePagination,
-        FormControlLabel,} from '@mui/material';
+        FormControlLabel,
+        TableContainer,} from '@mui/material';
 import Switch from '@mui/material/Switch';
 import Notification from '../utils/Notification';
 import { useAuthState } from "../../Context";
@@ -25,10 +25,11 @@ const PlayersDT = () => {
 
       const [dense, setDense] = React.useState(false);
 
-    const dataTable = []
+      
 
     React.useEffect(() => {
-      console.log(state.playerWithFilter, 'state player');
+      console.log(state)
+      const dataTable = []
       dataTable.push(state.playerWithFilter)
       setData(dataTable);
     }, [state]);
@@ -104,132 +105,133 @@ const PlayersDT = () => {
 
     return (
       <Box sx={{ width: '100%' }}>
-        <Paper >
+        <Paper sx={{ background:"black", color:"lightgreen" }}>
         <Typography
           sx={{ flex: '1 1 100%', fontWeight:'bold', textAlign:'left'}}
           variant="h4"
           id="tableTitle"
           component="div"
         >
-          Player Statistics
+          SS Player Statistics
         </Typography>
         {(error !== "") ? ( <div className = "error">{error}</div>) : ""} 
         <Notification
           notify={notify}
           setNotify={setNotify}
         />
+        <TableContainer>
         <Table sx={{ minWidth: 750 }}
             aria-labelledby="tableTitle"
             size={dense ? 'small' : 'medium'}>
           <TableHead>
             <TableRow>
-            <TableCell sx={{fontWeight: 'bold'}}>Count</TableCell>
-              <TableCell sx={{fontWeight: 'bold'}}>Entries</TableCell>
-              <TableCell sx={{fontWeight: 'bold'}}>AvProfit</TableCell>
-              <TableCell sx={{fontWeight: 'bold'}}>AvStake</TableCell>
-              <TableCell sx={{fontWeight: 'bold'}}>AvROI</TableCell>
-              <TableCell sx={{fontWeight: 'bold'}}>Profit</TableCell>
-              <TableCell sx={{fontWeight: 'bold'}}>Ability</TableCell>
-              <TableCell sx={{fontWeight: 'bold'}}>Stake</TableCell>
-              <TableCell sx={{fontWeight: 'bold'}}>Cashes</TableCell>
-              <TableCell sx={{fontWeight: 'bold'}}>Rake</TableCell>
-              <TableCell sx={{fontWeight: 'bold'}}>TotalROI</TableCell>
-              <TableCell sx={{fontWeight: 'bold'}}>ITM</TableCell>
-              <TableCell sx={{fontWeight: 'bold'}}>Bankroll</TableCell>
-              <TableCell sx={{fontWeight: 'bold'}}>FirstGameDate</TableCell>
-              <TableCell sx={{fontWeight: 'bold'}}>LastGameDate</TableCell>
-              <TableCell sx={{fontWeight: 'bold'}}>MostGamesInDay</TableCell>
-              <TableCell sx={{fontWeight: 'bold'}}>AvGamesPerDay</TableCell>
-              <TableCell sx={{fontWeight: 'bold'}}>ActiveDayCount</TableCell>
-              <TableCell sx={{fontWeight: 'bold'}}>TournamentWins</TableCell>
-              <TableCell sx={{fontWeight: 'bold'}}>FinalTables</TableCell>
-              <TableCell sx={{fontWeight: 'bold'}}>Best100StreakAvProfit</TableCell>
-              <TableCell sx={{fontWeight: 'bold'}}>Best500StreakAvProfit</TableCell>
-              <TableCell sx={{fontWeight: 'bold'}}>Worst100StreakAvProfit</TableCell>
-              <TableCell sx={{fontWeight: 'bold'}}>Worst500StreakAvProfit</TableCell>
-              <TableCell sx={{fontWeight: 'bold'}}>AvEntrants</TableCell>
-              <TableCell sx={{fontWeight: 'bold'}}>TurboRatio</TableCell>
-              <TableCell sx={{fontWeight: 'bold'}}>PercentFieldBeaten</TableCell>
-              <TableCell sx={{fontWeight: 'bold'}}>FinshesEarly</TableCell>
-              <TableCell sx={{fontWeight: 'bold'}}>FinshesEarlyMiddle</TableCell>
-              <TableCell sx={{fontWeight: 'bold'}}>FinshesMiddle</TableCell>
-              <TableCell sx={{fontWeight: 'bold'}}>FinshesMiddleLate</TableCell>
-              <TableCell sx={{fontWeight: 'bold'}}>FinshesLate</TableCell>
-              <TableCell sx={{fontWeight: 'bold'}}>PTLBPoints</TableCell>
-              <TableCell sx={{fontWeight: 'bold'}}>MaxWinningStreak</TableCell>
-              <TableCell sx={{fontWeight: 'bold'}}>MaxLosingStreak</TableCell>
-              <TableCell sx={{fontWeight: 'bold'}}>MaxCashingStreak</TableCell>
-              <TableCell sx={{fontWeight: 'bold'}}>WinningDays</TableCell>
-              <TableCell sx={{fontWeight: 'bold'}}>LosingDays</TableCell>
-              <TableCell sx={{fontWeight: 'bold'}}>BreakEvenDays</TableCell>
-              <TableCell sx={{fontWeight: 'bold'}}>AchievementPoints</TableCell>  
+            <TableCell sx={{fontWeight: 'bold' , color:"lightgreen" }}>Count</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"lightgreen" }}>Entries</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"lightgreen" }}>AvProfit</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"lightgreen" }}>AvStake</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"lightgreen" }}>AvROI</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"lightgreen" }}>Profit</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"lightgreen" }}>Ability</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"lightgreen" }}>Stake</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"lightgreen" }}>Cashes</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"lightgreen" }}>Rake</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"lightgreen" }}>TotalROI</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"lightgreen" }}>ITM</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"lightgreen" }}>Bankroll</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"lightgreen" }}>FirstGameDate</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"lightgreen" }}>LastGameDate</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"lightgreen" }}>MostGamesInDay</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"lightgreen" }}>AvGamesPerDay</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"lightgreen" }}>ActiveDayCount</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"lightgreen" }}>TournamentWins</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"lightgreen" }}>FinalTables</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"lightgreen" }}>Best100StreakAvProfit</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"lightgreen" }}>Best500StreakAvProfit</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"lightgreen" }}>Worst100StreakAvProfit</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"lightgreen" }}>Worst500StreakAvProfit</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"lightgreen" }}>AvEntrants</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"lightgreen" }}>TurboRatio</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"lightgreen" }}>PercentFieldBeaten</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"lightgreen" }}>FinshesEarly</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"lightgreen" }}>FinshesEarlyMiddle</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"lightgreen" }}>FinshesMiddle</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"lightgreen" }}>FinshesMiddleLate</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"lightgreen" }}>FinshesLate</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"lightgreen" }}>PTLBPoints</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"lightgreen" }}>MaxWinningStreak</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"lightgreen" }}>MaxLosingStreak</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"lightgreen" }}>MaxCashingStreak</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"lightgreen" }}>WinningDays</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"lightgreen" }}>LosingDays</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"lightgreen" }}>BreakEvenDays</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"lightgreen" }}>AchievementPoints</TableCell>  
             </TableRow>
           </TableHead>
           <TableBody>
             {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, key) => (
-              <TableRow
+              <TableRow 
                 hover
                 tabIndex={-1}
                 key={key}>
-                <TableCell>{row.Count}</TableCell>
-                <TableCell>{row.Entries}</TableCell>
-                <TableCell>{row.AvProfit}</TableCell>
-                <TableCell>{row.AvStake}</TableCell>
-                <TableCell>{row.AvROI}</TableCell>
-                <TableCell>${row.Profit}</TableCell>
-                <TableCell>{row.Ability}</TableCell>
-                <TableCell>{row.Stake}</TableCell>
-                <TableCell>{row.Cashes}</TableCell>
-                <TableCell>{row.Rake}</TableCell>
-                <TableCell>{row.TotalROI}</TableCell>
-                <TableCell>{row.ITM}</TableCell>
-                <TableCell>{row.Bankroll}</TableCell>
-                <TableCell>{row.FirstGameDate}</TableCell>
-                <TableCell>{row.LastGameDate}</TableCell>
-                <TableCell>{row.MostGamesInDay}</TableCell>
-                <TableCell>{row.AvGamesPerDay}</TableCell>
-                <TableCell>{row.ActiveDayCount}</TableCell>
-                <TableCell>{row.TournamentWins}</TableCell>
-                <TableCell>{row.FinalTables}</TableCell>
-                <TableCell>{row.Best100StreakAvProfit}</TableCell>
-                <TableCell>{row.Best500StreakAvProfit}</TableCell>
-                <TableCell>{row.Worst100StreakAvProfit}</TableCell>
-                <TableCell>{row.Worst500StreakAvProfit}</TableCell>
-                <TableCell>{row.AvEntrants}</TableCell>
-                <TableCell>{row.TurboRatio}</TableCell>
-                <TableCell>{row.PercentFieldBeaten}</TableCell>
-                <TableCell>{row.FinshesEarly}</TableCell>
-                <TableCell>{row.FinshesEarlyMiddle}</TableCell>
-                <TableCell>{row.FinshesMiddle}</TableCell>
-                <TableCell>{row.FinshesMiddleLate}</TableCell>
-                <TableCell>{row.FinshesLate}</TableCell>
-                <TableCell>{row.PTLBPoints}</TableCell>
-                <TableCell>{row.MaxWinningStreak}</TableCell>
-                <TableCell>{row.MaxLosingStreak}</TableCell>
-                <TableCell>{row.MaxCashingStreak}</TableCell>
-                <TableCell>{row.WinningDays}</TableCell>
-                <TableCell>{row.LosingDays}</TableCell>
-                <TableCell>{row.BreakEvenDays}</TableCell>
-                <TableCell>{row.AchievementPoints}</TableCell>
+                <TableCell sx={{ color:"lightgreen" }}>{row.Count}</TableCell>
+                <TableCell sx={{ color:"lightgreen" }}>{row.Entries}</TableCell>
+                <TableCell sx={{ color:"lightgreen" }}>{row.AvProfit}</TableCell>
+                <TableCell sx={{ color:"lightgreen" }}>{row.AvStake}</TableCell>
+                <TableCell sx={{ color:"lightgreen" }}>{row.AvROI}</TableCell>
+                <TableCell sx={{ color:"lightgreen" }}>{row.Profit}</TableCell>
+                <TableCell sx={{ color:"lightgreen" }}>{row.Ability}</TableCell>
+                <TableCell sx={{ color:"lightgreen" }}>{row.Stake}</TableCell>
+                <TableCell sx={{ color:"lightgreen" }}>{row.Cashes}</TableCell>
+                <TableCell sx={{ color:"lightgreen" }}>{row.Rake}</TableCell>
+                <TableCell sx={{ color:"lightgreen" }}>{row.TotalROI}</TableCell>
+                <TableCell sx={{ color:"lightgreen" }}>{row.ITM}</TableCell>
+                <TableCell sx={{ color:"lightgreen" }}>{row.Bankroll}</TableCell>
+                <TableCell sx={{ color:"lightgreen" }}>{row.FirstGameDate}</TableCell>
+                <TableCell sx={{ color:"lightgreen" }}>{row.LastGameDate}</TableCell>
+                <TableCell sx={{ color:"lightgreen" }}>{row.MostGamesInDay}</TableCell>
+                <TableCell sx={{ color:"lightgreen" }}>{row.AvGamesPerDay}</TableCell>
+                <TableCell sx={{ color:"lightgreen" }}>{row.ActiveDayCount}</TableCell>
+                <TableCell sx={{ color:"lightgreen" }}>{row.TournamentWins}</TableCell>
+                <TableCell sx={{ color:"lightgreen" }}>{row.FinalTables}</TableCell>
+                <TableCell sx={{ color:"lightgreen" }}>{row.Best100StreakAvProfit}</TableCell>
+                <TableCell sx={{ color:"lightgreen" }}>{row.Best500StreakAvProfit}</TableCell>
+                <TableCell sx={{ color:"lightgreen" }}>{row.Worst100StreakAvProfit}</TableCell>
+                <TableCell sx={{ color:"lightgreen" }}>{row.Worst500StreakAvProfit}</TableCell>
+                <TableCell sx={{ color:"lightgreen" }}>{row.AvEntrants}</TableCell>
+                <TableCell sx={{ color:"lightgreen" }}>{row.TurboRatio}</TableCell>
+                <TableCell sx={{ color:"lightgreen" }}>{row.PercentFieldBeaten}</TableCell>
+                <TableCell sx={{ color:"lightgreen" }}>{row.FinshesEarly}</TableCell>
+                <TableCell sx={{ color:"lightgreen" }}>{row.FinshesEarlyMiddle}</TableCell>
+                <TableCell sx={{ color:"lightgreen" }}>{row.FinshesMiddle}</TableCell>
+                <TableCell sx={{ color:"lightgreen" }}>{row.FinshesMiddleLate}</TableCell>
+                <TableCell sx={{ color:"lightgreen" }}>{row.FinshesLate}</TableCell>
+                <TableCell sx={{ color:"lightgreen" }}>{row.PTLBPoints}</TableCell>
+                <TableCell sx={{ color:"lightgreen" }}>{row.MaxWinningStreak}</TableCell>
+                <TableCell sx={{ color:"lightgreen" }}>{row.MaxLosingStreak}</TableCell>
+                <TableCell sx={{ color:"lightgreen" }}>{row.MaxCashingStreak}</TableCell>
+                <TableCell sx={{ color:"lightgreen" }}>{row.WinningDays}</TableCell>
+                <TableCell sx={{ color:"lightgreen" }}>{row.LosingDays}</TableCell>
+                <TableCell sx={{ color:"lightgreen" }}>{row.BreakEvenDays}</TableCell>
+                <TableCell sx={{ color:"lightgreen" }}>{row.AchievementPoints}</TableCell>
               </TableRow>
             ))}
             
           </TableBody>
-          <TableFooter>
-              <TableRow>
-              <TablePagination
-                  rowsPerPageOptions={[5, 10, 25]}
-                  count={data.length}
-                  rowsPerPage={rowsPerPage}
-                  page={page}
-                  onPageChange={handleChangePage}
-                  onRowsPerPageChange={handleChangeRowsPerPage}
-              />
-              </TableRow>
-          </TableFooter>
-        </Table>
+          </Table>
+        </TableContainer>
+        <TablePagination
+          sx={{ color:"lightgreen" }}
+          rowsPerPageOptions={[5, 10, 15]}
+          component="div"
+          count={data.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
       </Paper>
       <FormControlLabel
+        
         control={<Switch checked={dense} onChange={handleChangeDense} />}
         label="Colapsar"
       />

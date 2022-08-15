@@ -18,7 +18,7 @@
     font-style: SemiBold;
   }
   
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 70px) {
     .avatar-container {
       width: 50%;
     }

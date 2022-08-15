@@ -23,8 +23,10 @@ function HomePage() {
   return (
     <>
       <MenuAppBar handleBtnClick={toggleSidebar} />
-      <Grid container spacing={3} sx={{ marginLeft: "2%", marginTop: "2%" }}>
-        <PlayersDT/>
+      <Grid container spacing={3} sx={{ marginLeft: "2%", marginTop: "2%"}}>
+        <Grid item xs={11}>
+          <PlayersDT/>
+        </Grid>
         
       </Grid>
       
