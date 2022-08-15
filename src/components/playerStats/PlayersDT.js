@@ -8,7 +8,9 @@ import {Box,
         Paper,
         Typography,
         TableFooter,
-        TablePagination} from '@mui/material';
+        TablePagination,
+        FormControlLabel,} from '@mui/material';
+import Switch from '@mui/material/Switch';
 import Notification from '../utils/Notification';
 import { useAuthState } from "../../Context";
 
@@ -21,14 +23,17 @@ const PlayersDT = () => {
       const [rowsPerPage, setRowsPerPage] = React.useState(5);
       const [notify, setNotify] = React.useState({isOpen:false, message:'', type:'error'})
 
+      const [dense, setDense] = React.useState(false);
+
     const dataTable = []
-    let dataValues = []
 
     React.useEffect(() => {
       console.log(state.playerWithFilter, 'state player');
       dataTable.push(state.playerWithFilter)
       setData(dataTable);
     }, [state]);
+
+
     // React.useEffect(() => {
     //   console.log(state.playerWithFilter, 'state en tabla')
     //   state.playerWithFilter.map(player => {
@@ -92,6 +97,9 @@ const PlayersDT = () => {
         setPage(0);
     };
 
+    const handleChangeDense = (event) => {
+      setDense(event.target.checked);
+    };
 
 
     return (
@@ -110,7 +118,9 @@ const PlayersDT = () => {
           notify={notify}
           setNotify={setNotify}
         />
-        <Table sx={{minWidth: 650}} aria-label="simple table">
+        <Table sx={{ minWidth: 750 }}
+            aria-labelledby="tableTitle"
+            size={dense ? 'small' : 'medium'}>
           <TableHead>
             <TableRow>
             <TableCell sx={{fontWeight: 'bold'}}>Count</TableCell>
@@ -158,13 +168,15 @@ const PlayersDT = () => {
           <TableBody>
             {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, key) => (
               <TableRow
+                hover
+                tabIndex={-1}
                 key={key}>
                 <TableCell>{row.Count}</TableCell>
                 <TableCell>{row.Entries}</TableCell>
                 <TableCell>{row.AvProfit}</TableCell>
                 <TableCell>{row.AvStake}</TableCell>
                 <TableCell>{row.AvROI}</TableCell>
-                <TableCell>{row.Profit}</TableCell>
+                <TableCell>${row.Profit}</TableCell>
                 <TableCell>{row.Ability}</TableCell>
                 <TableCell>{row.Stake}</TableCell>
                 <TableCell>{row.Cashes}</TableCell>
@@ -217,6 +229,10 @@ const PlayersDT = () => {
           </TableFooter>
         </Table>
       </Paper>
+      <FormControlLabel
+        control={<Switch checked={dense} onChange={handleChangeDense} />}
+        label="Colapsar"
+      />
       </Box>
     );
 }    
