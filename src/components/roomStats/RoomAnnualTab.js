@@ -57,9 +57,9 @@ const RoomAnnualTab = () => {
 
     return (
       <Box sx={{ width: '100%' }}>
-        <Paper sx={{ background:"black", color:"lightgreen" , border: 1, borderColor:"black"}}>
+        <Paper sx={{ background:"black", color:"#2debab" , border: 1, borderColor:"black"}}>
         <Typography
-          sx={{ flex: '1 1 100%', fontWeight:'bold', textAlign:'center', background:"lightgreen", color:"black"}}
+          sx={{ flex: '1 1 100%', fontWeight:'bold', textAlign:'center', background:"#2debab", color:"black"}}
           variant="h4"
           id="tableTitle"
           component="div"
@@ -77,10 +77,10 @@ const RoomAnnualTab = () => {
             size={dense ? 'small' : 'medium'}>
           <TableHead>
             <TableRow>
-            <TableCell sx={{fontWeight: 'bold' , color:"lightgreen" }}>Sala</TableCell>
-              <TableCell sx={{fontWeight: 'bold', color:"lightgreen" }}>Volume MTT</TableCell>
-              <TableCell sx={{fontWeight: 'bold', color:"lightgreen" }}>% MTT</TableCell>
-              <TableCell sx={{fontWeight: 'bold', color:"lightgreen" }}>% SNG</TableCell>
+            <TableCell sx={{fontWeight: 'bold' , color:"#2debab" }}>Sala</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"#2debab" }}>Volume MTT</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"#2debab" }}>% MTT</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"#2debab" }}>% SNG</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -89,10 +89,10 @@ const RoomAnnualTab = () => {
                 hover
                 tabIndex={-1}
                 key={key}>
-                <TableCell sx={{ color:"lightgreen" }}>{row.Sala}</TableCell>
-                <TableCell sx={{ color:"lightgreen" }}>{row.VolumeMTT}</TableCell>
-                <TableCell sx={{ color:"lightgreen" }}>{row.MTTpercent}</TableCell>
-                <TableCell sx={{ color:"lightgreen" }}>{row.SNGpercent}</TableCell>
+                <TableCell sx={{ color:"#2debab" }}>{row.Sala}</TableCell>
+                <TableCell sx={{ color:"#2debab" }}>{row.VolumeMTT}</TableCell>
+                <TableCell sx={{ color:"#2debab" }}>{row.MTTpercent}</TableCell>
+                <TableCell sx={{ color:"#2debab" }}>{row.SNGpercent}</TableCell>
               </TableRow>
             ))}
 
@@ -100,7 +100,7 @@ const RoomAnnualTab = () => {
           </Table>
         </TableContainer>
         <TablePagination
-          sx={{ color:"lightgreen" }}
+          sx={{ color:"#2debab" }}
           rowsPerPageOptions={[5, 10, 15]}
           component="div"
           count={data.length}

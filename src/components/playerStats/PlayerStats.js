@@ -201,14 +201,14 @@ export default function PlayerStats() {
             <FormGroup>
               <FormControlLabel control={<Checkbox defaultChecked />} label="Clear Filter" />
              </FormGroup>
-            <Button variant="contained" color="primary" sx={{ margin: "3%", backgroundColor:'black', color:'lightgreen' }} onClick={handleSubmit} disabled={player._id ? false : true}>
+            <Button variant="contained" color="primary" sx={{ fontWeight: 'bold', border:1, borderColor:"black",margin: "3%", backgroundColor:'#2debab', color:'black' }} onClick={handleSubmit} disabled={player._id ? false : true}>
               Apply
             </Button>
             <Button 
               className="add" 
               variant="contained" 
               color="primary"
-              sx={{ margin: "3%", backgroundColor:'black', color:'lightgreen'}} 
+              sx={{ fontWeight: 'bold', border:1, borderColor:"black",margin: "3%", backgroundColor:'#2debab', color:'black'}} 
               startIcon={<AddIcon/>}
               onClick={() => setOpenPopup(true)}
               >Add Player</Button>
