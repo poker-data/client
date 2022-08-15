@@ -107,8 +107,8 @@ export default function PlayerStats() {
 
 
   const columns = [
-    { field: 'Name', headerName: 'Name', width: 150 },
-    { field: 'Username', headerName: 'Username', width: 150 },
+    { field: 'Name', headerName: 'Name', width: 200 },
+    { field: 'shkUsername', headerName: 'Username (SharkScope)', width: 200 }
   ];
 
   //addPlayer
@@ -117,6 +117,7 @@ export default function PlayerStats() {
         if(window.confirm('Esta seguro que desea crear el usuario?'))
         {
           setNewPlayer(values);
+          setOpenPopup(false)
         }
           else{
             setNotify({
@@ -124,6 +125,7 @@ export default function PlayerStats() {
               message: 'Usuario no agregado',
               type: 'error'
             })
+            setOpenPopup(false)
          }     
 }
 

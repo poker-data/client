@@ -50,6 +50,7 @@ export default function PlayerForm (props) {
         if(validate())
     
         addPlayer(values);
+        
 
         }
         
