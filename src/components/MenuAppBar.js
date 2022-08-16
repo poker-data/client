@@ -27,6 +27,18 @@ export default function MenuAppBar({ handleBtnClick }) {
     history.push("/home");
   };
 
+  const handleTDClick = () => {
+    history.push("/teamdashboard");
+  };
+
+  const handlePDClick = () => {
+    history.push("/playerdashboard");
+  };
+
+  const handleRDClick = () => {
+    history.push("/roomdashboard");
+  };
+
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -91,7 +103,58 @@ export default function MenuAppBar({ handleBtnClick }) {
             }}
             onClick={handleBrandClick}
           >
-           Poker Data
+           Player Info
+          </Typography>
+          <Typography
+            variant="h6"
+            component="div"
+            className="main-title"
+            fontWeight="bold"
+            sx={{
+              flexGrow: 1,
+              fontSize: "30px",
+              color:"black",
+              "@media screen and (max-width: 768px)": {
+                fontSize: "14px",
+              },
+            }}
+            onClick={handlePDClick}
+          >
+           Player Dashboard
+          </Typography>
+          <Typography
+            variant="h6"
+            component="div"
+            className="main-title"
+            fontWeight="bold"
+            sx={{
+              flexGrow: 1,
+              fontSize: "30px",
+              color:"black",
+              "@media screen and (max-width: 768px)": {
+                fontSize: "14px",
+              },
+            }}
+            onClick={handleTDClick}
+          >
+           Team Dashboard
+          </Typography>
+          <Typography
+            variant="h6"
+            component="div"
+            className="main-title"
+            fontWeight="bold"
+            sx={{
+              flexGrow: 1,
+              fontSize: "30px",
+              color:"black",
+              "@media screen and (max-width: 768px)": {
+                fontSize: "14px",
+              },
+            }}
+            onClick={handleRDClick}
+          >
+           Room Dashboard
           </Typography>
           {auth && (
             <div className="avatar-container">

@@ -1,16 +1,16 @@
 import React from "react";
 
+import "./PlayerDashboard.css";
 import MenuAppBar from "../components/MenuAppBar";
 import { useAuthDispatch, useAuthState } from '../Context'
 import Grid from '@mui/material/Grid';
-import PlayersDT from "../components/playerStats/PlayersDT";
 import PlayerAnnualTab from "../components/playerStats/PlayerAnnualTab";
 import PlayerMonthlyTab from "../components/playerStats/PlayerMonthlyTab";
 import PlayerWeeklyTab from "../components/playerStats/PlayerWeeklyTab";
 import RoomAnnualTab from "../components/roomStats/RoomAnnualTab";
 import RoomMonthlylTab from "../components/roomStats/RoomMonthlyTab";
 
-function HomePage() {
+function RoomDashboard() {
   const state = useAuthState();
   const dispatch = useAuthDispatch();
 
@@ -28,10 +28,7 @@ function HomePage() {
   return (
     <>
       <MenuAppBar handleBtnClick={toggleSidebar} />
-      <Grid container spacing={3} sx={{ marginLeft: "2%", marginTop: "2%"}}>
-        <Grid item xs={11}>
-          <PlayersDT/>
-        </Grid>
+      <Grid container spacing={2} sx={{ marginLeft: "2%", marginTop: "2%"}}>
         <Grid item xs={3}>
           <PlayerAnnualTab/>
         </Grid>
@@ -40,12 +37,6 @@ function HomePage() {
         </Grid>
         <Grid item xs={3}>
           <PlayerWeeklyTab/>
-        </Grid>
-        <Grid item xs={5}>
-          <RoomAnnualTab/>
-        </Grid>
-        <Grid item xs={5}>
-          <RoomMonthlylTab/>
         </Grid>
         
       </Grid>
@@ -56,4 +47,4 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default RoomDashboard;

@@ -98,7 +98,7 @@ export default function PlayerStats() {
       roomName: room.roomName
     }
     const response = await getPlayerByFilter(dispatch, options);
-    history.push('/info');
+    history.push('/playerdashboard');
   }
 
 
@@ -131,37 +131,45 @@ export default function PlayerStats() {
 }
 
   return (
-    <Grid >
-      <Stack sx={{margin:"%"}}>
+    
+    <Grid container spacing={2}  >
+      <Grid item xs={4} >
+      <Stack sx={{margin:"2%"}}>
       <h1>Players</h1>
-      <div style={{ height: 300, width: '100%' }}>
-        <DataGrid rows={rows} columns={columns} />
+      <div style={{ height: 640, width: '100%' }}>
+        <DataGrid 
+        sx = {{ color: 'black', border:1}}
+        rows={rows} columns={columns}
+         />
       </div>
       </Stack>
-      <Box sx={{ minWidth: 120 }}>
-        <FormControl fullWidth>
+      </Grid>
+      
+      <Box sx={{ minWidth: 120, margin:"1.5%"}}>
+        <h1>Filter</h1>
+        <FormControl sx= {{border:1, borderRadius: 1}}fullWidth>
           <InputLabel id="demo-simple-select-label"> Jugador</InputLabel>
           <NativeSelect
-            defaultValue= ""
+            defaultValue=''
             inputProps={{
               name: 'Jugador',
               id: 'uncontrolled-native',
             }}
             label="Jugadores"
             onChange={handlePlayerIDChange}
-            sx={{ margin: "3%", padding: '3%', color: 'black' }} 
+            sx={{ margin: "3%", padding: '3%'}} 
           >
-            {<option value={playerList.shkUsername}></option>}
+            {<option value={player.shkUsername}></option>}
             {playerList.length > 1 ? playerList.map((player) => { return (<option key={player._id} value={player._id}> {player.shkUsername} </option>) }) : <option value="">No hay jugadores (actualizar)</option>}
           </NativeSelect>
-          <Stack>
-            <Stack sx={{ display: "flex", flexDirection: "row", margin:"3%" }}>
-             <Stack>
-              <LocalizationProvider 
+            <Stack sx={{  margin:"2%" }}>
+             <Stack direction={{ xs: 'column', sm: 'row' }}
+                    spacing={{ xs: 1}}>
+              <LocalizationProvider    
               dateAdapter={AdapterDateFns}>
                 <DatePicker
                   label="Seleccionar fecha desde"
-                  value={selectedDate.from ? selectedDate.from : null}
+                  value={selectedDate.from ? selectedDate.from : null}                  
                   onChange={(newDate) => {
                     setSelectedDate({ ...selectedDate, from: newDate })
                   }}
@@ -179,6 +187,7 @@ export default function PlayerStats() {
                 />
               </LocalizationProvider>
               </Stack>
+              
               <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">Sala</InputLabel>
                 <NativeSelect
@@ -189,7 +198,7 @@ export default function PlayerStats() {
                   }}
                   label="Salas"
                   onChange={handleRoomChange}
-                  sx={{ margin: "3%", padding: '3%', color: 'black' }}
+                  sx={{ margin: "3%", padding: '3%'}}
                 >
                   {<option value={room.roomName}></option>}
                   {roomList.length > 0 ? roomList.map((room) => { return (<option key={room.room} value={room.room}> {room.room} </option>) }) : <option value="">No hay salas (seleccionar)</option>}
@@ -213,7 +222,6 @@ export default function PlayerStats() {
               onClick={() => setOpenPopup(true)}
               >Add Player</Button>
             </Stack>
-          </Stack>
         </FormControl>
         <Popup
           title="Ingresar Datos"

@@ -1,6 +1,9 @@
 import HomePage from "../pages/HomePage";
 import SinPath from "../components/playerStats/SinPath";
-import InfoPage from "../pages/InfoPage";
+import PlayerDashboard from "../pages/PlayerDashboard";
+import TeamDashboard from "../pages/TeamDashboard";
+import RoomDashboard from "../pages/RoomDashboard";
+
 const routes = [
   {
     path: "/home",
@@ -8,8 +11,18 @@ const routes = [
     isPrivate: false,
   },
   {
-    path: "/info",
-    component: InfoPage,
+    path: "/playerdashboard",
+    component: PlayerDashboard,
+    isPrivate: false,
+  },
+  {
+    path: "/teamdashboard",
+    component: TeamDashboard,
+    isPrivate: false,
+  },
+  {
+    path: "/roomdashboard",
+    component: RoomDashboard,
     isPrivate: false,
   },
   {

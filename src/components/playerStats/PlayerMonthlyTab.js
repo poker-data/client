@@ -24,7 +24,7 @@ const PlayerMonthlyTab = () => {
       const [rowsPerPage, setRowsPerPage] = React.useState(5);
       const [notify, setNotify] = React.useState({isOpen:false, message:'', type:'error'})
 
-      const [dense, setDense] = React.useState(false);
+      const [dense, setDense] = React.useState(true);
 
 
       const datos = [{
