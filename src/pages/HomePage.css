@@ -1,4 +1,6 @@
-
+footer{
+  background-color: black;
+}
 #charts-container {
     display: flex;
     justify-content: space-between;

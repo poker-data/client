@@ -132,13 +132,13 @@ export default function PlayerStats() {
 
   return (
     
-    <Grid container spacing={2}  >
+    <Grid container spacing={2}   >
       <Grid item xs={4} >
       <Stack sx={{margin:"2%"}}>
-      <h1>Players</h1>
+      <h1 style={{ color:"#d3d3d3"}}>Players</h1>
       <div style={{ height: 640, width: '100%' }}>
         <DataGrid 
-        sx = {{ color: 'black', border:1}}
+        sx={{ borderRadius:2, border:1, flex: '1 1 100%', fontWeight:'bold', textAlign:'center', background:"#d3d3d3", color:"#000000"}}
         rows={rows} columns={columns}
          />
       </div>
@@ -146,8 +146,8 @@ export default function PlayerStats() {
       </Grid>
       
       <Box sx={{ minWidth: 120, margin:"1.5%"}}>
-        <h1>Filter</h1>
-        <FormControl sx= {{border:1, borderRadius: 1}}fullWidth>
+        <h1 style={{ color:"#ebe9eb"}}>Filter</h1>
+        <FormControl sx= {{border:1, borderRadius: 5, flex: '1 1 100%', textAlign:'center', background:"#d3d3d3", color:"#000000"}}fullWidth>
           <InputLabel id="demo-simple-select-label"> Jugador</InputLabel>
           <NativeSelect
             defaultValue=''
@@ -157,12 +157,12 @@ export default function PlayerStats() {
             }}
             label="Jugadores"
             onChange={handlePlayerIDChange}
-            sx={{ margin: "3%", padding: '3%'}} 
+            sx={{ margin: "2%", padding: '2%' , background:"#d3d3d3", borderRadius:1}} 
           >
             {<option value={player.shkUsername}></option>}
             {playerList.length > 1 ? playerList.map((player) => { return (<option key={player._id} value={player._id}> {player.shkUsername} </option>) }) : <option value="">No hay jugadores (actualizar)</option>}
           </NativeSelect>
-            <Stack sx={{  margin:"2%" }}>
+            <Stack sx={{ margin:"2%", background:"#d3d3d3", color:"#000000" , borderRadius:2}}>
              <Stack direction={{ xs: 'column', sm: 'row' }}
                     spacing={{ xs: 1}}>
               <LocalizationProvider    
@@ -210,14 +210,14 @@ export default function PlayerStats() {
             <FormGroup>
               <FormControlLabel control={<Checkbox defaultChecked />} label="Clear Filter" />
              </FormGroup>
-            <Button variant="contained" color="primary" sx={{ fontWeight: 'bold', border:1, borderColor:"black",margin: "3%", backgroundColor:'#2debab', color:'black' }} onClick={handleSubmit} disabled={player._id ? false : true}>
+            <Button variant="contained" color="primary" sx={{ fontWeight: 'bold', border:1, borderColor:"#454545",margin: "3%", backgroundColor:'#515151', color:'#ebe9eb' }} onClick={handleSubmit} disabled={player._id ? false : true}>
               Apply
             </Button>
             <Button 
               className="add" 
               variant="contained" 
               color="primary"
-              sx={{ fontWeight: 'bold', border:1, borderColor:"black",margin: "3%", backgroundColor:'#2debab', color:'black'}} 
+              sx={{ fontWeight: 'bold', border:1, borderColor:"#454545",margin: "3%", backgroundColor:'#454545', color:'#ebe9eb'}} 
               startIcon={<AddIcon/>}
               onClick={() => setOpenPopup(true)}
               >Add Player</Button>

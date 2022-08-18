@@ -61,9 +61,9 @@ const PlayerWeeklyTab = () => {
 
     return (
       <Box sx={{ width: '100%' }}>
-        <Paper sx={{ background:"black", color:"#2debab" , border: 1, borderColor:"black"}}>
+        <Paper sx={{ background:"#d3d3d3", color:"#ebe9eb" , border: 1, borderColor:"#000000"}}>
         <Typography
-          sx={{ flex: '1 1 100%', fontWeight:'bold', textAlign:'center', background:"#2debab", color:"black"}}
+          sx={{ flex: '1 1 100%', fontWeight:'bold', textAlign:'center', background:"#000000", color:"#ebe9eb"}}
           variant="h4"
           id="tableTitle"
           component="div"
@@ -81,13 +81,13 @@ const PlayerWeeklyTab = () => {
             size={dense ? 'small' : 'medium'}>
           <TableHead>
             <TableRow>
-            <TableCell sx={{fontWeight: 'bold' , color:"#2debab" }}>Profit</TableCell>
-              <TableCell sx={{fontWeight: 'bold', color:"#2debab" }}>Av Profit</TableCell>
-              <TableCell sx={{fontWeight: 'bold', color:"#2debab" }}>Total ROI</TableCell>
-              <TableCell sx={{fontWeight: 'bold', color:"#2debab" }}>Av ROI</TableCell>
-              <TableCell sx={{fontWeight: 'bold', color:"#2debab" }}>#MTT</TableCell>
-              <TableCell sx={{fontWeight: 'bold', color:"#2debab" }}>#SNG</TableCell>
-              <TableCell sx={{fontWeight: 'bold', color:"#2debab" }}>%MTT</TableCell>
+            <TableCell sx={{fontWeight: 'bold' , color:"#454545" }}>Profit</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Av Profit</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Total ROI</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Av ROI</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>#MTT</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>#SNG</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>%MTT</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -96,13 +96,13 @@ const PlayerWeeklyTab = () => {
                 hover
                 tabIndex={-1}
                 key={key}>
-                <TableCell sx={{ color:"#2debab" }}>{row.Profit}</TableCell>
-                <TableCell sx={{ color:"#2debab" }}>{row.avProfit}</TableCell>
-                <TableCell sx={{ color:"#2debab" }}>{row.avROI}</TableCell>
-                <TableCell sx={{ color:"#2debab" }}>{row.totalROI}</TableCell>
-                <TableCell sx={{ color:"#2debab" }}>{row.MTTnumber}</TableCell>
-                <TableCell sx={{ color:"#2debab" }}>{row.SNGnumber}</TableCell>
-                <TableCell sx={{ color:"#2debab" }}>{row.MTTpercent}</TableCell>
+                <TableCell sx={{ color:"#454545" }}>{row.Profit}</TableCell>
+                <TableCell sx={{ color:"#454545" }}>{row.avProfit}</TableCell>
+                <TableCell sx={{ color:"#454545" }}>{row.avROI}</TableCell>
+                <TableCell sx={{ color:"#454545" }}>{row.totalROI}</TableCell>
+                <TableCell sx={{ color:"#454545" }}>{row.MTTnumber}</TableCell>
+                <TableCell sx={{ color:"#454545" }}>{row.SNGnumber}</TableCell>
+                <TableCell sx={{ color:"#454545" }}>{row.MTTpercent}</TableCell>
 
               </TableRow>
             ))}
@@ -111,7 +111,7 @@ const PlayerWeeklyTab = () => {
           </Table>
         </TableContainer>
         <TablePagination
-          sx={{ color:"#2debab" }}
+          sx={{ color:"#454545" }}
           rowsPerPageOptions={[5, 10, 15]}
           component="div"
           count={data.length}
