@@ -111,9 +111,9 @@ const RoomAnnualTab = () => {
         />
       </Paper>
       <FormControlLabel
-
+        sx = {{ color:"#d3d3d3" }}
         control={<Switch checked={dense} onChange={handleChangeDense} />}
-        label="Colapsar"
+        label="Colapse"
       />
       </Box>
     );

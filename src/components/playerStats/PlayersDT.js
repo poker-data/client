@@ -232,7 +232,8 @@ const PlayersDT = () => {
       <FormControlLabel
         
         control={<Switch checked={dense} onChange={handleChangeDense} />}
-        label="Colapsar"
+        sx = {{ color:"#d3d3d3" }}
+        label="Colapse"
       />
       </Box>
     );

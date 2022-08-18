@@ -146,8 +146,8 @@ export default function PlayerStats() {
       </Grid>
       
       <Box sx={{ minWidth: 120, margin:"1.5%"}}>
-        <h1 style={{ color:"#ebe9eb"}}>Filter</h1>
-        <FormControl sx= {{border:1, borderRadius: 5, flex: '1 1 100%', textAlign:'center', background:"#d3d3d3", color:"#000000"}}fullWidth>
+        <h1 style={{ color:"#d3d3d3"}}>Filter</h1>
+        <FormControl sx= {{border:1, borderRadius: 2, flex: '1 1 100%', textAlign:'center', background:"#d3d3d3", color:"#d3d3d3"}}fullWidth>
           <InputLabel id="demo-simple-select-label"> Jugador</InputLabel>
           <NativeSelect
             defaultValue=''
@@ -157,7 +157,7 @@ export default function PlayerStats() {
             }}
             label="Jugadores"
             onChange={handlePlayerIDChange}
-            sx={{ margin: "2%", padding: '2%' , background:"#d3d3d3", borderRadius:1}} 
+            sx={{ margin: "2%", padding: '2%' , background:"#d3d3d3", borderRadius:1, color:"#000000"}} 
           >
             {<option value={player.shkUsername}></option>}
             {playerList.length > 1 ? playerList.map((player) => { return (<option key={player._id} value={player._id}> {player.shkUsername} </option>) }) : <option value="">No hay jugadores (actualizar)</option>}
@@ -207,9 +207,9 @@ export default function PlayerStats() {
               </FormControl>
             </Stack >
             <Stack sx={{display:"flex", flexDirection:"row",padding:"2%", margin:"3%"}}>
-            <FormGroup>
-              <FormControlLabel control={<Checkbox defaultChecked />} label="Clear Filter" />
-             </FormGroup>
+            {/* <FormGroup>
+              <FormControlLabel sx={{ color:"#454545"}}control={<Checkbox defaultChecked />} label="Clear Filter" />
+             </FormGroup> */}
             <Button variant="contained" color="primary" sx={{ fontWeight: 'bold', border:1, borderColor:"#454545",margin: "3%", backgroundColor:'#515151', color:'#ebe9eb' }} onClick={handleSubmit} disabled={player._id ? false : true}>
               Apply
             </Button>

@@ -6,7 +6,7 @@ const SinPath = () => {
         window.location.href = "/home";
     }
 
-  return <div>Error 404 go to <button onClick={redirectToHome}>HOME</button></div>;
+  return <div style={{ color:"#d3d3d3"}}>Error 404 go to <button onClick={redirectToHome}>HOME</button></div>;
 }
 
 export default SinPath;
