@@ -116,6 +116,27 @@ catch (error) {
 }
 }
 
+export  const getDataFromDefaultFilters = async (dispatch, options) => {
+  try {
+
+    let url = `${ROOT_URL}/api/getDefaultGroupFiltersData`;
+
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(options)
+    };
+
+     let response = await fetch(url, requestOptions);
+     let data = await response.json();
+     console.log(data);
+    dispatch({ type: "GET_DEFAULT_FILTERS", payload: data }); 
+}
+catch (error) {
+  console.log(error)
+}
+}
+
 export async function getRooms (dispatch){
   const requestOptions = {
     method: "GET",
@@ -132,6 +153,22 @@ export async function getRooms (dispatch){
   }
 }
 
+export async function getDefaultFilterList (dispatch){
+  const requestOptions = {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  };
+  try {
+    let response = await fetch(`${ROOT_URL}/api/getDefaultFilters`, requestOptions);
+    let data = await response.json();
+    dispatch({ type: "DEFAULT_FILTER_LIST", payload: data }); 
+    console.log(data)
+    return data;
+} catch (error) {
+    dispatch({ type: "LOGIN_ERROR", error: error });
+    console.log(error + "try catch actions getRooms");
+  }
+}
 
 export async function setNewPlayer(values){
 
@@ -143,6 +180,40 @@ export async function setNewPlayer(values){
   console.log(values)
   try {
     let response = await fetch(`${ROOT_URL}/api/setPlayerData`, requestOptions);
+    let data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error + "try catch actions setPlayer");
+  }
+}
+
+export async function getGroups (dispatch){
+  const requestOptions = {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  };
+  try {
+    let response = await fetch(`${ROOT_URL}/api/getGroups`, requestOptions);
+    let data = await response.json();
+    dispatch({ type: "GROUPS", payload: data }); 
+    console.log(data)
+    return data;
+} catch (error) {
+    dispatch({ type: "LOGIN_ERROR", error: error });
+    console.log(error + "try catch actions getRooms");
+  }
+}
+
+export async function setNewGroup(values){
+
+  const requestOptions = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(values)
+  };
+  console.log(values)
+  try {
+    let response = await fetch(`${ROOT_URL}/api/setGroup`, requestOptions);
     let data = await response.json();
     return data;
   } catch (error) {

@@ -6,6 +6,10 @@ import {
     getPlayerByFilter,
     getRooms,
     setNewPlayer,
+    getDataFromDefaultFilters,
+    getDefaultFilterList,
+    getGroups,
+    setNewGroup
   } from "./actions";
   
   import { AuthProvider, useAuthDispatch, useAuthState } from "./context";
@@ -20,5 +24,9 @@ import {
     getPlayers,
     getPlayerByFilter,
     getRooms,
-    setNewPlayer
+    setNewPlayer,
+    getDataFromDefaultFilters,
+    getDefaultFilterList,
+    getGroups,
+    setNewGroup
   };
