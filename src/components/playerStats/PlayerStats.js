@@ -36,6 +36,9 @@ export default function PlayerStats() {
   const [selectedRoomToFilter, setSelectedRoomToFilter] = React.useState('');
   const [defaultFilterList, setDefaultFilterList] = React.useState([]);
   const [groupList, setGroupList] = React.useState([]);
+  const [groupToCreate, setGroupToCreate] = React.useState({ groupName: '' });
+  const [selectedGroupToFilter, setSelectedGroupToFilter] = React.useState('');
+
 
   const state = useAuthState();
   let dispatch = useAuthDispatch();
@@ -59,15 +62,23 @@ export default function PlayerStats() {
     })
 
   }
-  // const handleRoomChange = (e) => {
 
-  //   if (selectedRoomToFilter.length > 0) {
-  //     const addRoom = selectedRoomToFilter.concat(e.target.value);
-  //     setSelectedRoomToFilter(addRoom);
-  //   } else {
-  //     setSelectedRoomToFilter(e.target.value);
-  //   }
-  // };
+  const handleGroupChange = (e) => {
+    const filterSelectedGroup = groupList.filter(group => group.groupName === e.target.value);
+    setSelectedGroupToFilter({
+      ...selectedGroupToFilter,
+      groupName: filterSelectedGroup[0].groupName
+    })
+    console.log(selectedGroupToFilter)
+
+  }
+
+  const createGroupHandleChange = (e) => {
+    setGroupToCreate({
+      ...groupToCreate,
+      groupName: e.target.value
+    })
+  }
 
 
   React.useEffect(async () => {
@@ -147,7 +158,7 @@ export default function PlayerStats() {
 //addGroup 
   const addGroup = (values) => {
     if (window.confirm('Esta seguro que desea crear el grupo?')) {
-      setNewGroup(values);
+      createGroupHandleChange(values);
       setOpenPopup(false)
     }
     else {
@@ -161,12 +172,6 @@ export default function PlayerStats() {
   
   }
 
-  const filterList = [
-    { id: 1, filterType: "filterType1" },
-    { id: 2, filterType: "filterType2" },
-    { id: 3, filterType: "filterType3" },
-    { id: 4, filterType: "filterType4" },
-    { id: 5, filterType: "filterType5" },]
 
   return (
 
@@ -282,11 +287,11 @@ export default function PlayerStats() {
               id: 'uncontrolled-native',
             }}
             label="Groups"
-            onChange={handlePlayerIDChange}
+            onChange={handleGroupChange}
             sx={{ margin: "2%", padding: '2%', background: "#d3d3d3", borderRadius: 1, color: "#000000" }}
           >
             {<option value={""}></option>}
-            {groupList.length > 0 ? groupList.map((group) => { return (<option key={group._id} value={group._id}> {group.groupName} </option>) }) : <option value="">No hay grupos (actualizar)</option>}
+            {groupList.length > 0 ? groupList.map((group) => { return (<option key={group._id} value={group.groupName}> {group.groupName} </option>) }) : <option value="">No hay grupos (actualizar)</option>}
           </NativeSelect>
           <Stack sx={{ margin: "2%", background: "#d3d3d3", color: "#000000", borderRadius: 2 }}>
             <FormControl fullWidth>
@@ -301,7 +306,7 @@ export default function PlayerStats() {
                 onChange={handleRoomChange}
                 sx={{ margin: "3%", padding: '3%' }}
               >
-                {<option value={room.roomName}></option>}
+                {<option value={""}></option>}
                 {defaultFilterList.length > 0 ? defaultFilterList.map((filter) => { return (<option key={filter.id} value={filter.filterType}> {filter.filterType} </option>) }) : <option value="">no hay filtros</option>}
 
               </NativeSelect>

@@ -1,19 +1,16 @@
 import { FormControl, Grid, InputLabel, MenuItem, Select, TextField, Paper, Button } from '@mui/material';
 import React from 'react';
 import { Box } from '@mui/system';
-import { UseForm, Form} from './UseForm';
+import { UseForm, Form } from './UseForm';
 
 const initialFieldValues = {
    groupName:'',
 }
 
 
-
-
 export default function GroupForm (props) {
 
     const {addGroup} = props
-    
     
     UseForm();
     
