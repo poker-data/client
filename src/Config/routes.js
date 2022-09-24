@@ -3,6 +3,7 @@ import SinPath from "../components/playerStats/SinPath";
 import PlayerDashboard from "../pages/PlayerDashboard";
 import TeamDashboard from "../pages/TeamDashboard";
 import RoomDashboard from "../pages/RoomDashboard";
+import LoginPage from "../pages/Login/LoginPage";
 
 const routes = [
   {
@@ -26,10 +27,15 @@ const routes = [
     isPrivate: false,
   },
   {
+    path: "/",
+    component: LoginPage,
+    isPrivate: false,
+  }/* ,
+  {
     path: "*",
     component: SinPath,
     isPrivate: false,
-  }
+  } */
 ];
 
 export default routes;

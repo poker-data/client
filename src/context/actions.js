@@ -15,11 +15,10 @@ export async function loginUser(dispatch, loginPayload) {
     let data = await response.json();
     // console.log("request login response: ", response);
     data.role = data.user.role;
-    data.imageLink = data.user.imageLink;
 
     if (data.user) {
       // console.log(data);
-      localStorage.setItem("currentUser", JSON.stringify(data));
+      localStorage.setItem("currentUser", JSON.stringify(data.info));
       dispatch({ type: "LOGIN_SUCCESS", payload: data });
       return data;
     }
@@ -58,11 +57,11 @@ export async function getPlayerStats(dispatch, name,body) {
 
   const requestOptions = {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", "auth-token": localStorage.getItem("token") },
     body: JSON.stringify(body)
   };
 
-  console.log("name: ", name);
+ // console.log("name: ", name);
 
   let response = await fetch(`${ROOT_URL}/api/playerData/${name}`, requestOptions);
   let data = await response.json();
@@ -78,7 +77,7 @@ export async function getPlayerStats(dispatch, name,body) {
 export async function getPlayers(dispatch) {
   const requestOptions = {
     method: "GET",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", "auth-token": localStorage.getItem("token")},
   };
   try {
     let response = await fetch(`${ROOT_URL}/api/getPlayers`, requestOptions);
@@ -102,7 +101,7 @@ export  const getPlayerByFilter = async (dispatch, options) => {
 
     const requestOptions = {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "auth-token": localStorage.getItem("token") },
       body: JSON.stringify(options)
     };
 
@@ -123,7 +122,7 @@ export  const getDataFromDefaultFilters = async (dispatch, options) => {
 
     const requestOptions = {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "auth-token": localStorage.getItem("token")},
       body: JSON.stringify(options)
     };
 
@@ -140,7 +139,7 @@ catch (error) {
 export async function getRooms (dispatch){
   const requestOptions = {
     method: "GET",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", "auth-token": localStorage.getItem("token")},
   };
   try {
     let response = await fetch(`${ROOT_URL}/api/getRooms`, requestOptions);
@@ -156,7 +155,7 @@ export async function getRooms (dispatch){
 export async function getDefaultFilterList (dispatch){
   const requestOptions = {
     method: "GET",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json","auth-token": localStorage.getItem("token") },
   };
   try {
     let response = await fetch(`${ROOT_URL}/api/getDefaultFilters`, requestOptions);
@@ -174,7 +173,7 @@ export async function setNewPlayer(values){
 
   const requestOptions = {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json","auth-token": localStorage.getItem("token") },
     body: JSON.stringify(values)
   };
   console.log(values)
@@ -190,7 +189,7 @@ export async function setNewPlayer(values){
 export async function getGroups (dispatch){
   const requestOptions = {
     method: "GET",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json","auth-token": localStorage.getItem("token") },
   };
   try {
     let response = await fetch(`${ROOT_URL}/api/getGroups`, requestOptions);
@@ -208,7 +207,7 @@ export async function setNewGroup(values){
 
   const requestOptions = {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json","auth-token": localStorage.getItem("token") },
     body: JSON.stringify(values)
   };
   console.log(values)

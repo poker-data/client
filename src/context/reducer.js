@@ -8,9 +8,6 @@ let token = localStorage.getItem("currentUser")
 let role = localStorage.getItem("currentUser")
   ? JSON.parse(localStorage.getItem("currentUser")).role
   : "";
-let imageLink = localStorage.getItem("currentUser")
-  ? JSON.parse(localStorage.getItem("currentUser")).imageLink
-  : "";
 
 export const initialState = {
   user: "" || user,
