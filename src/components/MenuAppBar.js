@@ -25,7 +25,6 @@ export default function MenuAppBar({ handleBtnClick }) {
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [modal, setModal] = React.useState(false);
-  const [isEdit, setIsEdit] = React.useState(false);
 
   const handleBrandClick = () => {
     history.push("/home");
@@ -41,6 +40,14 @@ export default function MenuAppBar({ handleBtnClick }) {
 
   const handleRDClick = () => {
     history.push("/roomdashboard");
+  };
+
+  const showModal = () => {
+    if (!modal) {
+      setModal(true);
+    } else {
+      setModal(false);
+    }
   };
 
   const handleUSClick = () => {
@@ -67,14 +74,7 @@ export default function MenuAppBar({ handleBtnClick }) {
   };
 
 
-  const showModal = () => {
-    setIsEdit(false);
-    if (!modal) {
-      setModal(true);
-    } else {
-      setModal(false);
-    }
-  };
+ 
 
   const closeModal = () => {
     setModal(false);

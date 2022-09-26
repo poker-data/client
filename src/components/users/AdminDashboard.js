@@ -11,7 +11,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { Button, Grid, TextField, Stack, Box, FormControl, InputLabel, Select } from "@mui/material";
 import { alertEditUser, alertPassword } from "./Alerts";
 
-const AdminDashboard = ({  closeModal}) => {
+const AdminDashboard = ({ closeModal }) => {
   const history = useHistory();
   const dispatch = useAuthDispatch();
   const styles = useStylesForm();
