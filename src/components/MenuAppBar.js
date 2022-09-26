@@ -44,7 +44,7 @@ export default function MenuAppBar({ handleBtnClick }) {
   };
 
   const handleUSClick = () => {
-   
+    showModal()
   };
 
   const handleMenu = (event) => {
@@ -189,7 +189,7 @@ export default function MenuAppBar({ handleBtnClick }) {
             }}
             onClick={handleUSClick}
             >
-           Users Config
+           Users
           </Typography>
           {auth && (
             <div className="avatar-container">

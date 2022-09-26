@@ -20,15 +20,6 @@ const AdminDashboard = ({  closeModal}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [modal, setModal] = useState(false);
-  const [search, setSearch] = useState("");
-  const [users, setUsers] = useState([]);
-  const [isEdit, setIsEdit] = useState(false);
-  const [imageLink, setImageLink] = useState("");
-  const [index, setIndex] = useState("");
-
-
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const body = {
@@ -101,10 +92,9 @@ const AdminDashboard = ({  closeModal}) => {
                     value={role}
                     onChange={e => setRole(e.target.value)}
                   >
-                    <MenuItem value={"salesman"}>Salesman</MenuItem>
+                    <MenuItem value={"dev"}>Dev</MenuItem>
                     <MenuItem value={"administrator"}>Administrator</MenuItem>
-                    <MenuItem value={"director"}>Director</MenuItem>
-                    <MenuItem value={"developer"}>Developer</MenuItem>
+                    <MenuItem value={"player"}>Player</MenuItem>
                   </Select>
                 </FormControl>
               
