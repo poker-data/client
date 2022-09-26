@@ -36,10 +36,11 @@ const LoginForm = () => {
     } else {
       try {
         setError("");
+      //  console.log("credentials: ", credentials);
         let response = await loginUser(dispatch, credentials);
-        // console.log("response: ", response);
+         console.log("response: ", response.ok);
         // console.log(credentials);
-        if (!response || !response.user) {
+        if (!response.ok) {
           setError("Usuario o contraseña incorrectos");
           return;
         }

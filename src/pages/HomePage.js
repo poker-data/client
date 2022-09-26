@@ -12,7 +12,8 @@ function HomePage() {
   const state = useAuthState();
   const dispatch = useAuthDispatch();
 
-
+  const userToken = JSON.parse(localStorage.getItem("currentUser")).token 
+ //console.log("token", userToken);
   const [sidebarVisible, setSidebarVisible] = React.useState(false);
 
   const toggleSidebar = () => {
@@ -27,7 +28,7 @@ function HomePage() {
     <>
       <MenuAppBar handleBtnClick={toggleSidebar} />
       <Grid container spacing={3} sx={{ marginLeft: "2%", marginTop: "2%" }}>
-        <PlayerStats/>
+        <PlayerStats userToken={ userToken }/>
         
       </Grid>
       

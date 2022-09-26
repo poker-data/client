@@ -3,7 +3,7 @@ let user = localStorage.getItem("currentUser")
   : "";
 let token = localStorage.getItem("currentUser")
   ? JSON.parse(localStorage.getItem("currentUser")).token
-  : "";
+  : false;
 
 let role = localStorage.getItem("currentUser")
   ? JSON.parse(localStorage.getItem("currentUser")).role
@@ -38,8 +38,7 @@ export const AuthReducer = (initialState, action) => {
         user: action.payload.user,
         token: action.payload.token,
         loading: false,
-        role: action.payload.role,
-        imageLink: action.payload.user.imageLink,
+        role: action.payload.user.role,
       };
     case "LOGOUT":
       return {

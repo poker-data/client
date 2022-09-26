@@ -19,7 +19,8 @@ import PlayerForm from './PlayerForm';
 import GroupForm from './GroupForm';
 import { useHistory } from 'react-router-dom';
 
-export default function PlayerStats() {
+export default function PlayerStats({ userToken }) {
+  //console.log("userToken", userToken);
   const history = useHistory();
   const [openPopup, setOpenPopup] = React.useState(false)
   const [openGroupPopup, setOpenGroupPopup] = React.useState(false)

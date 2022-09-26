@@ -5,17 +5,17 @@ import { useAuthState } from "../Context";
 
 const AppRoutes = ({ component: Component, path, isPrivate, ...rest }) => {
   const state = useAuthState();
+  console.log("token", state.token);
   return (
     <Route
       path={path}
       render={(props) =>
-        /* isPrivate && !state.token ? (
-          <Redirect to={{ pathname: "/login" }} />
+        isPrivate && !state.token ? (
+          <Redirect to={{ pathname: "/" }} />
         ) : (
           //   <Navigate to="/login" />
           <Component {...props} />
-        ) */
-        <Component {...props} />
+        )
       }
       {...rest}
     />

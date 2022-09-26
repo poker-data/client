@@ -11,6 +11,7 @@ import Avatar from "@mui/material/Avatar";
 import { logout, useAuthDispatch, useAuthState } from "../Context";
 import { useHistory } from "react-router-dom";
 import "./MenuAppBar.css";
+import AdminDashboard from "./users/AdminDashboard";
 
 export default function MenuAppBar({ handleBtnClick }) {
   const dispatch = useAuthDispatch();
@@ -23,6 +24,9 @@ export default function MenuAppBar({ handleBtnClick }) {
 
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [modal, setModal] = React.useState(false);
+  const [isEdit, setIsEdit] = React.useState(false);
+
   const handleBrandClick = () => {
     history.push("/home");
   };
@@ -37,6 +41,10 @@ export default function MenuAppBar({ handleBtnClick }) {
 
   const handleRDClick = () => {
     history.push("/roomdashboard");
+  };
+
+  const handleUSClick = () => {
+   
   };
 
   const handleMenu = (event) => {
@@ -58,14 +66,28 @@ export default function MenuAppBar({ handleBtnClick }) {
     history.push("/login");
   };
 
+
+  const showModal = () => {
+    setIsEdit(false);
+    if (!modal) {
+      setModal(true);
+    } else {
+      setModal(false);
+    }
+  };
+
+  const closeModal = () => {
+    setModal(false);
+  };
   React.useEffect(() => {
     if (state.user === "") {
       console.log("redirecting on sign out");
      // redirectOnSignOut();
     }
   }, []);
-
+  
   return (
+    <>
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ border: 1, borderColor:"black", bgcolor: "#000000", padding: "0.5% 0" }}>
         <Toolbar>
@@ -83,7 +105,7 @@ export default function MenuAppBar({ handleBtnClick }) {
                 },
                 mr: 2,
               }}
-            >
+              >
               <MenuIcon />
               
             </IconButton>
@@ -102,7 +124,7 @@ export default function MenuAppBar({ handleBtnClick }) {
               },
             }}
             onClick={handleBrandClick}
-          >
+            >
            Player Info
           </Typography>
           <Typography
@@ -118,7 +140,7 @@ export default function MenuAppBar({ handleBtnClick }) {
               },
             }}
             onClick={handlePDClick}
-          >
+            >
            Player Dashboard
           </Typography>
           <Typography
@@ -134,7 +156,7 @@ export default function MenuAppBar({ handleBtnClick }) {
               },
             }}
             onClick={handleTDClick}
-          >
+            >
            Team Dashboard
           </Typography>
           <Typography
@@ -150,8 +172,24 @@ export default function MenuAppBar({ handleBtnClick }) {
               },
             }}
             onClick={handleRDClick}
-          >
+            >
            Room Dashboard
+          </Typography>
+          <Typography
+            variant="h6"
+            component="div"
+            className="main-title"
+            sx={{
+              flexGrow: 1,
+              fontSize: "30px",
+              color:"#ebe9eb",
+              "@media screen and (max-width: 768px)": {
+                fontSize: "14px",
+              },
+            }}
+            onClick={handleUSClick}
+            >
+           Users Config
           </Typography>
           {auth && (
             <div className="avatar-container">
@@ -170,7 +208,7 @@ export default function MenuAppBar({ handleBtnClick }) {
                     fill: "black",
                   },
                 }}
-              >
+                >
                 <Avatar src={avatar} alt="PF" />
               </IconButton>
               <Menu
@@ -187,7 +225,7 @@ export default function MenuAppBar({ handleBtnClick }) {
                 }}
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
-              >
+                >
                 {/* <MenuItem onClick={handleClose}>Profile</MenuItem> */}
                 <MenuItem onClick={handleClose}>My account</MenuItem>
                 <MenuItem onClick={handleSignOut}>Sign Out</MenuItem>
@@ -197,5 +235,11 @@ export default function MenuAppBar({ handleBtnClick }) {
         </Toolbar>
       </AppBar>
     </Box>
+    {modal ? (
+        <AdminDashboard
+          closeModal={closeModal}
+        />
+      ) : null}
+          </>
   );
 }

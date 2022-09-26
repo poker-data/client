@@ -9,22 +9,22 @@ const routes = [
   {
     path: "/home",
     component: HomePage,
-    isPrivate: false,
+    isPrivate: true,
   },
   {
     path: "/playerdashboard",
     component: PlayerDashboard,
-    isPrivate: false,
+    isPrivate: true,
   },
   {
     path: "/teamdashboard",
     component: TeamDashboard,
-    isPrivate: false,
+    isPrivate: true,
   },
   {
     path: "/roomdashboard",
     component: RoomDashboard,
-    isPrivate: false,
+    isPrivate: true,
   },
   {
     path: "/",
