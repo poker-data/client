@@ -26,7 +26,7 @@ export default function PopUp(props) {
             <Button
             className="add" 
             variant="contained" 
-            sx={{fontWeight: 'bold', border:1, borderColor:"black", backgroundColor:'#2debab', color:'black'}} 
+            sx={{fontWeight: 'bold', border:1, borderColor:"black", backgroundColor:'#454545', color:'#ebe9eb'}} 
             onClick={() => setOpenPopup(false)}>
             X
             </Button>

@@ -19,7 +19,7 @@ export default function CustomInput({ label, handleChange, type, InputProps }) {
       //  InputProps={InputProps ? InputProps : null}
       sx={{
         input: {
-          color: "red",
+          color: "black",
           background: "#fff"
         }
       }}

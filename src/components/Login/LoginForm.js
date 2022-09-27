@@ -76,12 +76,12 @@ const LoginForm = () => {
         alignItems="center"
         justifyContent="center"
         style={{ minHeight: "100vh" }}
+        sx={{background: "#000000", borderRadius: 1, color: "#ebe9eb" }}
       >
         <p
           className="title_text"
-          sx={{ fontFamily: "Roboto", fontSize: "40px" , color: "white"}}
         >
-          PokerData Login
+          Login
         </p>
 
         <Grid container item justifyContent="center" xs={12}>
@@ -89,7 +89,7 @@ const LoginForm = () => {
             type={"text"}
             label={"Correo de usuario"}
             handleChange={setUser}
-            sx = {{color: "#fff"}}
+           
           />
         </Grid>
 
@@ -109,12 +109,9 @@ const LoginForm = () => {
               fullWidth
               onClick={submitCredentials}
               className="login-btn"
-              sx={{
-                color: "#3f50b5",
-                fontSize: "20px",
-              }}
+              sx={{fontSize: "20px",fontWeight: 'bold', border: 1, borderColor: "#454545", backgroundColor: '#454545', color: '#ebe9eb' }}
             >
-              Inicia Sesión
+              Inicia Sesion
             </Button>
           </Grid>
         </Grid>

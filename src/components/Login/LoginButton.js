@@ -5,7 +5,8 @@ import Grid from "@mui/material/Grid";
 const LoginButton = ({ submitCredentials }) => {
   return (
     <Grid item justifyContent="center" xs={3}>
-      <Button fullWidth onClick={submitCredentials}>
+      <Button fullWidth onClick={submitCredentials}
+      >
         Log in
       </Button>
     </Grid>

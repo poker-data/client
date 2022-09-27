@@ -115,7 +115,7 @@ export default function PlayerForm (props) {
               type="submit"
               className="add-player" 
               variant="contained" 
-              sx={{fontWeight: 'bold', border:1, borderColor:"black",margin: "3%", backgroundColor:'#2debab', color:'black'}} 
+              sx={{fontWeight: 'bold', border:1, borderColor:"black",margin: "3%", backgroundColor:'#454545', color:'#ebe9eb'}} 
               
           >ADD</Button>
       </Form>
