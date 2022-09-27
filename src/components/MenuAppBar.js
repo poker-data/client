@@ -12,6 +12,7 @@ import { logout, useAuthDispatch, useAuthState } from "../Context";
 import { useHistory } from "react-router-dom";
 import "./MenuAppBar.css";
 import AdminDashboard from "./users/AdminDashboard";
+import { Drawer } from "@mui/material";
 
 export default function MenuAppBar({ handleBtnClick }) {
   const dispatch = useAuthDispatch();
@@ -25,6 +26,8 @@ export default function MenuAppBar({ handleBtnClick }) {
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [modal, setModal] = React.useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
+
 
   const handleBrandClick = () => {
     history.push("/home");
@@ -65,6 +68,8 @@ export default function MenuAppBar({ handleBtnClick }) {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+ 
 
   const handleSignOut = async () => {
     // console.log("logging out");
@@ -109,108 +114,142 @@ export default function MenuAppBar({ handleBtnClick }) {
                 },
                 mr: 2,
               }}
+              onClick={() => setIsDrawerOpen(true)}
               >
               <MenuIcon />
               
             </IconButton>
+            <Drawer 
+            anchor = 'left'
+            open={isDrawerOpen}
+            onClose={()=> setIsDrawerOpen(false)}>
+
+            <Box p={2} width='100%' height='100%' textAlign='center' role='presentation'
+            sx={{ bgcolor: "#0a0b0c"}}
+            
+            >
+                <Typography 
+                  variant="h6" 
+                  component='div'
+                  className="main-title"
+                  sx={{
+                    flexGrow: 1,
+                    fontSize: "30px",
+                    bgcolor:"#000000",
+                    color:"#ebe9eb",
+                    fontWeight: "bold",
+                    "@media screen and (max-width: 768px)": {
+                      fontSize: "30px",
+                    },
+                  }}>
+                    Menu</Typography>
+                <Typography
+                  variant="h6"
+                  component="div"
+                  className="main-title"
+                  sx={{
+                    flexGrow: 1,
+                    fontSize: "30px",
+                    color:"#ebe9eb",
+                    "@media screen and (max-width: 768px)": {
+                      fontSize: "14px",
+                    },
+                  }}
+                  onClick={handleBrandClick}
+                  >
+                Player Info
+                </Typography>   
+
+                <Typography
+                variant="h6"
+                component="div"
+                className="main-title"
+                sx={{
+                  flexGrow: 1,
+                  fontSize: "30px",
+                  color:"#ebe9eb",
+                  "@media screen and (max-width: 768px)": {
+                    fontSize: "14px",
+                  },
+                }}
+                onClick={handleGDClick}
+                >
+              Group Info
+              </Typography>
+
+              <Typography
+                variant="h6"
+                component="div"
+                className="main-title"
+                sx={{
+                  flexGrow: 1,
+                  fontSize: "30px",
+                  color:"#ebe9eb",
+                  "@media screen and (max-width: 768px)": {
+                    fontSize: "14px",
+                  },
+                }}
+                onClick={handlePDClick}
+                >
+              Player Dashboard
+              </Typography>
+
+              <Typography
+                variant="h6"
+                component="div"
+                className="main-title"
+                sx={{
+                  flexGrow: 1,
+                  fontSize: "30px",
+                  color:"#ebe9eb",
+                  "@media screen and (max-width: 768px)": {
+                    fontSize: "14px",
+                  },
+                }}
+                onClick={handleTDClick}
+                >
+              Team Dashboard
+              </Typography>
+
+              <Typography
+                variant="h6"
+                component="div"
+                className="main-title"
+                sx={{
+                  flexGrow: 1,
+                  fontSize: "30px",
+                  color:"#ebe9eb",
+                  "@media screen and (max-width: 768px)": {
+                    fontSize: "14px",
+                  },
+                }}
+                onClick={handleRDClick}
+                >
+              Room Dashboard
+              </Typography>
+
+              <Typography
+                variant="h6"
+                component="div"
+                className="main-title"
+                sx={{
+                  flexGrow: 1,
+                  fontSize: "30px",
+                  color:"#ebe9eb",
+                  "@media screen and (max-width: 768px)": {
+                    fontSize: "14px",
+                  },
+                }}
+                onClick={handleUSClick}
+                >
+              Users
+              </Typography>
+
+            </Box>
+            </Drawer>
           </div>
 
-          <Typography
-            variant="h6"
-            component="div"
-            className="main-title"
-            sx={{
-              flexGrow: 1,
-              fontSize: "30px",
-              color:"#ebe9eb",
-              "@media screen and (max-width: 768px)": {
-                fontSize: "14px",
-              },
-            }}
-            onClick={handleBrandClick}
-            >
-           Player Info
-          </Typography>
-          <Typography
-            variant="h6"
-            component="div"
-            className="main-title"
-            sx={{
-              flexGrow: 1,
-              fontSize: "30px",
-              color:"#ebe9eb",
-              "@media screen and (max-width: 768px)": {
-                fontSize: "14px",
-              },
-            }}
-            onClick={handleGDClick}
-            >
-           Group Info
-          </Typography>
-          <Typography
-            variant="h6"
-            component="div"
-            className="main-title"
-            sx={{
-              flexGrow: 1,
-              fontSize: "30px",
-              color:"#ebe9eb",
-              "@media screen and (max-width: 768px)": {
-                fontSize: "14px",
-              },
-            }}
-            onClick={handlePDClick}
-            >
-           Player Dashboard
-          </Typography>
-          <Typography
-            variant="h6"
-            component="div"
-            className="main-title"
-            sx={{
-              flexGrow: 1,
-              fontSize: "30px",
-              color:"#ebe9eb",
-              "@media screen and (max-width: 768px)": {
-                fontSize: "14px",
-              },
-            }}
-            onClick={handleTDClick}
-            >
-           Team Dashboard
-          </Typography>
-          <Typography
-            variant="h6"
-            component="div"
-            className="main-title"
-            sx={{
-              flexGrow: 1,
-              fontSize: "30px",
-              color:"#ebe9eb",
-              "@media screen and (max-width: 768px)": {
-                fontSize: "14px",
-              },
-            }}
-            onClick={handleRDClick}
-            >
-           Room Dashboard
-          </Typography>
-          <Typography
-            variant="h6"
-            component="div"
-            className="main-title"
-            sx={{
-              flexGrow: 1,
-              fontSize: "30px",
-              color:"#ebe9eb",
-              "@media screen and (max-width: 768px)": {
-                fontSize: "14px",
-              },
-            }}
-            onClick={handleUSClick}
-            >
-           Users
-          </Typography>
+          
           {auth && (
             <div className="avatar-container">
               <Typography>{seller}</Typography>
