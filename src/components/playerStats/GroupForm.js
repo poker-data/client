@@ -16,8 +16,8 @@ export default function GroupForm (props) {
     
     const validate = (fieldValues = values ) => {
         let temp = { ...errors } 
-        if ('shkUsername' in fieldValues)
-            temp.shkUsername = fieldValues.shkUsername ? "" : "Debe proporcionar un usuario de Sharkscope."
+        if ('groupName' in fieldValues)
+            temp.groupName = fieldValues.groupName ? "" : "Debe proporcionar un usuario de Sharkscope."
             setErrors({
                 ...temp
             })
@@ -61,7 +61,7 @@ export default function GroupForm (props) {
                             type="text" 
                             variant="outlined"
                             label="GroupName"
-                            name="GroupName"
+                            name="groupName"
                             value={values.groupName}
                             onChange = {handleInputChange}
                             {...(errors.name & {error:true})}

@@ -159,7 +159,7 @@ export default function PlayerStats({ userToken }) {
 //addGroup 
   const addGroup = (values) => {
     if (window.confirm('Esta seguro que desea crear el grupo?')) {
-      createGroupHandleChange(values);
+      setNewGroup(values);
       setOpenPopup(false)
     }
     else {
