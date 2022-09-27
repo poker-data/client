@@ -1,0 +1,27 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: montserrat, sans-serif;
+  }
+  #charts-container {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+   
+    .page-title {
+      margin-bottom: 3%;
+    }
+    
+    @media screen and (max-width: 768px) {
+      .chart-container {
+        width: 100%;
+      }
+      .chart-container2 {
+          width: 20%;
+        }
+      .page-title {
+        margin-bottom: 5%;
+      }
+    }

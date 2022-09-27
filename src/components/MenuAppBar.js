@@ -30,6 +30,10 @@ export default function MenuAppBar({ handleBtnClick }) {
     history.push("/home");
   };
 
+  const handleGDClick = () => {
+    history.push("/groups");
+  };
+
   const handleTDClick = () => {
     history.push("/teamdashboard");
   };
@@ -126,6 +130,22 @@ export default function MenuAppBar({ handleBtnClick }) {
             onClick={handleBrandClick}
             >
            Player Info
+          </Typography>
+          <Typography
+            variant="h6"
+            component="div"
+            className="main-title"
+            sx={{
+              flexGrow: 1,
+              fontSize: "30px",
+              color:"#ebe9eb",
+              "@media screen and (max-width: 768px)": {
+                fontSize: "14px",
+              },
+            }}
+            onClick={handleGDClick}
+            >
+           Group Info
           </Typography>
           <Typography
             variant="h6"

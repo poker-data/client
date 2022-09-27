@@ -4,11 +4,17 @@ import PlayerDashboard from "../pages/PlayerDashboard";
 import TeamDashboard from "../pages/TeamDashboard";
 import RoomDashboard from "../pages/RoomDashboard";
 import LoginPage from "../pages/Login/LoginPage";
+import GroupPage from "../pages/GroupPage";
 
 const routes = [
   {
     path: "/home",
     component: HomePage,
+    isPrivate: true,
+  },
+  {
+    path: "/groups",
+    component: GroupPage,
     isPrivate: true,
   },
   {
