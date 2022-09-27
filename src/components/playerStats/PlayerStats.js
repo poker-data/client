@@ -28,17 +28,23 @@ export default function PlayerStats({ userToken }) {
   const initialPlayerState = Object.freeze({ playerName: "", _id: "", shkUsername: "" })
   const initialRoomState = Object.freeze({ roomName: "", _id: "" })
   const initialDateState = Object.freeze({ from: '', to: '' })
+  const initialFilterState = Object.freeze({filterType:"", _id:""})
+  const initialGroupState = Object.freeze({groupName:"", _id:""})
 
   const [playerList, setPlayerList] = React.useState([]);
   const [roomList, setRoomList] = React.useState([]);
+
   const [selectedDate, setSelectedDate] = React.useState(initialDateState);
   const [player, setPlayer] = React.useState(initialPlayerState);
   const [room, setRoom] = React.useState(initialRoomState);
+  const [filter, setFilter] = React.useState(initialFilterState);
+  const [group, setGroup] = React.useState(initialGroupState);
+
   const [selectedRoomToFilter, setSelectedRoomToFilter] = React.useState('');
   const [defaultFilterList, setDefaultFilterList] = React.useState([]);
   const [groupList, setGroupList] = React.useState([]);
   const [groupToCreate, setGroupToCreate] = React.useState({ groupName: '' });
-  const [selectedGroupToFilter, setSelectedGroupToFilter] = React.useState('');
+
 
 
   const state = useAuthState();
@@ -64,22 +70,24 @@ export default function PlayerStats({ userToken }) {
 
   }
 
+  const handleFilterChange = (e) => {
+    const filterSelectedFilter= defaultFilterList.filter(filter => filter.filterType === e.target.value);
+    setFilter({
+      ...filter,
+      filterType: filterSelectedFilter[0].filterType
+    })
+
+  }
+
   const handleGroupChange = (e) => {
     const filterSelectedGroup = groupList.filter(group => group.groupName === e.target.value);
-    setSelectedGroupToFilter({
-      ...selectedGroupToFilter,
+    setGroup({
+      ...group,
       groupName: filterSelectedGroup[0].groupName
     })
-    console.log(selectedGroupToFilter)
 
   }
 
-  const createGroupHandleChange = (e) => {
-    setGroupToCreate({
-      ...groupToCreate,
-      groupName: e.target.value
-    })
-  }
 
 
   React.useEffect(async () => {
@@ -89,10 +97,6 @@ export default function PlayerStats({ userToken }) {
     await getGroups(dispatch);
   }, []);
 
-  React.useEffect(async () => {
-    await getRooms(dispatch);
-
-  }, []);
 
   React.useEffect(() => {
     state.players.length ? setPlayerList(state.players) : setPlayerList([]);
@@ -291,8 +295,8 @@ export default function PlayerStats({ userToken }) {
             onChange={handleGroupChange}
             sx={{ margin: "2%", padding: '2%', background: "#d3d3d3", borderRadius: 1, color: "#000000" }}
           >
-            {<option value={""}></option>}
-            {groupList.length > 0 ? groupList.map((group) => { return (<option key={group._id} value={group.groupName}> {group.groupName} </option>) }) : <option value="">No hay grupos (actualizar)</option>}
+            {<option value={group.groupName}></option>}
+            {groupList.length > 0 ? groupList.map((group) => { return (<option key={group._id} value={group.groupName}> {group.groupName} </option>) }) : <option value="">No hay grupos</option>}
           </NativeSelect>
           <Stack sx={{ margin: "2%", background: "#d3d3d3", color: "#000000", borderRadius: 2 }}>
             <FormControl fullWidth>
@@ -304,11 +308,11 @@ export default function PlayerStats({ userToken }) {
                   id: 'uncontrolled-native',
                 }}
                 label="Filters"
-                onChange={handleRoomChange}
+                onChange={handleFilterChange}
                 sx={{ margin: "3%", padding: '3%' }}
               >
-                {<option value={""}></option>}
-                {defaultFilterList.length > 0 ? defaultFilterList.map((filter) => { return (<option key={filter.id} value={filter.filterType}> {filter.filterType} </option>) }) : <option value="">no hay filtros</option>}
+                {<option value={filter.filterType}></option>}
+                {defaultFilterList.length > 0 ? defaultFilterList.map((filter) => { return (<option key={filter._id} value={filter.filterType}> {filter.filterType} </option>) }) : <option value="">No hay filtros</option>}
 
               </NativeSelect>
             </FormControl>
