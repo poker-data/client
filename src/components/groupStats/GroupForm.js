@@ -16,8 +16,10 @@ export default function GroupForm (props) {
     
     const validate = (fieldValues = values ) => {
         let temp = { ...errors } 
+        if ('shkName' in fieldValues)
+            temp.shkName = fieldValues.shkName ? "" : "Debe proporcionar un usuario de Sharkscope."
         if ('groupName' in fieldValues)
-            temp.groupName = fieldValues.groupName ? "" : "Debe proporcionar un usuario de Sharkscope."
+            temp.groupName = fieldValues.groupName ? "" : "Debe proporcionar el nombre del grupo."
             setErrors({
                 ...temp
             })
@@ -55,12 +57,25 @@ export default function GroupForm (props) {
           <Form onSubmit={handleSubmit}>
             <Grid container>
                     <Grid item xs={6}>
+                    <TextField
+                            autoComplete="off"
+                            size="small"
+                            type="text" 
+                            variant="outlined"
+                            label="Sharkscope Name"
+                            name="shkName"
+                            value={values.shkName ? values.shkName : ''}
+                            onChange = {handleInputChange}
+                            {...(errors.shkName & {error:true})}
+                            {...errors.error}
+                            helperText={errors.shkName}
+                        />
                         <TextField
                             autoComplete="off"
                             size="small"
                             type="text" 
                             variant="outlined"
-                            label="GroupName"
+                            label="Name"
                             name="groupName"
                             value={values.groupName}
                             onChange = {handleInputChange}

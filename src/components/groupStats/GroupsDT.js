@@ -219,9 +219,22 @@ const GroupsDT = () => {
 
                 <TableCell sx={{ color:"#454545" }}>{row.FinalTables}</TableCell>
 
-                <TableCell sx={{ color:"#454545" }}>{row.Best100StreakAvProfit}</TableCell>
+                <TableCell 
+                sx={{ color:"#454545" }}
+                style={{
+                  color:
+                  ((Math.sign(parseFloat(row.Best100StreakAvProfit)) === 1 && '#454545') ||
+                  (Math.sign(parseFloat(row.Best100StreakAvProfit)) === -1 && 'red'))
+                 }}>{row.Best100StreakAvProfit ? '$'+row.Best100StreakAvProfit : row.Best100StreakAvProfit}</TableCell>
 
-                <TableCell sx={{ color:"#454545" }}>{row.Best500StreakAvProfit}</TableCell>
+
+                <TableCell 
+                sx={{ color:"#454545" }}
+                style={{
+                  color:
+                  ((Math.sign(parseFloat(row.Best500StreakAvProfit)) === 1 && '#454545') ||
+                  (Math.sign(parseFloat(row.Best500StreakAvProfit)) === -1 && 'red'))
+                 }}>{row.Best500StreakAvProfit ? '$'+row.Best500StreakAvProfit : row.Best500StreakAvProfit}</TableCell>
 
                 <TableCell 
                 sx={{ color:"#454545" }}

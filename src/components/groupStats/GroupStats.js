@@ -26,7 +26,7 @@ export default function GroupStats({ userToken }) {
   const [notify, setNotify] = React.useState({ isOpen: false, message: '', type: 'error' })
   const initialDateState = Object.freeze({ from: '', to: '' })
   const initialFilterState = Object.freeze({filterType:"", _id:""})
-  const initialGroupState = Object.freeze({groupName:"", _id:""})
+  const initialGroupState = Object.freeze({groupName:"", shkName: "", _id:""})
 
 
   const [selectedDate, setSelectedDate] = React.useState(initialDateState);
@@ -56,10 +56,11 @@ export default function GroupStats({ userToken }) {
   }
 
   const handleGroupChange = (e) => {
-    const filterSelectedGroup = groupList.filter(group => group.groupName === e.target.value);
+    const filterSelectedGroup = groupList.filter(group => group._id === e.target.value);
     setGroup({
       ...group,
       groupName: filterSelectedGroup[0].groupName,
+      shkName: filterSelectedGroup[0].shkName,
       _id: filterSelectedGroup[0]._id
     })
 
@@ -91,7 +92,7 @@ export default function GroupStats({ userToken }) {
 
     const options = {
       _id: group._id,
-      groupName: group.groupName,
+      shkName: group.shkName,
       //dateFrom: dateFrom,
      // dateTo: dateTo,
     }
@@ -101,20 +102,22 @@ export default function GroupStats({ userToken }) {
 
 
   const rows = groupList?.map((group) => {
-    return { id: group._id, Name: group.groupName}
+    return { id: group._id, Name: group.groupName, shkName: group.shkName }
   })
+
 
 
   const columns = [
     { field: 'Name', headerName: 'Name', width: 200 },
+    { field: 'shkName', headerName: 'Username', width: 200 },
   ];
 
- 
+
 //addGroup 
   const addGroup = (values) => {
     if (window.confirm('Esta seguro que desea crear el grupo?')) {
       setNewGroup(values);
-      setOpenPopup(false)
+      setOpenGroupPopup(false)
     }
     else {
       setNotify({
@@ -122,7 +125,7 @@ export default function GroupStats({ userToken }) {
         message: 'Grupo no agregado',
         type: 'error'
       })
-      setOpenPopup(false)
+      setOpenGroupPopup(false)
     }
   
   }
@@ -157,8 +160,8 @@ export default function GroupStats({ userToken }) {
             onChange={handleGroupChange}
             sx={{ margin: "2%", padding: '2%', background: "#d3d3d3", borderRadius: 1, color: "#000000" }}
           >
-            {<option value={group.groupName}></option>}
-            {groupList.length > 0 ? groupList.map((group) => { return (<option key={group._id} value={group.groupName}> {group.groupName} </option>) }) : <option value="">No hay grupos</option>}
+            {<option value={group.shkName}></option>}
+            {groupList.length > 0 ? groupList.map((group) => { return (<option key={group._id} value={group._id}> {group.groupName} </option>) }) : <option value="">No hay grupos</option>}
           </NativeSelect>
           <Stack sx={{ margin: "2%", background: "#d3d3d3", color: "#000000", borderRadius: 2 }}>
             <FormControl fullWidth>
@@ -173,8 +176,8 @@ export default function GroupStats({ userToken }) {
                 onChange={handleFilterChange}
                 sx={{ margin: "3%", padding: '3%' }}
               >
-                {<option value={filter.filterType}></option>}
-                {defaultFilterList.length > 0 ? defaultFilterList.map((filter) => { return (<option key={filter._id} value={filter.filterType}> {filter.filterType} </option>) }) : <option value="">No hay filtros</option>}
+                {<option value={filter.filterName}></option>}
+                {defaultFilterList.length > 0 ? defaultFilterList.map((filter) => { return (<option key={filter._id} value={filter.filterType}> {filter.filterName} </option>) }) : <option value="">No hay filtros</option>}
 
               </NativeSelect>
             </FormControl>

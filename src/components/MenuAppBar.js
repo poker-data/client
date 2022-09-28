@@ -163,7 +163,7 @@ export default function MenuAppBar({ handleBtnClick }) {
                   }}
                   onClick={handleBrandClick}
                   >
-                Player Info
+                Players
                 </Typography>   
 
                 <Typography
@@ -183,7 +183,7 @@ export default function MenuAppBar({ handleBtnClick }) {
                 }}
                 onClick={handleGClick}
                 >
-              Group Info
+              Groups
               </Typography>
 
               <Typography
@@ -203,7 +203,7 @@ export default function MenuAppBar({ handleBtnClick }) {
                 }}
                 onClick={handlePDClick}
                 >
-              Player Dashboard
+              Player Statistics
               </Typography>
 
               <Typography
@@ -223,7 +223,7 @@ export default function MenuAppBar({ handleBtnClick }) {
                 }}
                 onClick={handleGDClick}
                 >
-              Group Dashboard
+              Group Statistics
               </Typography>
 
               <Typography
@@ -243,7 +243,7 @@ export default function MenuAppBar({ handleBtnClick }) {
                 }}
                 onClick={handleRDClick}
                 >
-              Room Dashboard
+              Room Statistics
               </Typography>
 
               
