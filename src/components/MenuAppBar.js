@@ -13,6 +13,7 @@ import { useHistory } from "react-router-dom";
 import "./MenuAppBar.css";
 import AdminDashboard from "./users/AdminDashboard";
 import { Drawer } from "@mui/material";
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 
 export default function MenuAppBar({ handleBtnClick }) {
   const dispatch = useAuthDispatch();
@@ -128,21 +129,24 @@ export default function MenuAppBar({ handleBtnClick }) {
             sx={{ bgcolor: "#0a0b0c"}}
             
             >
-                <Typography 
-                  variant="h6" 
-                  component='div'
-                  className="main-title"
-                  sx={{
-                    flexGrow: 1,
-                    fontSize: "30px",
-                    color:"#d3d3d3",
-                    borderBottom: 1,
-                    fontWeight: "bold",
-                    "@media screen and (max-width: 768px)": {
-                      fontSize: "30px",
-                    },
-                  }}>
-                    Menu</Typography>
+                <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{
+                "& svg": {
+                  fontSize: "35px",
+                  color: "#ebe9eb",
+                  fill: "#ebe9eb",
+                },
+                mr: 2,
+              }}
+              onClick={() => setIsDrawerOpen(false)}
+              >
+              <KeyboardBackspaceIcon />
+              
+            </IconButton>
                 <Typography
                   variant="h6"
                   component="div"
