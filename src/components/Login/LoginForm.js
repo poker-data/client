@@ -1,6 +1,6 @@
 import React from "react";
 import CustomInput from "./CustomInput";
-import { Grid, Button, InputAdornment, IconButton } from "@mui/material";
+import { Grid, Button, InputAdornment, IconButton, TextField } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 import { loginUser, useAuthDispatch } from "../../Context";
@@ -98,7 +98,8 @@ const LoginForm = () => {
         </Grid>
 
         <Grid container item justifyContent="center" xs={12}>
-          <CustomInput
+          
+        <CustomInput
             type={showPassword ? "text" : "password"}
             label={"contrasena"}
             handleChange={setPassword}

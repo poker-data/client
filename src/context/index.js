@@ -9,7 +9,8 @@ import {
     getDataFromDefaultFilters,
     getDefaultFilterList,
     getGroups,
-    setNewGroup
+    setNewGroup,
+    getGroupDataByFilter
   } from "./actions";
   
   import { AuthProvider, useAuthDispatch, useAuthState } from "./context";
@@ -28,5 +29,6 @@ import {
     getDataFromDefaultFilters,
     getDefaultFilterList,
     getGroups,
-    setNewGroup
+    setNewGroup,
+    getGroupDataByFilter,
   };

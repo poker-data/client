@@ -22,7 +22,8 @@ export const initialState = {
   oneUser: [],
   defaultFiltersData: [],
   defaultFilterList: [],
-  groups: []
+  groups: [],
+  defaultGroupFilteredList: [],
 };
 
 export const AuthReducer = (initialState, action) => {
@@ -74,16 +75,21 @@ export const AuthReducer = (initialState, action) => {
         ...initialState,
         defaultFiltersData: action.payload.info,
       };
-      case "DEFAULT_FILTER_LIST":
+    case "DEFAULT_FILTER_LIST":
         return {
           ...initialState,
           defaultFilterList: action.payload.info,
-        };
-        case "GROUPS":
-          return {
-            ...initialState,
-            groups: action.payload.info,
-          };
+      };
+    case "GROUPS":
+        return {
+          ...initialState,
+          groups: action.payload.info,
+      };
+    case "GET_GROUPDATA_BY_FILTER":
+        return {
+          ...initialState,
+          defaultGroupFilteredList: action.payload.info,
+      };
 
     default:
       throw new Error(`Unhandled action type: ${action.type}`);

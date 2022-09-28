@@ -22,13 +22,10 @@ export default function PlayerStats({ userToken }) {
   //console.log("userToken", userToken);
   const history = useHistory();
   const [openPopup, setOpenPopup] = React.useState(false)
-  const [openGroupPopup, setOpenGroupPopup] = React.useState(false)
   const [notify, setNotify] = React.useState({ isOpen: false, message: '', type: 'error' })
   const initialPlayerState = Object.freeze({ playerName: "", _id: "", shkUsername: "" })
   const initialRoomState = Object.freeze({ roomName: "", _id: "" })
   const initialDateState = Object.freeze({ from: '', to: '' })
-  const initialFilterState = Object.freeze({filterType:"", _id:""})
-  const initialGroupState = Object.freeze({groupName:"", _id:""})
 
   const [playerList, setPlayerList] = React.useState([]);
   const [roomList, setRoomList] = React.useState([]);
@@ -62,9 +59,6 @@ export default function PlayerStats({ userToken }) {
     })
 
   }
-
-
-
 
 
   React.useEffect(async () => {

@@ -1,5 +1,4 @@
 import React from "react";
-
 import "./GroupDashboard.css";
 import MenuAppBar from "../components/MenuAppBar";
 import { useAuthDispatch, useAuthState } from '../Context'

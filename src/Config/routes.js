@@ -5,6 +5,7 @@ import TeamDashboard from "../pages/TeamDashboard";
 import RoomDashboard from "../pages/RoomDashboard";
 import LoginPage from "../pages/Login/LoginPage";
 import GroupPage from "../pages/GroupPage";
+import GroupDashboard from "../pages/GroupDashboard";
 
 const routes = [
   {
@@ -20,6 +21,11 @@ const routes = [
   {
     path: "/playerdashboard",
     component: PlayerDashboard,
+    isPrivate: true,
+  },
+  {
+    path: "/groupdashboard",
+    component: GroupDashboard,
     isPrivate: true,
   },
   {

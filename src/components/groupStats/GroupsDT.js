@@ -28,9 +28,10 @@ const GroupsDT = () => {
       
 
     React.useEffect(() => {
+      console.log(state.defaultGroupFilteredList)
       const dataTable = []
-      //dataTable.push(state.playerWithFilter)
-      //setData(dataTable);
+      dataTable.push(state.defaultGroupFilteredList)
+      setData(dataTable);
     }, [state]);
 
 

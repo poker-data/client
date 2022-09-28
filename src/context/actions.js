@@ -218,3 +218,25 @@ export async function setNewGroup(values) {
     console.log(error + "try catch actions setPlayer");
   }
 }
+
+export const getGroupDataByFilter = async (dispatch, options) => {
+
+  try {
+
+    let url = `${ROOT_URL}/api/getDefaultGroupFiltersData`;
+
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "auth-token": JSON.parse(localStorage.getItem("currentUser")).token },
+      body: JSON.stringify(options)
+    };
+
+    let response = await fetch(url, requestOptions);
+    let data = await response.json();
+    console.log(data);
+    dispatch({ type: "GET_GROUPDATA_BY_FILTER", payload: data });
+  }
+  catch (error) {
+    console.log(error)
+  }
+}

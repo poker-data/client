@@ -5,7 +5,7 @@ import { Button, Stack, Select, TextField } from "@mui/material";
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
-import { useAuthDispatch,  useAuthState, getPlayerByFilter, setNewPlayer, getDefaultFilterList, getGroups, setNewGroup } from "../../Context";
+import { useAuthDispatch,  useAuthState, getGroupDataByFilter, getDefaultFilterList, getGroups, setNewGroup } from "../../Context";
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -59,7 +59,8 @@ export default function GroupStats({ userToken }) {
     const filterSelectedGroup = groupList.filter(group => group.groupName === e.target.value);
     setGroup({
       ...group,
-      groupName: filterSelectedGroup[0].groupName
+      groupName: filterSelectedGroup[0].groupName,
+      _id: filterSelectedGroup[0]._id
     })
 
   }
@@ -85,16 +86,16 @@ export default function GroupStats({ userToken }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const dateFrom = selectedDate.from !== "" ? selectedDate.from.getTime() : null;
-    const dateTo = selectedDate.to !== "" ? selectedDate.to.getTime() : null;
+    //const dateFrom = selectedDate.from !== "" ? selectedDate.from.getTime() : null;
+    //const dateTo = selectedDate.to !== "" ? selectedDate.to.getTime() : null;
 
     const options = {
       _id: group._id,
       groupName: group.groupName,
-      dateFrom: dateFrom,
-      dateTo: dateTo,
+      //dateFrom: dateFrom,
+     // dateTo: dateTo,
     }
-    const response = await getPlayerByFilter(dispatch, options);
+    const response = await getGroupDataByFilter(dispatch, options);
     history.push('/groupdashboard');
   }
 

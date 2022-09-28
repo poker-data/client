@@ -246,16 +246,20 @@ export default function MenuAppBar({ handleBtnClick }) {
               Room Dashboard
               </Typography>
 
-              <Typography
+              
+
+            </Box>
+            </Drawer>
+          </div>
+
+          <Typography
                 variant="h6"
                 component="div"
                 className="main-title"
                 sx={{
                   flexGrow: 1,
                   fontSize: "30px",
-                  marginBottom: "4%",
-                  borderBottom: 1,
-                  borderColor: "white",
+                  marginLeft: "2%",
                   color:"white",
                   "@media screen and (max-width: 768px)": {
                     fontSize: "14px",
@@ -265,10 +269,6 @@ export default function MenuAppBar({ handleBtnClick }) {
                 >
               Users
               </Typography>
-
-            </Box>
-            </Drawer>
-          </div>
 
           
           {auth && (
