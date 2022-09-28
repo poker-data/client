@@ -135,8 +135,8 @@ export default function MenuAppBar({ handleBtnClick }) {
                   sx={{
                     flexGrow: 1,
                     fontSize: "30px",
-                    bgcolor:"#000000",
-                    color:"#ebe9eb",
+                    color:"#d3d3d3",
+                    borderBottom: 1,
                     fontWeight: "bold",
                     "@media screen and (max-width: 768px)": {
                       fontSize: "30px",
@@ -150,7 +150,10 @@ export default function MenuAppBar({ handleBtnClick }) {
                   sx={{
                     flexGrow: 1,
                     fontSize: "30px",
-                    color:"#ebe9eb",
+                    marginBottom: "4%",
+                    borderBottom: 1,
+                    borderColor: "#d3d3d3",
+                    color:"#d3d3d3",
                     "@media screen and (max-width: 768px)": {
                       fontSize: "14px",
                     },
@@ -167,7 +170,10 @@ export default function MenuAppBar({ handleBtnClick }) {
                 sx={{
                   flexGrow: 1,
                   fontSize: "30px",
-                  color:"#ebe9eb",
+                  marginBottom: "4%",
+                  borderBottom: 1,
+                  borderColor: "#d3d3d3",
+                  color:"#d3d3d3",
                   "@media screen and (max-width: 768px)": {
                     fontSize: "14px",
                   },
@@ -184,7 +190,10 @@ export default function MenuAppBar({ handleBtnClick }) {
                 sx={{
                   flexGrow: 1,
                   fontSize: "30px",
-                  color:"#ebe9eb",
+                  marginBottom: "4%",
+                  borderBottom: 1,
+                  borderColor: "#d3d3d3",
+                  color:"#d3d3d3",
                   "@media screen and (max-width: 768px)": {
                     fontSize: "14px",
                   },
@@ -201,7 +210,10 @@ export default function MenuAppBar({ handleBtnClick }) {
                 sx={{
                   flexGrow: 1,
                   fontSize: "30px",
-                  color:"#ebe9eb",
+                  marginBottom: "4%",
+                  borderBottom: 1,
+                  borderColor: "#d3d3d3",
+                  color:"#d3d3d3",
                   "@media screen and (max-width: 768px)": {
                     fontSize: "14px",
                   },
@@ -218,7 +230,10 @@ export default function MenuAppBar({ handleBtnClick }) {
                 sx={{
                   flexGrow: 1,
                   fontSize: "30px",
-                  color:"#ebe9eb",
+                  marginBottom: "4%",
+                  borderBottom: 1,
+                  borderColor: "#d3d3d3",
+                  color:"#d3d3d3",
                   "@media screen and (max-width: 768px)": {
                     fontSize: "14px",
                   },
@@ -235,7 +250,10 @@ export default function MenuAppBar({ handleBtnClick }) {
                 sx={{
                   flexGrow: 1,
                   fontSize: "30px",
-                  color:"#ebe9eb",
+                  marginBottom: "4%",
+                  borderBottom: 1,
+                  borderColor: "#d3d3d3",
+                  color:"#d3d3d3",
                   "@media screen and (max-width: 768px)": {
                     fontSize: "14px",
                   },
