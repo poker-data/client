@@ -38,8 +38,8 @@ export default function MenuAppBar({ handleBtnClick }) {
     history.push("/groups");
   };
 
-  const handleTDClick = () => {
-    history.push("/teamdashboard");
+  const handleGDClick = () => {
+    history.push("/groupdashboard");
   };
 
   const handlePDClick = () => {
@@ -221,9 +221,9 @@ export default function MenuAppBar({ handleBtnClick }) {
                     fontSize: "14px",
                   },
                 }}
-                onClick={handleTDClick}
+                onClick={handleGDClick}
                 >
-              Team Dashboard
+              Group Dashboard
               </Typography>
 
               <Typography
