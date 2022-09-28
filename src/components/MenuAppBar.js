@@ -34,7 +34,7 @@ export default function MenuAppBar({ handleBtnClick }) {
     history.push("/home");
   };
 
-  const handleGDClick = () => {
+  const handleGClick = () => {
     history.push("/groups");
   };
 
@@ -99,7 +99,7 @@ export default function MenuAppBar({ handleBtnClick }) {
   return (
     <>
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ border: 1, borderColor:"black", bgcolor: "#000000", padding: "0.5% 0" }}>
+      <AppBar position="static" sx={{width:'100%', border: 1, borderColor:"black", bgcolor: "#000000", padding: "0.5% 0" }}>
         <Toolbar>
           <div onClick={handleBtnClick}>
             <IconButton
@@ -113,7 +113,6 @@ export default function MenuAppBar({ handleBtnClick }) {
                   color: "#ebe9eb",
                   fill: "#ebe9eb",
                 },
-                mr: 2,
               }}
               onClick={() => setIsDrawerOpen(true)}
               >
@@ -156,8 +155,8 @@ export default function MenuAppBar({ handleBtnClick }) {
                     fontSize: "30px",
                     marginBottom: "4%",
                     borderBottom: 1,
-                    borderColor: "#d3d3d3",
-                    color:"#d3d3d3",
+                    borderColor: "white",
+                    color:"white",
                     "@media screen and (max-width: 768px)": {
                       fontSize: "14px",
                     },
@@ -176,13 +175,13 @@ export default function MenuAppBar({ handleBtnClick }) {
                   fontSize: "30px",
                   marginBottom: "4%",
                   borderBottom: 1,
-                  borderColor: "#d3d3d3",
-                  color:"#d3d3d3",
+                  borderColor: "white",
+                  color:"white",
                   "@media screen and (max-width: 768px)": {
                     fontSize: "14px",
                   },
                 }}
-                onClick={handleGDClick}
+                onClick={handleGClick}
                 >
               Group Info
               </Typography>
@@ -196,8 +195,8 @@ export default function MenuAppBar({ handleBtnClick }) {
                   fontSize: "30px",
                   marginBottom: "4%",
                   borderBottom: 1,
-                  borderColor: "#d3d3d3",
-                  color:"#d3d3d3",
+                  borderColor: "white",
+                  color:"white",
                   "@media screen and (max-width: 768px)": {
                     fontSize: "14px",
                   },
@@ -216,8 +215,8 @@ export default function MenuAppBar({ handleBtnClick }) {
                   fontSize: "30px",
                   marginBottom: "4%",
                   borderBottom: 1,
-                  borderColor: "#d3d3d3",
-                  color:"#d3d3d3",
+                  borderColor: "white",
+                  color:"white",
                   "@media screen and (max-width: 768px)": {
                     fontSize: "14px",
                   },
@@ -236,8 +235,8 @@ export default function MenuAppBar({ handleBtnClick }) {
                   fontSize: "30px",
                   marginBottom: "4%",
                   borderBottom: 1,
-                  borderColor: "#d3d3d3",
-                  color:"#d3d3d3",
+                  borderColor: "white",
+                  color:"white",
                   "@media screen and (max-width: 768px)": {
                     fontSize: "14px",
                   },
@@ -256,8 +255,8 @@ export default function MenuAppBar({ handleBtnClick }) {
                   fontSize: "30px",
                   marginBottom: "4%",
                   borderBottom: 1,
-                  borderColor: "#d3d3d3",
-                  color:"#d3d3d3",
+                  borderColor: "white",
+                  color:"white",
                   "@media screen and (max-width: 768px)": {
                     fontSize: "14px",
                   },
@@ -274,7 +273,7 @@ export default function MenuAppBar({ handleBtnClick }) {
           
           {auth && (
             <div className="avatar-container">
-              <Typography>{seller}</Typography>
+              <Typography >{seller}</Typography>
               <IconButton
                 size="large"
                 aria-label="account of current user"
@@ -288,10 +287,11 @@ export default function MenuAppBar({ handleBtnClick }) {
                     color: "black",
                     fill: "black",
                   },
+                  mr:2,
                 }}
                 >
                 <Avatar src={avatar} alt="PF" />
-              </IconButton>
+              </IconButton >
               <Menu
                 id="acoount-menu"
                 anchorEl={anchorEl}
