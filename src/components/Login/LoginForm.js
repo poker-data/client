@@ -78,12 +78,14 @@ const LoginForm = () => {
         alignItems="center"
         justifyContent="center"
         style={{ minHeight: "100vh" }}
-        sx={{background: "#000000", borderRadius: 1, color: "#ebe9eb" }}
+        sx={{background: "#ebe9eb", borderRadius: 1, color: "#ebe9eb" }}
       >
         <p
           className="title_text"
+          style={{ color: "black"}}
+          
         >
-          Login
+          <strong>Login</strong>
         </p>
 
         <Grid container item justifyContent="center" xs={12}>
