@@ -30,23 +30,27 @@ export default function MenuAppBar({ handleBtnClick }) {
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
 
 
-  const handleBrandClick = () => {
+  const handleHomeClick = () => {
     history.push("/home");
   };
 
-  const handleGClick = () => {
+  const handlePlayerClick = () => {
+    history.push("/players");
+  };
+
+  const handleGroupClick = () => {
     history.push("/groups");
   };
 
-  const handleGDClick = () => {
+  const handleGroupStatsClick = () => {
     history.push("/groupdashboard");
   };
 
-  const handlePDClick = () => {
+  const handlePlayerStatsClick = () => {
     history.push("/playerdashboard");
   };
 
-  const handleRDClick = () => {
+  const handleRoomStatsClick = () => {
     history.push("/roomdashboard");
   };
 
@@ -146,6 +150,25 @@ export default function MenuAppBar({ handleBtnClick }) {
               <KeyboardBackspaceIcon />
               
             </IconButton>
+            <Typography
+                  variant="h6"
+                  component="div"
+                  className="main-title"
+                  sx={{
+                    flexGrow: 1,
+                    fontSize: "30px",
+                    marginBottom: "4%",
+                    borderBottom: 1,
+                    borderColor: "white",
+                    color:"white",
+                    "@media screen and (max-width: 768px)": {
+                      fontSize: "14px",
+                    },
+                  }}
+                  onClick={handleHomeClick}
+                  >
+                Home
+                </Typography>
                 <Typography
                   variant="h6"
                   component="div"
@@ -161,7 +184,7 @@ export default function MenuAppBar({ handleBtnClick }) {
                       fontSize: "14px",
                     },
                   }}
-                  onClick={handleBrandClick}
+                  onClick={handlePlayerClick}
                   >
                 Players
                 </Typography>   
@@ -181,7 +204,7 @@ export default function MenuAppBar({ handleBtnClick }) {
                     fontSize: "14px",
                   },
                 }}
-                onClick={handleGClick}
+                onClick={handleGroupClick}
                 >
               Groups
               </Typography>
@@ -201,7 +224,7 @@ export default function MenuAppBar({ handleBtnClick }) {
                     fontSize: "14px",
                   },
                 }}
-                onClick={handlePDClick}
+                onClick={handlePlayerStatsClick}
                 >
               Player Statistics
               </Typography>
@@ -221,7 +244,7 @@ export default function MenuAppBar({ handleBtnClick }) {
                     fontSize: "14px",
                   },
                 }}
-                onClick={handleGDClick}
+                onClick={handleGroupStatsClick}
                 >
               Group Statistics
               </Typography>
@@ -241,7 +264,7 @@ export default function MenuAppBar({ handleBtnClick }) {
                     fontSize: "14px",
                   },
                 }}
-                onClick={handleRDClick}
+                onClick={handleRoomStatsClick}
                 >
               Room Statistics
               </Typography>
@@ -257,7 +280,6 @@ export default function MenuAppBar({ handleBtnClick }) {
                 component="div"
                 className="main-title"
                 sx={{
-                  flexGrow: 1,
                   fontSize: "30px",
                   marginLeft: "2%",
                   color:"white",
@@ -282,6 +304,8 @@ export default function MenuAppBar({ handleBtnClick }) {
                 onClick={handleMenu}
                 color="inherit"
                 sx={{
+                  position: "absolute",
+                  right: "1%",
                   "& svg": {
                     fontSize: "35px",
                     color: "black",

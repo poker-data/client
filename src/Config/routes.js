@@ -6,11 +6,17 @@ import RoomDashboard from "../pages/RoomDashboard";
 import LoginPage from "../pages/Login/LoginPage";
 import GroupPage from "../pages/GroupPage";
 import GroupDashboard from "../pages/GroupDashboard";
+import PlayerPage from "../pages/PlayerPage";
 
 const routes = [
   {
     path: "/home",
     component: HomePage,
+    isPrivate: true,
+  },
+  {
+    path: "/players",
+    component: PlayerPage,
     isPrivate: true,
   },
   {

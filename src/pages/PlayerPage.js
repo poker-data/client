@@ -8,7 +8,7 @@ import { getPlayerStats, useAuthDispatch, useAuthState } from '../Context'
 import Grid from '@mui/material/Grid';
 import PlayerStats from "../components/playerStats/PlayerStats";
 
-function HomePage() {
+function PlayerPage() {
   const state = useAuthState();
   const dispatch = useAuthDispatch();
 
@@ -28,6 +28,7 @@ function HomePage() {
     <>
       <MenuAppBar handleBtnClick={toggleSidebar} />
       <Grid container spacing={3} sx={{ marginLeft: "2%", marginTop: "2%" }}>
+        <PlayerStats userToken={ userToken }/>
         
       </Grid>
       
@@ -80,4 +81,4 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default PlayerPage;

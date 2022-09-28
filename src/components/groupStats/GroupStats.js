@@ -17,6 +17,7 @@ import AddIcon from '@mui/icons-material/Add';
 import Popup from '../utils/Popup';
 import GroupForm from './GroupForm';
 import { useHistory } from 'react-router-dom';
+import CircularIndeterminate from "../utils/CircularIndeterminate";
 
 export default function GroupStats({ userToken }) {
   //console.log("userToken", userToken);
@@ -36,6 +37,8 @@ export default function GroupStats({ userToken }) {
   const [defaultFilterList, setDefaultFilterList] = React.useState([]);
   const [groupList, setGroupList] = React.useState([]);
   const [groupToCreate, setGroupToCreate] = React.useState({ groupName: '' });
+
+  const [isLoading, setIsLoading] = React.useState(false);
 
 
 
@@ -87,6 +90,7 @@ export default function GroupStats({ userToken }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     //const dateFrom = selectedDate.from !== "" ? selectedDate.from.getTime() : null;
     //const dateTo = selectedDate.to !== "" ? selectedDate.to.getTime() : null;
 
@@ -97,6 +101,7 @@ export default function GroupStats({ userToken }) {
      // dateTo: dateTo,
     }
     const response = await getGroupDataByFilter(dispatch, options);
+    setIsLoading(false);
     history.push('/groupdashboard');
   }
 
@@ -132,6 +137,7 @@ export default function GroupStats({ userToken }) {
 
 
   return (
+
 
     <Grid container spacing={2}   >
       <Grid item xs={4} >
@@ -197,6 +203,7 @@ export default function GroupStats({ userToken }) {
             >Add Group</Button>
           </Stack>
         </FormControl>
+        {isLoading ? <CircularIndeterminate /> : null}
         
         <Popup
           title="Ingresar Datos"
