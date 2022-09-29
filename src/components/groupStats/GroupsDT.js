@@ -13,7 +13,7 @@ import {Box,
 import Switch from '@mui/material/Switch';
 import Notification from '../utils/Notification';
 import { useAuthState } from "../../Context";
-
+import { parseSecondstoDate } from '../utils/Formatters';
 
 const GroupsDT = () => {
       const state = useAuthState();
@@ -28,22 +28,13 @@ const GroupsDT = () => {
       
 
     React.useEffect(() => {
-      console.log(state.defaultGroupFilteredList)
       const dataTable = []
-      dataTable.push(state.defaultGroupFilteredList)
+      state.defaultGroupFilteredList.stats ? dataTable.push(state.defaultGroupFilteredList.stats) : dataTable.push([]);
       setData(dataTable);
     }, [state]);
 
 
 
-
-    const parseSecondstoDate = (date) => {
-      let dateObj = new Date(date * 1000);
-      let dateResult = dateObj.getDate()+
-          "/"+(dateObj.getMonth()+1)+
-          "/"+dateObj.getFullYear()
-      return dateResult;
-    }
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);

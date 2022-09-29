@@ -5,6 +5,8 @@ import MenuAppBar from "../components/MenuAppBar";
 import { useAuthDispatch, useAuthState } from '../Context'
 import Grid from '@mui/material/Grid';
 import PlayersDT from "../components/playerStats/PlayersDT";
+import LineChart from "../components/charts/LineChart";
+
 
 
 function PlayerDashboard() {
@@ -28,9 +30,14 @@ function PlayerDashboard() {
       <Grid container spacing={3} sx={{ marginLeft: "2%", marginTop: "2%"}}>
         <Grid item xs={11}>
           <PlayersDT/>
-        </Grid>  
-      </Grid>
-      
+        </Grid> 
+        <Grid item xs={8} >
+          <LineChart 
+          title="Total"
+          data= {state.playerWithFilter.data ? state.playerWithFilter.data : []}
+          />
+        </Grid>
+      </Grid>  
 
       {}
     </>

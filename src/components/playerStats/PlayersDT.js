@@ -13,6 +13,7 @@ import {Box,
 import Switch from '@mui/material/Switch';
 import Notification from '../utils/Notification';
 import { useAuthState } from "../../Context";
+import { parseSecondstoDate } from '../utils/Formatters';
 
 
 const PlayersDT = () => {
@@ -28,73 +29,12 @@ const PlayersDT = () => {
       
 
     React.useEffect(() => {
-      console.log(state)
       const dataTable = []
-      dataTable.push(state.playerWithFilter)
+      state.playerWithFilter.stats ? dataTable.push(state.playerWithFilter.stats) : dataTable.push([]) 
       setData(dataTable);
     }, [state]);
 
 
-    // React.useEffect(() => {
-    //   console.log(state.playerWithFilter, 'state en tabla')
-    //   state.playerWithFilter.map(player => {
-    //   const asd = player["@id"] 
-    //   const amount = player["$"]
-    //   const obj = {[asd] : amount}
-    //   dataTable.push(obj)
-    //   })
-      
-    //   console.log(dataTable, 'dataTable')
-    //   setData(dataValues);
-    // }, [state])
-
-   
-
-    // const datos = [{
-    //   playerName: 'John Doe',
-    //   username :  'johndoe',
-    //   volume : '100',
-    //   avGamesDay : '10',
-    //   profit : '100',
-    //   avProfit  : '100',
-    //   avROI : '100',
-    //   totalROI : '100',
-    //   itm : '100',
-    //   turbo : '100',
-    //   turboPercent : '100',
-    //   hiper : '100',
-    //   hiperPercent : '100',
-    //   requiredBankroll : '100',
-    //   winningDays : '100',
-    //   losingDays : '100',
-    //   pokerstars : '100',
-    //   pokerstarsPercent : '100',
-    //   pokerstarsES : '100',
-    //   pokerstarsPercentES : '100',
-    //   winamax : '100',
-    //   winamaxPercent : '100',
-    //   wpn : '100',
-    //   wpnPercent : '100',
-    //   partypoker : '100',
-    //   partypokerPercent : '100',
-    //   tiger : '100',
-    //   tigerPercent : '100',
-    //   tripleEight: '100',
-    //   tripleEightPercent : '100',
-    //   GGNetwork : '100',
-    //   GGNetworkPercent : '100',
-    //   iPoker : '100',
-    //   iPokerPercent : '100',
-    // }];
-
-
-    const parseSecondstoDate = (date) => {
-      let dateObj = new Date(date * 1000);
-      let dateResult = dateObj.getDate()+
-          "/"+(dateObj.getMonth()+1)+
-          "/"+dateObj.getFullYear()
-      return dateResult;
-    }
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);

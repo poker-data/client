@@ -4,6 +4,7 @@ import MenuAppBar from "../components/MenuAppBar";
 import { useAuthDispatch, useAuthState } from '../Context'
 import Grid from '@mui/material/Grid';
 import GroupsDT from "../components/groupStats/GroupsDT";
+import LineChart from "../components/charts/LineChart";
 
 
 function GroupDashboard() {
@@ -28,6 +29,12 @@ function GroupDashboard() {
         <Grid item xs={11}>
           <GroupsDT/>
         </Grid>  
+        <Grid item xs={8}>
+          <LineChart 
+          title="Total"
+          data= {state.defaultGroupFilteredList.data ? state.defaultGroupFilteredList.data : []}
+          />
+        </Grid>
       </Grid>
 
       {}

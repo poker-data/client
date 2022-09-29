@@ -106,7 +106,7 @@ export const getPlayerByFilter = async (dispatch, options) => {
 
     let response = await fetch(url, requestOptions);
     let data = await response.json();
-    console.log(data);
+    console.log(data, 'data getplayer');
     dispatch({ type: "GET_PLAYER_BY_FILTER", payload: data });
   }
   catch (error) {

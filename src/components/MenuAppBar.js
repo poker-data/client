@@ -269,8 +269,6 @@ export default function MenuAppBar({ handleBtnClick }) {
               Room Statistics
               </Typography>
 
-              
-
             </Box>
             </Drawer>
           </div>

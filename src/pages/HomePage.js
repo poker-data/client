@@ -7,6 +7,7 @@ import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid'
 import { getPlayerStats, useAuthDispatch, useAuthState } from '../Context'
 import Grid from '@mui/material/Grid';
 import PlayerStats from "../components/playerStats/PlayerStats";
+import LineChart from "../components/charts/LineChart";
 
 function HomePage() {
   const state = useAuthState();
@@ -28,7 +29,7 @@ function HomePage() {
     <>
       <MenuAppBar handleBtnClick={toggleSidebar} />
       <Grid container spacing={3} sx={{ marginLeft: "2%", marginTop: "2%" }}>
-        
+
       </Grid>
       
 
