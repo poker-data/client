@@ -1,0 +1,28 @@
+.main-title:hover {
+    cursor: pointer;
+  }
+  .main-title {
+    color: black;
+  }
+  .avatar-container {
+    width: 20%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  .avatar-container p {
+    display: inline-block;
+    color: black;
+    font-family: Poppins;
+    font-size: 20px;
+    font-style: SemiBold;
+  }
+  
+  @media screen and (max-width: 70px) {
+    .avatar-container {
+      width: 50%;
+    }
+    .avatar-container p {
+      font-size: 12px;
+    }
+  }
