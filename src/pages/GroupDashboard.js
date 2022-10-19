@@ -1,7 +1,7 @@
 import React from "react";
 import "./GroupDashboard.css";
 import MenuAppBar from "../components/MenuAppBar";
-import { useAuthDispatch, useAuthState } from '../Context'
+import { useAuthDispatch, useAuthState } from '../context'
 import Grid from '@mui/material/Grid';
 import GroupsDT from "../components/groupStats/GroupsDT";
 import LineChart from "../components/charts/LineChart";

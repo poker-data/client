@@ -8,7 +8,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import Avatar from "@mui/material/Avatar";
-import { logout, useAuthDispatch, useAuthState } from "../Context";
+import { logout, useAuthDispatch, useAuthState } from "../context";
 import { useHistory } from "react-router-dom";
 import "./MenuAppBar.css";
 import AdminDashboard from "./users/AdminDashboard";

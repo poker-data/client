@@ -2,7 +2,7 @@
 import React from "react";
 import { BrowserRouter as Router, Switch } from "react-router-dom";
 import routes from "./Config/routes";
-import { AuthProvider } from "./Context";
+import { AuthProvider } from "./context";
 import AppRoute from "./components/AppRoutes";
 
 function App() {

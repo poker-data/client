@@ -4,7 +4,7 @@ import MenuAppBar from "../components/MenuAppBar";
 import "./GroupPage.css";
 import Box from '@mui/material/Box';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid'
-import {  useAuthDispatch, useAuthState } from '../Context'
+import {  useAuthDispatch, useAuthState } from '../context'
 import Grid from '@mui/material/Grid';
 import GroupStats from "../components/groupStats/GroupStats";
 

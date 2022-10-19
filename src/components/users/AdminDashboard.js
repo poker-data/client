@@ -5,7 +5,7 @@ import {
  // modifyUserBy_id,
   useAuthState,
   useAuthDispatch,
-} from "../../Context";
+} from "../../context";
 import { useStylesForm } from "./useStylesForm";
 import MenuItem from "@mui/material/MenuItem";
 import { Button, Grid, TextField, Stack, Box, FormControl, InputLabel, Select } from "@mui/material";

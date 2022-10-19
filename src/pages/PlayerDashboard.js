@@ -2,7 +2,7 @@ import React from "react";
 
 import "./PlayerDashboard.css";
 import MenuAppBar from "../components/MenuAppBar";
-import { useAuthDispatch, useAuthState } from '../Context'
+import { useAuthDispatch, useAuthState } from '../context'
 import Grid from '@mui/material/Grid';
 import PlayersDT from "../components/playerStats/PlayersDT";
 import LineChart from "../components/charts/LineChart";
