@@ -32,31 +32,14 @@ export async function loginUser(dispatch, loginPayload) {
 export async function logout(dispatch) {
   localStorage.removeItem("currentUser");
   dispatch({ type: "LOGOUT" });
-/*   const requestOptions = {
-    method: "GET",
-    headers: { "Content-Type": "application/json" },
-
-  };
-  let response = await fetch(`${ROOT_URL}/logout`, requestOptions);
-  let data = await response.json();
-  // console.log(data);
-
-  if (data.status === "loggedout") {
-    localStorage.removeItem("currentUser");
-    localStorage.removeItem("token");
-    localStorage.removeItem("role");
-    localStorage.removeItem("imageLink");
-    // localStorage.clear();
-    dispatch({ type: "LOGOUT" });
-  } else {
-    alert("Error al cerrar sesión");
-  } */
 }
+
+
 export async function getPlayerStats(dispatch, name, body) {
 
   const requestOptions = {
     method: "POST",
-    headers: { "Content-Type": "application/json", "auth-token": JSON.parse(localStorage.getItem("currentUser")).token },
+    headers: { "Content-Type": "application/json", "token": JSON.parse(localStorage.getItem("currentUser")).token },
     body: JSON.stringify(body)
   };
 
