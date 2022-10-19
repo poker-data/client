@@ -40,7 +40,7 @@
   "scripts": {
     "start": "react-scripts start",
     "test": "react-scripts test",
-    "build": "react-scripts build --max-old-space-size=7168",
+    "build": "react-scripts --max_old_space_size=8192 build",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
