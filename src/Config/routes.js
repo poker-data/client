@@ -2,7 +2,7 @@ import HomePage from "../pages/HomePage";
 import SinPath from "../components/playerStats/SinPath";
 import PlayerDashboard from "../pages/PlayerDashboard";
 import TeamDashboard from "../pages/TeamDashboard";
-import RoomDashboard from "../pages/RoomDashboard";
+import TournamentsPage from "../pages/TournamentsPage";
 import LoginPage from "../pages/Login/LoginPage";
 import GroupPage from "../pages/GroupPage";
 import GroupDashboard from "../pages/GroupDashboard";
@@ -40,8 +40,8 @@ const routes = [
     isPrivate: true,
   },
   {
-    path: "/roomdashboard",
-    component: RoomDashboard,
+    path: "/tournaments",
+    component: TournamentsPage,
     isPrivate: true,
   },
   {

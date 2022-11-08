@@ -1,25 +1,25 @@
 import React from "react";
 import Plot from "react-plotly.js";
-import { formatDataSet } from '../utils/Formatters';
+import { formatDataSetLineChart  } from '../utils/Formatters';
 
 const LineChart = (props) => {
 
  const { title } = props;
 
- const { index, dates, profits } = formatDataSet(props.data);  
+ const { dates, profits } = formatDataSetLineChart(props.data);  
 
   var Data = [
     {
-      // type: "scatter",
-      type: "bar",
-      // mode: "lines+markers",
-        //  x: [1, 2, 3],
-        //  y: [2, 6, 3],
-       x: index,
-       y: profits,
+      type: "scatter",
+      //type: "bar",
+      mode: "lines",
+          x: dates,
+          y: profits,
+      // x: plot_data['x'],
+       //y: plot_data['y'],
       marker: {
-        //color: "red",
-        color: "#1f77b4", // muted blue
+        color: "red",
+        //color: "#1f77b4", // muted blue
       },
     },
   ];
@@ -32,8 +32,8 @@ const LineChart = (props) => {
         fontweight: "bold",
       },
     },
-     autosize: true,
-     responsive: true,
+    // autosize: true,
+    // responsive: true,
   };
 
   return (

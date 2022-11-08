@@ -50,8 +50,8 @@ export default function MenuAppBar({ handleBtnClick }) {
     history.push("/playerdashboard");
   };
 
-  const handleRoomStatsClick = () => {
-    history.push("/roomdashboard");
+  const handleTournamentsClick = () => {
+    history.push("/tournaments");
   };
 
   const showModal = () => {
@@ -264,9 +264,9 @@ export default function MenuAppBar({ handleBtnClick }) {
                     fontSize: "14px",
                   },
                 }}
-                onClick={handleRoomStatsClick}
+                onClick={handleTournamentsClick}
                 >
-              Room Statistics
+              Tournaments
               </Typography>
 
             </Box>

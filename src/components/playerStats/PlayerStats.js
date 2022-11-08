@@ -127,7 +127,7 @@ export default function PlayerStats({ userToken }) {
 
   return (
 
-    <Grid container spacing={2}   >
+    <Grid container spacing={2} >
       <Grid item xs={4} >
         <Stack sx={{ margin: "2%" }}>
           <h1 style={{ color: "#d3d3d3" }}>Players</h1>
@@ -140,7 +140,7 @@ export default function PlayerStats({ userToken }) {
         </Stack>
       </Grid>
 
-      <Box sx={{ minWidth: 120, margin: "1.5%" }}>
+      <Box sx={{ minWidth: 120, margin: "1.9%" }}>
         <h1 style={{ color: "#d3d3d3" }}>Player Filter</h1>
         <FormControl sx={{ border: 1, borderRadius: 2, flex: '1 1 100%', textAlign: 'center', background: "#d3d3d3", color: "#d3d3d3" }} fullWidth>
           <InputLabel id="demo-simple-select-label"> Player</InputLabel>

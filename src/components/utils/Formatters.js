@@ -6,6 +6,10 @@ export const parseSecondstoDate = (date) => {
     return dateResult;
   }
 
+//Funcion para precision de decimales
+export const  financial = (x) => {
+  return Number.parseFloat(x).toFixed(2);
+}
 
 export const formatDataSet = (data) => {
 
@@ -22,7 +26,7 @@ export const formatDataSet = (data) => {
     return newData;   
     });
 
-    const index = formattedData.map((item, index) => index);
+    //const index = formattedData.map((item, index) => index);
     const dates = formattedData.map((item) => item.FirstDate);
     const profits = formattedData.map( (item) => item.Profit);
     // const cashes = formattedData.map( (item) => item.Cashes);
@@ -30,6 +34,45 @@ export const formatDataSet = (data) => {
     // const avROI = formattedData.map( (item) => item.AvROI);
     // const entries = formattedData.map( (item) => item.Entries);
 
-    return { index, dates, profits};
+    return { dates, profits};
     
   }
+
+
+  // export const formatDataSetLineChart = (data) => {
+
+  //   let plot_data = []
+  //   let x = []
+  //   let y = []
+  //   let total = 0;
+  //   data.map((item) => {
+      
+  //       x.push(parseSecondstoDate(item.FirstDate))
+  //       total = total + parseFloat(item.Profit)
+  //       console.log(financial(total))
+  //       y.push(financial(total).toString())
+
+          
+  //   })
+  //   plot_data['x'] = x;
+  //   plot_data['y'] = y;
+
+  //   return { plot_data };
+    
+  // }
+
+  export const formatDataSetLineChart = (data) => {
+
+    let total = 0;
+
+    const dates = data.map((item) => parseSecondstoDate(item.FirstDate));
+    const profits = data.map( (item) => {
+      total = total + parseFloat(item.Profit)
+      return total;
+    });
+    
+
+    return { dates, profits };
+
+  }
+
