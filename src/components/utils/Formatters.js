@@ -1,3 +1,4 @@
+
 export const parseSecondstoDate = (date) => {
     let dateObj = new Date(date * 1000);
     let dateResult = dateObj.getDate()+
@@ -10,6 +11,7 @@ export const parseSecondstoDate = (date) => {
 export const  financial = (x) => {
   return Number.parseFloat(x).toFixed(2);
 }
+
 
 export const formatDataSet = (data) => {
 
@@ -67,11 +69,10 @@ export const formatDataSet = (data) => {
 
     const dates = data.map((item) => parseSecondstoDate(item.FirstDate));
     const profits = data.map( (item) => {
-      total = total + parseFloat(item.Profit)
-      return total;
+        total = total + parseFloat(item.Profit)
+        return financial(total);
     });
     
-
     return { dates, profits };
 
   }

@@ -27,13 +27,18 @@ const TournamentStats = () => {
 
 
       const datos = [{
-        Hora : 'dd/mm/aaaa',
-        Sala : '100',
-        BuyIn : '100',
-        R: '100',
-        Price: '100',
-        Field: '100',
-        Torneo: 'Este Lo Ganas',
+        id : '123123',
+        scheduledStartDate : 'dd/mm/aaaa',
+        network : '100',
+        stake : '100',
+        guarantee: '100',
+        game: 'H',
+        name: 'Este Lo Gana',
+        AvAbility: '64',
+        TypeAvAbility: '12',
+        TypeAvEntrants: '12',
+        TypeAvDuration: '12',
+        overlay: '12',
      }];
 
     React.useEffect(async () => {
@@ -67,7 +72,7 @@ const TournamentStats = () => {
           id="tableTitle"
           component="div"
         >
-          Current Tournaments
+          Upcoming Tournaments
         </Typography>
         {(error !== "") ? ( <div className = "error">{error}</div>) : ""}
         <Notification
@@ -80,13 +85,18 @@ const TournamentStats = () => {
             size={dense ? 'small' : 'medium'}>
           <TableHead>
             <TableRow>
-              <TableCell sx={{fontWeight: 'bold' , color:"#454545" }}>Hora</TableCell>
+              <TableCell sx={{fontWeight: 'bold' , color:"#454545" }}>ID</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Fecha Inicio</TableCell>
               <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Sala</TableCell>
-              <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>BuyIn</TableCell>
-              <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>R</TableCell>
-              <TableCell sx={{fontWeight: 'bold' , color:"#454545" }}>Price</TableCell>
-              <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Field</TableCell>
-              <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Torneo</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Stake</TableCell>
+              <TableCell sx={{fontWeight: 'bold' , color:"#454545" }}>Garantia</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Tipo</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Nombre</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Habilidad media</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Habilidad media por tipo</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Participantes medios por tipo</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Duracion media por tipo</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Superposicion</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -95,13 +105,18 @@ const TournamentStats = () => {
                 hover
                 tabIndex={-1}
                 key={key}>
-                <TableCell sx={{ color:"#454545" }}>{row.Hora}</TableCell>
-                <TableCell sx={{ color:"#454545" }}>{row.Sala}</TableCell>
-                <TableCell sx={{ color:"#454545" }}>{row.BuyIn}</TableCell>
-                <TableCell sx={{ color:"#454545" }}>{row.R}</TableCell>
-                <TableCell sx={{ color:"#454545" }}>{row.Price}</TableCell>
-                <TableCell sx={{ color:"#454545" }}>{row.Field}</TableCell>
-                <TableCell sx={{ color:"#454545" }}>{row.Torneo}</TableCell>
+                <TableCell sx={{ color:"#454545" }}>{row.id}</TableCell>
+                <TableCell sx={{ color:"#454545" }}>{row.scheduledStartDate}</TableCell>
+                <TableCell sx={{ color:"#454545" }}>{row.network}</TableCell>
+                <TableCell sx={{ color:"#454545" }}>{row.stake}</TableCell>
+                <TableCell sx={{ color:"#454545" }}>{row.guarantee}</TableCell>
+                <TableCell sx={{ color:"#454545" }}>{row.game}</TableCell>
+                <TableCell sx={{ color:"#454545" }}>{row.name}</TableCell>
+                <TableCell sx={{ color:"#454545" }}>{row.AvAbility}</TableCell>
+                <TableCell sx={{ color:"#454545" }}>{row.TypeAvAbility}</TableCell>
+                <TableCell sx={{ color:"#454545" }}>{row.TypeAvEntrants}</TableCell>
+                <TableCell sx={{ color:"#454545" }}>{row.TypeAvDuration}</TableCell>
+                <TableCell sx={{ color:"#454545" }}>{row.overlay}</TableCell>
               </TableRow>
             ))}
 
