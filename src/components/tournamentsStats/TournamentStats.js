@@ -89,7 +89,7 @@ const TournamentStats = () => {
               <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Fecha Inicio</TableCell>
               <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Sala</TableCell>
               <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Stake</TableCell>
-              <TableCell sx={{fontWeight: 'bold' , color:"#454545" }}>Garantia</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Garantia</TableCell>
               <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Tipo</TableCell>
               <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Nombre</TableCell>
               <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Habilidad media</TableCell>
