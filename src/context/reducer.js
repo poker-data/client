@@ -24,6 +24,7 @@ export const initialState = {
   defaultFilterList: [],
   groups: [],
   defaultGroupFilteredList: [],
+  tournamentData: [],
 };
 
 export const AuthReducer = (initialState, action) => {
@@ -89,6 +90,11 @@ export const AuthReducer = (initialState, action) => {
         return {
           ...initialState,
           defaultGroupFilteredList: action.payload.info,
+      };
+    case "GET_TOURNAMENTDATA":
+        return {
+          ...initialState,
+          tournamentsdata: action.payload.info,
       };
 
     default:

@@ -7,6 +7,32 @@ export const parseSecondstoDate = (date) => {
     return dateResult;
   }
 
+export const parseSecondstoDateWithSeconds = (date) => {
+    let dateObj = new Date(date * 1000);
+    let ampm = 'AM'
+    let extrazeroend= ''
+    let extrazerobeg=''
+    if(dateObj.getHours() > 12){
+      ampm = 'PM'
+    }
+    if(dateObj.getMinutes() < 1){
+      extrazeroend = '0'
+    }
+    if(dateObj.getMinutes() < 10){
+      extrazerobeg = '0'
+      extrazeroend = ''
+    }
+    
+    let dateResult = dateObj.getDate()+
+        "/"+(dateObj.getMonth()+1)+
+        "/"+dateObj.getFullYear()+
+        " "+dateObj.getHours()+
+        ":"+ extrazerobeg +dateObj.getMinutes() + extrazeroend+
+        " "+ampm
+        
+    return dateResult;
+}
+
 //Funcion para precision de decimales
 export const  financial = (x) => {
   return Number.parseFloat(x).toFixed(2);

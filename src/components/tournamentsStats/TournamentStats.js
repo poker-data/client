@@ -12,11 +12,14 @@ import {Box,
         TableContainer,} from '@mui/material';
 import Switch from '@mui/material/Switch';
 import Notification from '../utils/Notification';
-import { useAuthState } from "../../Context";
+import {useAuthDispatch, getTournamentData, useAuthState } from "../../Context";
+import { parseSecondstoDateWithSeconds } from '../utils/Formatters';
+
 
 
 const TournamentStats = () => {
       const state = useAuthState();
+      let dispatch = useAuthDispatch();
       const [data, setData] = React.useState([]);
       const [error, setError] = React.useState('');
       const [page, setPage] = React.useState(0);
@@ -26,23 +29,12 @@ const TournamentStats = () => {
       const [dense, setDense] = React.useState(true);
 
 
-      const datos = [{
-        id : '123123',
-        scheduledStartDate : 'dd/mm/aaaa',
-        network : '100',
-        stake : '100',
-        guarantee: '100',
-        game: 'H',
-        name: 'Este Lo Gana',
-        AvAbility: '64',
-        TypeAvAbility: '12',
-        TypeAvEntrants: '12',
-        TypeAvDuration: '12',
-        overlay: '12',
-     }];
 
     React.useEffect(async () => {
-        setData(datos)
+
+        let body ={}
+        const response = await getTournamentData(dispatch, body);
+        setData(state.tournamentsdata.stats)
     }, [])
 
      
@@ -80,23 +72,24 @@ const TournamentStats = () => {
           setNotify={setNotify}
         />
         <TableContainer>
-        <Table sx={{ minWidth: 750 }}
-            aria-labelledby="tableTitle"
+        <Table sx={{ minWidth: 650 }}
+            aria-labelledby="simple table"
             size={dense ? 'small' : 'medium'}>
           <TableHead>
             <TableRow>
               <TableCell sx={{fontWeight: 'bold' , color:"#454545" }}>ID</TableCell>
-              <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Fecha Inicio</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"#454545"}}>Fecha</TableCell>
               <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Sala</TableCell>
               <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Stake</TableCell>
               <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Garantia</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Field</TableCell>
               <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Tipo</TableCell>
               <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Nombre</TableCell>
               <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Habilidad media</TableCell>
               <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Habilidad media por tipo</TableCell>
               <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Participantes medios por tipo</TableCell>
               <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Duracion media por tipo</TableCell>
-              <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Superposicion</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Overlay</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -106,13 +99,15 @@ const TournamentStats = () => {
                 tabIndex={-1}
                 key={key}>
                 <TableCell sx={{ color:"#454545" }}>{row.id}</TableCell>
-                <TableCell sx={{ color:"#454545" }}>{row.scheduledStartDate}</TableCell>
+                <TableCell sx={{ color:"#454545" }}>
+                {row.scheduledStartDate!=="-" ? parseSecondstoDateWithSeconds(row.scheduledStartDate) : row.scheduledStartDate}</TableCell>
                 <TableCell sx={{ color:"#454545" }}>{row.network}</TableCell>
-                <TableCell sx={{ color:"#454545" }}>{row.stake}</TableCell>
-                <TableCell sx={{ color:"#454545" }}>{row.guarantee}</TableCell>
-                <TableCell sx={{ color:"#454545" }}>{row.game}</TableCell>
+                <TableCell sx={{ color:"#454545" }}>{row.stake ? '$'+row.stake : row.stake}</TableCell>
+                <TableCell sx={{ color:"#454545" }}>{row.guarantee ? '$'+row.guarantee : row.guarantee}</TableCell>
+                <TableCell sx={{ color:"#454545" }}>{row.field!=="-" ? row.field : "-"}</TableCell>
+                <TableCell sx={{ color:"#454545" }}>{row.game==="H" ? "NL Hold'em": row.game }</TableCell>
                 <TableCell sx={{ color:"#454545" }}>{row.name}</TableCell>
-                <TableCell sx={{ color:"#454545" }}>{row.AvAbility}</TableCell>
+                <TableCell sx={{ color:"#454545" }}>{row.AvAbility>row.TypeAvAbility ? "▲"+row.AvAbility : "▼"+row.AvAbility}</TableCell>
                 <TableCell sx={{ color:"#454545" }}>{row.TypeAvAbility}</TableCell>
                 <TableCell sx={{ color:"#454545" }}>{row.TypeAvEntrants}</TableCell>
                 <TableCell sx={{ color:"#454545" }}>{row.TypeAvDuration}</TableCell>
@@ -125,7 +120,7 @@ const TournamentStats = () => {
         </TableContainer>
         <TablePagination
           sx={{ color:"#454545" }}
-          rowsPerPageOptions={[5, 10, 15]}
+          rowsPerPageOptions={[5, 25, 100]}
           component="div"
           count={data.length}
           rowsPerPage={rowsPerPage}

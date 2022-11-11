@@ -26,7 +26,7 @@ function TournamentsPage() {
   return (
     <>
       <MenuAppBar handleBtnClick={toggleSidebar} />
-      <Grid container spacing={2} sx={{ marginLeft: "2%", marginTop: "2%"}}>
+      <Grid container spacing={2} sx={{ marginLeft: "1%"}}>
         
         <TournamentStats/>
     

@@ -60,7 +60,7 @@ export default function PlayerStats({ userToken }) {
 
   }
 
-
+ 
   React.useEffect(async () => {
     await getPlayers(dispatch);
     await getRooms(dispatch);

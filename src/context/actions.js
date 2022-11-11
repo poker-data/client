@@ -202,6 +202,7 @@ export async function setNewGroup(values) {
   }
 }
 
+
 export const getGroupDataByFilter = async (dispatch, options) => {
 
   try {
@@ -218,6 +219,29 @@ export const getGroupDataByFilter = async (dispatch, options) => {
     let data = await response.json();
     console.log(data);
     dispatch({ type: "GET_GROUPDATA_BY_FILTER", payload: data });
+  }
+  catch (error) {
+    console.log(error)
+  }
+}
+
+
+export const getTournamentData = async (dispatch, options) => {
+
+  try {
+
+    let url = `${ROOT_URL}/api/getTournamentsData`
+
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "auth-token": JSON.parse(localStorage.getItem("currentUser")).token },
+      body: JSON.stringify(options)
+    };
+
+    let response = await fetch(url, requestOptions);
+    let data = await response.json();
+    console.log(data);
+    dispatch({ type: "GET_TOURNAMENTDATA", payload: data });
   }
   catch (error) {
     console.log(error)
