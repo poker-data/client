@@ -34,7 +34,8 @@ const TournamentStats = () => {
 
         let body ={}
         const response = await getTournamentData(dispatch, body);
-        setData(state.tournamentsdata.stats)
+        state.tournamentsdata ? setData(state.tournamentsdata.stats) : setData([])
+
     }, [])
 
      
