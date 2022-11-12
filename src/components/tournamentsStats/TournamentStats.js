@@ -14,10 +14,9 @@ import {Box,
 import Switch from '@mui/material/Switch';
 import Notification from '../utils/Notification';
 import {useAuthDispatch, getTournamentData, useAuthState } from "../../Context";
-import { parseSecondstoDateWithSeconds } from '../utils/Formatters';
+import { parseSecondstoDateWithSeconds, parseSecondstoHours } from '../utils/Formatters';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import Button from '@mui/material/Button';
-import { doNothing } from '@mui/x-date-pickers/internals/utils/utils';
 
 
 
@@ -60,11 +59,12 @@ const TournamentStats = () => {
     const handleRefresh = async (event) => {
       let body ={}
       const response = await getTournamentData(dispatch, body);
-      state.tournamentsdata ? setData(state.tournamentsdata.stats) : setData([])
+      let newData = state.tournamentsdata.stats.sort((a, b) => (a.scheduledStartDate > b.scheduledStartDate) ? 1 : -1)
+      state.tournamentsdata ? setData(newData) : setData([])
     }
 
+
     const handleButtonOptimal = (level) => {
-      //handleRefresh();
       let newData;
       switch(level) {
         case "optimal": newData = state.tournamentsdata.stats.filter( element => parseFloat(element.field) <= 200 && parseFloat(element.field) > 100);
@@ -77,7 +77,7 @@ const TournamentStats = () => {
         break;
 
       }      
-        setData(newData)
+        setData(newData.sort((a, b) => (a.scheduledStartDate > b.scheduledStartDate) ? 1 : -1))
     }
 
     return (
@@ -174,7 +174,7 @@ const TournamentStats = () => {
                 <TableCell sx={{ color:"#454545" }}>{row.AvAbility>row.TypeAvAbility ? "▲"+row.AvAbility : "▼"+row.AvAbility}</TableCell>
                 <TableCell sx={{ color:"#454545" }}>{row.TypeAvAbility}</TableCell>
                 <TableCell sx={{ color:"#454545" }}>{row.TypeAvEntrants}</TableCell>
-                <TableCell sx={{ color:"#454545" }}>{row.TypeAvDuration}</TableCell>
+                <TableCell sx={{ color:"#454545" }}>{row.TypeAvDuration!=="-" ? parseSecondstoHours(row.TypeAvDuration): "-"}</TableCell>
                 <TableCell sx={{ color:"#454545" }}>{row.overlay}</TableCell>
               </TableRow>
             ))}
