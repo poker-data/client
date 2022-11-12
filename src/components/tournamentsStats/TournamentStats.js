@@ -9,11 +9,14 @@ import {Box,
         Typography,
         TablePagination,
         FormControlLabel,
-        TableContainer,} from '@mui/material';
+        TableContainer,
+        IconButton,} from '@mui/material';
 import Switch from '@mui/material/Switch';
 import Notification from '../utils/Notification';
 import {useAuthDispatch, getTournamentData, useAuthState } from "../../Context";
 import { parseSecondstoDateWithSeconds } from '../utils/Formatters';
+import RefreshIcon from '@mui/icons-material/Refresh';
+
 
 
 
@@ -30,11 +33,7 @@ const TournamentStats = () => {
 
 
 
-    React.useEffect(async () => {
-
-        let body ={}
-        const response = await getTournamentData(dispatch, body);
-        state.tournamentsdata ? setData(state.tournamentsdata.stats) : setData([])
+    React.useEffect(async () => { 
 
     }, [])
 
@@ -55,6 +54,12 @@ const TournamentStats = () => {
       setDense(event.target.checked);
     };
 
+    const handleReplay = async (event) => {
+      let body ={}
+      const response = await getTournamentData(dispatch, body);
+      state.tournamentsdata ? setData(state.tournamentsdata.stats) : setData([])
+    }
+
 
     return (
       <Box sx={{ width: '100%' }}>
@@ -67,6 +72,10 @@ const TournamentStats = () => {
         >
           Upcoming Tournaments
         </Typography>
+        <IconButton sx={{float:"left", background:"#d3d3d3"}} 
+        aria-label="delete" onClick={() => handleReplay()}>
+                    <RefreshIcon/>
+                </IconButton>
         {(error !== "") ? ( <div className = "error">{error}</div>) : ""}
         <Notification
           notify={notify}
