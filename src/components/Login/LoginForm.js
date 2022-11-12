@@ -38,7 +38,7 @@ const LoginForm = () => {
         setError("");
       //  console.log("credentials: ", credentials);
         let response = await loginUser(dispatch, credentials);
-         console.log("response: ", response.ok);
+         //console.log("response: ", response.ok);
         // console.log(credentials);
         if (!response.ok) {
           setError("Usuario o contraseña incorrectos");
@@ -47,7 +47,7 @@ const LoginForm = () => {
         history.push("/home");
       } catch (error) {
         setError("Usuario o contraseña incorrectos");
-        console.log(error);
+        //console.log(error);
       }
     }
   };

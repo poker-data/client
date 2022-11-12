@@ -69,8 +69,6 @@ export default function GroupStats({ userToken }) {
 
   }
 
-
-
   React.useEffect(async () => {
     await getDefaultFilterList(dispatch);
     await getGroups(dispatch);
@@ -84,7 +82,7 @@ export default function GroupStats({ userToken }) {
 
   React.useEffect(() => {
     state.groups.length ? setGroupList(state.groups) : setGroupList([]);
-    console.log(state.groups);
+   // console.log(state.groups);
   }, [state]);
 
 
