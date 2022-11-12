@@ -51,6 +51,7 @@ export default function MenuAppBar({ handleBtnClick }) {
   };
 
   const handleTournamentsClick = () => {
+    
     history.push("/tournaments");
   };
 
