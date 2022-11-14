@@ -95,8 +95,7 @@ export default function GroupStats({ userToken }) {
     const options = {
       _id: group._id,
       shkName: group.shkName,
-      //dateFrom: dateFrom,
-     // dateTo: dateTo,
+      filterType: filter.filterType,
     }
     const response = await getGroupDataByFilter(dispatch, options);
     setIsLoading(false);
@@ -188,7 +187,14 @@ export default function GroupStats({ userToken }) {
           </Stack >
           <Stack sx={{ display: "flex", flexDirection: "row", padding: "2%", margin: "3%" }}>
 
-            <Button variant="contained" color="primary" sx={{ fontWeight: 'bold', border: 1, borderColor: "#454545", margin: "3%", backgroundColor: '#515151', color: '#ebe9eb' }} onClick={handleSubmit} disabled={group._id ? false : true}>
+            <Button variant="contained" color="primary" 
+              sx={{ fontWeight: 'bold',
+                    border: 1, 
+                    borderColor: "#454545", 
+                    margin: "3%", 
+                    backgroundColor: '#515151',
+                    color: '#ebe9eb' }}
+               onClick={handleSubmit} disabled={group._id ? false : true}>
               Apply
             </Button>
             <Button
