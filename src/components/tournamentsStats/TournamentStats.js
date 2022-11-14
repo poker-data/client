@@ -14,8 +14,9 @@ import {Box,
 import Switch from '@mui/material/Switch';
 import Notification from '../utils/Notification';
 import {useAuthDispatch, getTournamentData, useAuthState } from "../../Context";
-import { parseSecondstoDateWithSeconds } from '../utils/Formatters';
+import { parseSecondstoDateWithSeconds, parseSecondstoHours } from '../utils/Formatters';
 import RefreshIcon from '@mui/icons-material/Refresh';
+import Button from '@mui/material/Button';
 
 
 
@@ -33,7 +34,8 @@ const TournamentStats = () => {
 
 
 
-    React.useEffect(async () => { 
+    React.useEffect(async () => {
+
 
     }, [])
 
@@ -54,12 +56,29 @@ const TournamentStats = () => {
       setDense(event.target.checked);
     };
 
-    const handleReplay = async (event) => {
+    const handleRefresh = async (event) => {
       let body ={}
       const response = await getTournamentData(dispatch, body);
-      state.tournamentsdata ? setData(state.tournamentsdata.stats) : setData([])
+      let newData = state.tournamentsdata.stats.sort((a, b) => (a.scheduledStartDate > b.scheduledStartDate) ? 1 : -1)
+      state.tournamentsdata ? setData(newData) : setData([])
     }
 
+
+    const handleButtonOptimal = (level) => {
+      let newData;
+      switch(level) {
+        case "optimal": newData = state.tournamentsdata.stats.filter( element => parseFloat(element.field) <= 200 && parseFloat(element.field) > 100);
+        break;
+        case "suboptimalone": newData = state.tournamentsdata.stats.filter( element => parseFloat(element.field) <= 500 && parseFloat(element.field) >= 201);
+        break;
+        case "suboptimaltwo": newData = state.tournamentsdata.stats.filter( element => parseFloat(element.field) <= 100);
+        break;
+        default : newData = state.tournamentsdata.stats;
+        break;
+
+      }      
+        setData(newData.sort((a, b) => (a.scheduledStartDate > b.scheduledStartDate) ? 1 : -1))
+    }
 
     return (
       <Box sx={{ width: '100%' }}>
@@ -73,9 +92,44 @@ const TournamentStats = () => {
           Upcoming Tournaments
         </Typography>
         <IconButton sx={{float:"left", background:"#d3d3d3"}} 
-        aria-label="delete" onClick={() => handleReplay()}>
+          aria-label="delete" 
+          onClick={() => handleRefresh()}>
                     <RefreshIcon/>
-                </IconButton>
+          </IconButton>
+        <Button variant="outlined" 
+        sx={{ float:"left", 
+              fontWeight: 'bold',
+              border: 1, 
+              borderColor: "#454545",
+              margin:"0.2%", 
+              backgroundColor: '#454545',
+              color: '#ebe9eb' ,
+              "&:hover": {borderColor:"black", background:"grey"}}}
+              onClick={() => {handleButtonOptimal("optimal")}}
+              >Optima</Button>
+        <Button variant="outlined" 
+        sx={{ float:"left", 
+              fontWeight: 'bold',
+              border: 1, 
+              borderColor: "#454545",
+              margin:"0.2%", 
+              backgroundColor: '#454545',
+              color: '#ebe9eb' ,
+              "&:hover": {borderColor:"black", background:"grey"}}}
+              onClick={() => {handleButtonOptimal("suboptimalone")}}
+              >Suboptima 1</Button>
+        <Button variant="outlined" 
+        sx={{ float:"left", 
+              fontWeight: 'bold',
+              border: 1, 
+              borderColor: "#454545",
+              margin:"0.2%", 
+              backgroundColor: '#454545',
+              color: '#ebe9eb' ,
+              "&:hover": {borderColor:"black", background:"grey"}}}
+              onClick={() => {handleButtonOptimal("suboptimaltwo")}}
+              >Suboptima 2</Button>
+    
         {(error !== "") ? ( <div className = "error">{error}</div>) : ""}
         <Notification
           notify={notify}
@@ -120,7 +174,7 @@ const TournamentStats = () => {
                 <TableCell sx={{ color:"#454545" }}>{row.AvAbility>row.TypeAvAbility ? "▲"+row.AvAbility : "▼"+row.AvAbility}</TableCell>
                 <TableCell sx={{ color:"#454545" }}>{row.TypeAvAbility}</TableCell>
                 <TableCell sx={{ color:"#454545" }}>{row.TypeAvEntrants}</TableCell>
-                <TableCell sx={{ color:"#454545" }}>{row.TypeAvDuration}</TableCell>
+                <TableCell sx={{ color:"#454545" }}>{row.TypeAvDuration!=="-" ? parseSecondstoHours(row.TypeAvDuration): "-"}</TableCell>
                 <TableCell sx={{ color:"#454545" }}>{row.overlay}</TableCell>
               </TableRow>
             ))}

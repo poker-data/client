@@ -12,7 +12,7 @@ import {Box,
         TableContainer,} from '@mui/material';
 import Switch from '@mui/material/Switch';
 import Notification from '../utils/Notification';
-import { useAuthState } from "../../Context";
+import { useAuthState } from "../../context";
 import { parseSecondstoDate } from '../utils/Formatters';
 
 const GroupsDT = () => {

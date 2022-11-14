@@ -7,6 +7,25 @@ export const parseSecondstoDate = (date) => {
     return dateResult;
   }
 
+  export const parseSecondstoHours = (date) => {
+    let dateObj = new Date(date * 1000);
+    let extrazeroend= ''
+    let extrazerobeg=''
+
+    if(dateObj.getMinutes() < 1){
+      extrazeroend = '0'
+    }
+    if(dateObj.getMinutes() < 10){
+      extrazerobeg = '0'
+      extrazeroend = ''
+    }
+    
+    let dateResult = dateObj.getHours()+
+        ":"+ extrazerobeg +dateObj.getMinutes() + extrazeroend
+        
+    return dateResult;
+}
+
 export const parseSecondstoDateWithSeconds = (date) => {
     let dateObj = new Date(date * 1000);
     let ampm = 'AM'
