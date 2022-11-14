@@ -50,7 +50,6 @@ export async function getPlayerStats(dispatch, name, body) {
   const finalData = []
   data.info.Response.PlayerResponse.PlayerView.Player.Statistics.StatisticalDataSet[0].Data.map(stat => finalData.push(stat["Y"]));
   //finalData.sort(( a, b )=> b - a );
-  //console.log("finalData: ", finalData);
   dispatch({ type: "GET_USER", payload: data });
 
   return data;
@@ -89,7 +88,6 @@ export const getPlayerByFilter = async (dispatch, options) => {
 
     let response = await fetch(url, requestOptions);
     let data = await response.json();
-    //console.log(data, 'data getplayer');
     dispatch({ type: "GET_PLAYER_BY_FILTER", payload: data });
   }
   catch (error) {
@@ -110,7 +108,6 @@ export const getDataFromDefaultFilters = async (dispatch, options) => {
 
     let response = await fetch(url, requestOptions);
     let data = await response.json();
-    console.log(data);
     dispatch({ type: "GET_DEFAULT_FILTERS", payload: data });
   }
   catch (error) {
@@ -143,7 +140,6 @@ export async function getDefaultFilterList(dispatch) {
     let response = await fetch(`${ROOT_URL}/api/getDefaultFilters`, requestOptions);
     let data = await response.json();
     dispatch({ type: "DEFAULT_FILTER_LIST", payload: data });
-    //console.log(data)
     return data;
   } catch (error) {
     dispatch({ type: "LOGIN_ERROR", error: error });
@@ -158,7 +154,6 @@ export async function setNewPlayer(values) {
     headers: { "Content-Type": "application/json", "auth-token": JSON.parse(localStorage.getItem("currentUser")).token },
     body: JSON.stringify(values)
   };
-  //console.log(values)
   try {
     let response = await fetch(`${ROOT_URL}/api/setPlayerData`, requestOptions);
     let data = await response.json();
@@ -177,7 +172,6 @@ export async function getGroups(dispatch) {
     let response = await fetch(`${ROOT_URL}/api/getGroups`, requestOptions);
     let data = await response.json();
     dispatch({ type: "GROUPS", payload: data });
-   // console.log(data)
     return data;
   } catch (error) {
     dispatch({ type: "LOGIN_ERROR", error: error });
@@ -192,7 +186,6 @@ export async function setNewGroup(values) {
     headers: { "Content-Type": "application/json", "auth-token": JSON.parse(localStorage.getItem("currentUser")).token },
     body: JSON.stringify(values)
   };
-  //console.log(values)
   try {
     let response = await fetch(`${ROOT_URL}/api/setGroup`, requestOptions);
     let data = await response.json();
@@ -217,7 +210,6 @@ export const getGroupDataByFilter = async (dispatch, options) => {
 
     let response = await fetch(url, requestOptions);
     let data = await response.json();
-    //console.log(data);
     dispatch({ type: "GET_GROUPDATA_BY_FILTER", payload: data });
   }
   catch (error) {
@@ -240,7 +232,6 @@ export const getTournamentData = async (dispatch, options) => {
 
     let response = await fetch(url, requestOptions);
     let data = await response.json();
-   //console.log(data);
     dispatch({ type: "GET_TOURNAMENTDATA", payload: data });
   }
   catch (error) {

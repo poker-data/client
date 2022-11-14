@@ -7,8 +7,7 @@ export default function CustomInput({ label, handleChange, type, InputProps }) {
   const handleTextChange = (event) => {
     handleChange(event.target.value);
   };
-  //console.log("InputProps: ", InputProps);
-
+ 
   return (
     <Grid item justifyContent="center" xs={8} md={3}>
       <TextField
