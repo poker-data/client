@@ -34,10 +34,15 @@ const TournamentStats = () => {
 
 
 
-    React.useEffect(async () => {
-
-
-    }, [])
+      React.useEffect(() => {
+        let body ={}
+        const getData = async () => {
+          await getTournamentData(dispatch, body);
+        }
+        getData();
+        setData(state.tournamentsdata ? state.tournamentsdata.stats : [])
+  
+      }, [])
 
      
 

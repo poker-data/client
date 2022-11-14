@@ -48,7 +48,9 @@ const routes = [
     path: "/",
     component: LoginPage,
     isPrivate: false,
-  }/* ,
+  }
+  
+  /* ,
   {
     path: "*",
     component: SinPath,

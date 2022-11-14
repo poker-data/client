@@ -67,7 +67,7 @@ export async function getPlayers(dispatch) {
     return data;
   } catch (error) {
     dispatch({ type: "LOGIN_ERROR", error: error });
-    console.log(error + "try catch actions getPlayers");
+   // console.log(error + "try catch actions getPlayers");
   }
 }
 

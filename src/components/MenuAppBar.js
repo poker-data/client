@@ -84,9 +84,6 @@ export default function MenuAppBar({ handleBtnClick }) {
 
   const user = JSON.parse(localStorage.getItem("currentUser")).user;
 
-  const closeModal = () => {
-    setModal(false);
-  };
   React.useEffect(() => {
     if (state.user === "") {
       console.log("redirecting on sign out");
@@ -167,7 +164,8 @@ export default function MenuAppBar({ handleBtnClick }) {
 
 
 
-                  {user.admin ? (<>
+                  {user.admin ? (
+                  <>
                     <Typography
                       variant="h6"
                       component="div"
@@ -247,7 +245,7 @@ export default function MenuAppBar({ handleBtnClick }) {
                     >
                       Group Statistics
                     </Typography>
-
+                  
                   </>)
                     : null}
 
@@ -270,27 +268,12 @@ export default function MenuAppBar({ handleBtnClick }) {
                   >
                     Tournaments
                   </Typography>
-
+                  
                 </Box>
               </Drawer>
             </div>
 
-            <Typography
-              variant="h6"
-              component="div"
-              className="main-title"
-              sx={{
-                fontSize: "30px",
-                marginLeft: "2%",
-                color: "white",
-                "@media screen and (max-width: 768px)": {
-                  fontSize: "14px",
-                },
-              }}
-              onClick={handleUSClick}
-            >
-              Users
-            </Typography>
+          
 
 
             {auth && (
@@ -340,11 +323,7 @@ export default function MenuAppBar({ handleBtnClick }) {
           </Toolbar>
         </AppBar>
       </Box>
-      {modal ? (
-        <AdminDashboard
-          closeModal={closeModal}
-        />
-      ) : null}
+     
     </>
   );
 }
