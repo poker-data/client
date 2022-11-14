@@ -180,7 +180,7 @@ export default function GroupStats({ userToken }) {
                 sx={{ margin: "3%", padding: '3%' }}
               >
                 {<option value={filter.filterName}></option>}
-                {defaultFilterList.length > 0 ? defaultFilterList.map((filter) => { return (<option key={filter._id} value={filter.filterType}> {filter.filterName} </option>) }) : <option value="">No hay filtros</option>}
+                {defaultFilterList.length > 0 ? defaultFilterList.map((filter) => { return (<option key={filter.filterType} value={filter.filterType}> {filter.filterName} </option>) }) : <option value="">No hay filtros</option>}
 
               </NativeSelect>
             </FormControl>
