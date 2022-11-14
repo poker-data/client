@@ -5,7 +5,7 @@ import { Button, Stack, Select, TextField } from "@mui/material";
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
-import { useAuthDispatch,  useAuthState, getGroupDataByFilter, getDefaultFilterList, getGroups, setNewGroup } from "../../Context";
+import { useAuthDispatch,  useAuthState, getGroupDataByFilter, getDefaultFilterList, getGroups, setNewGroup } from "../../context";
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
