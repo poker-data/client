@@ -14,7 +14,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import { NavLink, useHistory } from "react-router-dom";
 import LogoImage from "../../assets/images/HPM_LOGO.jpeg";
 import "./SideBar.css";
-import { useAuthState } from "../../Context";
+import { useAuthState } from "../../context";
 
 const SideBar = ({ sidebarVisible, toggleSidebar }) => {
   const state = useAuthState();

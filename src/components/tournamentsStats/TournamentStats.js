@@ -13,7 +13,7 @@ import {Box,
         IconButton,} from '@mui/material';
 import Switch from '@mui/material/Switch';
 import Notification from '../utils/Notification';
-import {useAuthDispatch, getTournamentData, useAuthState } from "../../Context";
+import {useAuthDispatch, getTournamentData, useAuthState } from "../../context";
 import { parseSecondstoDateWithSeconds, parseSecondstoHours } from '../utils/Formatters';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import Button from '@mui/material/Button';
