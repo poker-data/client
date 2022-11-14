@@ -10,7 +10,8 @@ import {
     getDefaultFilterList,
     getGroups,
     setNewGroup,
-    getGroupDataByFilter
+    getGroupDataByFilter,
+    getTournamentData
   } from "./actions";
   
   import { AuthProvider, useAuthDispatch, useAuthState } from "./context";
@@ -31,4 +32,5 @@ import {
     getGroups,
     setNewGroup,
     getGroupDataByFilter,
+    getTournamentData,
   };

@@ -26,8 +26,6 @@ const PlayersDT = () => {
 
       const [dense, setDense] = React.useState(true);
 
-      
-
     React.useEffect(() => {
       const dataTable = []
       state.playerWithFilter.stats ? dataTable.push(state.playerWithFilter.stats) : dataTable.push([]) 
