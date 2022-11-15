@@ -103,7 +103,7 @@ export default function PlayerStats({ userToken }) {
 
   const columns = [
     { field: 'Name', headerName: 'Name', width: 200 },
-    { field: 'shkUsername', headerName: 'Username (SharkScope)', width: 200 },
+    { field: 'shkUsername', headerName: 'Username', width: 200 },
   ];
 
   //addPlayer
@@ -155,7 +155,7 @@ export default function PlayerStats({ userToken }) {
             sx={{ margin: "2%", padding: '2%', background: "#d3d3d3", borderRadius: 1, color: "#000000" }}
           >
             {<option value={player.shkUsername}></option>}
-            {playerList.length > 1 ? playerList.map((player) => { return (<option key={player._id} value={player._id}> {player.shkUsername} </option>) }) : <option value="">No hay jugadores (actualizar)</option>}
+            {playerList.length > 0 ? playerList.map((player) => { return (<option key={player._id} value={player._id}> {player.shkUsername} </option>) }) : <option value="">No hay jugadores (actualizar)</option>}
           </NativeSelect>
           <Stack sx={{ margin: "2%", background: "#d3d3d3", color: "#000000", borderRadius: 2 }}>
             <Stack direction={{ xs: 'column', sm: 'row' }}

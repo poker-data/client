@@ -33,6 +33,7 @@ const TournamentStats = () => {
       const [dense, setDense] = React.useState(true);
 
 
+      
 
       React.useEffect(() => {
         let body ={}
@@ -63,7 +64,10 @@ const TournamentStats = () => {
 
     const handleRefresh = async (event) => {
       let body ={}
-      const response = await getTournamentData(dispatch, body);
+        const getData = async () => {
+          await getTournamentData(dispatch, body);
+        }
+      getData();
       let newData = state.tournamentsdata.stats.sort((a, b) => (a.scheduledStartDate > b.scheduledStartDate) ? 1 : -1)
       state.tournamentsdata ? setData(newData) : setData([])
     }
@@ -72,11 +76,11 @@ const TournamentStats = () => {
     const handleButtonOptimal = (level) => {
       let newData;
       switch(level) {
-        case "optimal": newData = state.tournamentsdata.stats.filter( element => parseFloat(element.field) <= 200 && parseFloat(element.field) > 100);
+        case "optimal": newData = state.tournamentsdata.stats.filter( element => parseFloat(element.field) <= 200 && parseFloat(element.guarantee) > 100);
         break;
         case "suboptimalone": newData = state.tournamentsdata.stats.filter( element => parseFloat(element.field) <= 500 && parseFloat(element.field) >= 201);
         break;
-        case "suboptimaltwo": newData = state.tournamentsdata.stats.filter( element => parseFloat(element.field) <= 100);
+        case "suboptimaltwo": newData = state.tournamentsdata.stats.filter( element => parseFloat(element.guarantee) <= 100);
         break;
         default : newData = state.tournamentsdata.stats;
         break;
