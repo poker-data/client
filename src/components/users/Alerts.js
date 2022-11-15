@@ -63,9 +63,18 @@ export const alertDeleteUser = ({ deleteUserById , index, history })=>{
 
 export const alertPassword=()=>{
   swal({
-    title: "Contraseña demaciado corta",
+    title: "Contraseña demasiado corta",
     text: "Ingrese una contraseña de mas de 10 caracteres",
     icon: "error",
+    button: "Aceptar",
+  });
+}
+
+export const alertRegister=()=>{
+  swal({
+    title: "Usuario creado.",
+    text: "Usuario registrado con exito!",
+    icon: "success",
     button: "Aceptar",
   });
 }

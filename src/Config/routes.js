@@ -7,6 +7,7 @@ import LoginPage from "../pages/Login/LoginPage";
 import GroupPage from "../pages/GroupPage";
 import GroupDashboard from "../pages/GroupDashboard";
 import PlayerPage from "../pages/PlayerPage";
+import AdminDashboard from "../components/users/AdminDashboard";
 
 const routes = [
   {
@@ -45,10 +46,16 @@ const routes = [
     isPrivate: true,
   },
   {
+    path: "/admindashboard",
+    component: AdminDashboard,
+    isPrivate: true,
+  },
+  {
     path: "/",
     component: LoginPage,
     isPrivate: false,
-  }
+  },
+
   
   /* ,
   {

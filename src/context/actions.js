@@ -238,3 +238,19 @@ export const getTournamentData = async (dispatch, options) => {
     console.log(error)
   }
 }
+
+export const userRegister = async (payload) => {
+  const requestOptions = {
+    method : "POST",
+    headers: { "Content-Type": "application/json", "auth-token": JSON.parse(localStorage.getItem("currentUser")).token },
+    body: JSON.stringify(payload)
+  }
+  try {
+    let response = await fetch(`${ROOT_URL}/register`, requestOptions)
+    let data = await response.json()
+    return data
+
+  } catch(error){
+    console.log(error)
+  }
+}

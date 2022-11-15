@@ -96,8 +96,12 @@ export const AuthReducer = (initialState, action) => {
           ...initialState,
           tournamentsdata: action.payload.info,
       };
-
     default:
-      throw new Error(`Unhandled action type: ${action.type}`);
+      try {
+        return initialState
+      } catch (error) {
+        throw new Error(`Unhandled action type: ${action.type}, ${error}`);
+      }
+      
   }
 };
