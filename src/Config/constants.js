@@ -1,6 +1,6 @@
 
-//export const ROOT_URL = "https://bbzlatam-backend.onrender.com" // aws
-export const ROOT_URL = 'http://localhost:8080' // localhost;
+export const ROOT_URL = "https://bbzlatam-backend.onrender.com" // aws
+//export const ROOT_URL = 'http://localhost:8080' // localhost;
 export const STATUS = [
   "EN ESPERA",
   "EN PROCESO",
