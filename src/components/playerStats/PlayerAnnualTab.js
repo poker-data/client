@@ -13,7 +13,6 @@ import {Box,
 import Switch from '@mui/material/Switch';
 import Notification from '../utils/Notification';
 import { useAuthState } from "../../context";
-import { setDayWithOptions } from 'date-fns/fp';
 
 
 const PlayerAnnualTab = () => {

@@ -25,6 +25,7 @@ export const initialState = {
   groups: [],
   defaultGroupFilteredList: [],
   tournamentData: [],
+  remainingRequests: [],
 };
 
 export const AuthReducer = (initialState, action) => {
@@ -95,6 +96,11 @@ export const AuthReducer = (initialState, action) => {
         return {
           ...initialState,
           tournamentsdata: action.payload.info,
+      };
+      case "GET_REMAININGRQUESTS":
+        return {
+          ...initialState,
+          remainingRequests: action.payload.info,
       };
 
     default:

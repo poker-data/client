@@ -238,3 +238,24 @@ export const getTournamentData = async (dispatch, options) => {
     console.log(error)
   }
 }
+
+export const getRemainingRequests = async (dispatch, options) => {
+
+  try {
+
+    let url = `${ROOT_URL}/api/remainingRequest`
+
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "auth-token": JSON.parse(localStorage.getItem("currentUser")).token },
+      body: JSON.stringify(options)
+    };
+
+    let response = await fetch(url, requestOptions);
+    let data = await response.json();
+    dispatch({ type: "GET_REMAININGRQUESTS", payload: data });
+  }
+  catch (error) {
+    console.log(error)
+  }
+}
