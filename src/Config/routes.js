@@ -1,5 +1,4 @@
 import HomePage from "../pages/HomePage";
-import SinPath from "../components/playerStats/SinPath";
 import PlayerDashboard from "../pages/PlayerDashboard";
 import TeamDashboard from "../pages/TeamDashboard";
 import TournamentsPage from "../pages/TournamentsPage";
@@ -50,12 +49,6 @@ const routes = [
     isPrivate: false,
   }
   
-  /* ,
-  {
-    path: "*",
-    component: SinPath,
-    isPrivate: false,
-  } */
 ];
 
 export default routes;

@@ -16,8 +16,8 @@ import Notification from '../utils/Notification';
 import {useAuthDispatch, getTournamentData, useAuthState } from "../../context";
 import { parseSecondstoDateWithSeconds, parseSecondstoHours } from '../utils/Formatters';
 import RefreshIcon from '@mui/icons-material/Refresh';
+import DownloadIcon from '@mui/icons-material/Download';
 import Button from '@mui/material/Button';
-
 
 
 
@@ -33,17 +33,25 @@ const TournamentStats = () => {
       const [dense, setDense] = React.useState(true);
 
 
-      
-
-      React.useEffect(() => {
-        let body ={}
-        const getData = async () => {
-          await getTournamentData(dispatch, body);
+      React.useEffect( () => {  
+        let cancel = false;
+        let body = {
+          playerLevel: "1"
         }
-        getData();
-        setData(state.tournamentsdata ? state.tournamentsdata.stats : [])
-  
-      }, [])
+        const fetchTournamentData = async () => {
+            await getTournamentData(dispatch, body);
+            if (cancel) {
+              setData([])
+              return;
+            }else{
+              let dataTournaments = state?.tournamentsdata?.stats??[]
+              setData(dataTournaments)
+            }
+        }
+        fetchTournamentData();
+        return () => { cancel = true };
+      },[])
+
 
      
 
@@ -63,13 +71,31 @@ const TournamentStats = () => {
     };
 
     const handleRefresh = async (event) => {
-      let body ={}
-        const getData = async () => {
-          await getTournamentData(dispatch, body);
+
+      if (window.confirm('Esta seguro que desea realizar otra consulta hacia la API?')) {
+        setNotify({
+          isOpen: true,
+          message: 'Cargando consulta',
+          type: 'info'
+        })
+        let body ={
+          playerLevel:"1"
         }
-      getData();
-      let newData = state.tournamentsdata.stats.sort((a, b) => (a.scheduledStartDate > b.scheduledStartDate) ? 1 : -1)
-      state.tournamentsdata ? setData(newData) : setData([])
+          const getData = async () => {
+            await getTournamentData(dispatch, body);
+          }
+        getData();
+        let newData = state.tournamentsdata.stats.sort((a, b) => (a.scheduledStartDate > b.scheduledStartDate) ? 1 : -1)
+        state.tournamentsdata ? setData(newData) : setData([])
+      }
+      else {
+        setNotify({
+          isOpen: true,
+          message: 'Consulta cancelada',
+          type: 'error'
+        })
+      } 
+     
     }
 
 
@@ -102,8 +128,10 @@ const TournamentStats = () => {
         </Typography>
         <IconButton sx={{float:"left", background:"#d3d3d3"}} 
           aria-label="delete" 
-          onClick={() => handleRefresh()}>
-                    <RefreshIcon/>
+          onClick={() => {
+            handleRefresh();
+          }}>
+                    {data.length<1?<DownloadIcon/>:<RefreshIcon/>}
           </IconButton>
         <Button variant="outlined" 
         sx={{ float:"left", 
@@ -207,7 +235,9 @@ const TournamentStats = () => {
         control={<Switch checked={dense} onChange={handleChangeDense} />}
         label="Colapse"
       />
+      
       </Box>
+      
     );
 }
 

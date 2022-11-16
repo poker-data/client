@@ -25,7 +25,7 @@ export async function loginUser(dispatch, loginPayload) {
     return;
   } catch (error) {
     dispatch({ type: "LOGIN_ERROR", error: error });
-    // console.log(error + "try catch actions login");
+   
   }
 }
 
@@ -43,8 +43,6 @@ export async function getPlayerStats(dispatch, name, body) {
     body: JSON.stringify(body)
   };
 
-  // console.log("name: ", name);
-
   let response = await fetch(`${ROOT_URL}/api/playerData/${name}`, requestOptions);
   let data = await response.json();
   const finalData = []
@@ -56,10 +54,12 @@ export async function getPlayerStats(dispatch, name, body) {
 }
 
 export async function getPlayers(dispatch) {
+
   const requestOptions = {
     method: "GET",
-    headers: { "Content-Type": "application/json", "auth-token": JSON.parse(localStorage.getItem("currentUser")).token},
+    headers: { "Content-Type": "application/json", "token": JSON.parse(localStorage.getItem("currentUser")).token },
   };
+
   try {
     let response = await fetch(`${ROOT_URL}/api/getPlayers`, requestOptions);
     let data = await response.json();
@@ -72,22 +72,21 @@ export async function getPlayers(dispatch) {
 }
 
 export const getPlayerByFilter = async (dispatch, options) => {
+
   const name = options.shkUsername;
-  const _id = options._id;
+
   try {
-    const dateNow = new Date();
-
-
+  
     let url = `${ROOT_URL}/api/playerDataFiltered/${name}`;
 
     const requestOptions = {
       method: "POST",
-      headers: { "Content-Type": "application/json", "auth-token": JSON.parse(localStorage.getItem("currentUser")).token },
+      headers: { "Content-Type": "application/json", "token": JSON.parse(localStorage.getItem("currentUser")).token },
       body: JSON.stringify(options)
     };
 
-    let response = await fetch(url, requestOptions);
-    let data = await response.json();
+    const response = await fetch(url, requestOptions);
+    const data = await response.json();
     dispatch({ type: "GET_PLAYER_BY_FILTER", payload: data });
   }
   catch (error) {
@@ -98,16 +97,16 @@ export const getPlayerByFilter = async (dispatch, options) => {
 export const getDataFromDefaultFilters = async (dispatch, options) => {
   try {
 
-    let url = `${ROOT_URL}/api/getDefaultGroupFiltersData`;
+    const url = `${ROOT_URL}/api/getDefaultGroupFiltersData`;
 
     const requestOptions = {
       method: "POST",
-      headers: { "Content-Type": "application/json", "auth-token": JSON.parse(localStorage.getItem("currentUser")).token },
+      headers: { "Content-Type": "application/json", "token": JSON.parse(localStorage.getItem("currentUser")).token },
       body: JSON.stringify(options)
     };
 
-    let response = await fetch(url, requestOptions);
-    let data = await response.json();
+    const response = await fetch(url, requestOptions);
+    const data = await response.json();
     dispatch({ type: "GET_DEFAULT_FILTERS", payload: data });
   }
   catch (error) {
@@ -118,11 +117,11 @@ export const getDataFromDefaultFilters = async (dispatch, options) => {
 export async function getRooms(dispatch) {
   const requestOptions = {
     method: "GET",
-    headers: { "Content-Type": "application/json", "auth-token": JSON.parse(localStorage.getItem("currentUser")).token},
+    headers: { "Content-Type": "application/json", "token": JSON.parse(localStorage.getItem("currentUser")).token },
   };
   try {
-    let response = await fetch(`${ROOT_URL}/api/getRooms`, requestOptions);
-    let data = await response.json();
+    const response = await fetch(`${ROOT_URL}/api/getRooms`, requestOptions);
+    const data = await response.json();
     dispatch({ type: "GET_ROOMS", payload: data });
     return data;
   } catch (error) {
@@ -134,11 +133,11 @@ export async function getRooms(dispatch) {
 export async function getDefaultFilterList(dispatch) {
   const requestOptions = {
     method: "GET",
-    headers: { "Content-Type": "application/json", "auth-token": JSON.parse(localStorage.getItem("currentUser")).token},
+    headers: { "Content-Type": "application/json", "token": JSON.parse(localStorage.getItem("currentUser")).token },
   };
   try {
-    let response = await fetch(`${ROOT_URL}/api/getDefaultFilters`, requestOptions);
-    let data = await response.json();
+    const response = await fetch(`${ROOT_URL}/api/getDefaultFilters`, requestOptions);
+    const data = await response.json();
     dispatch({ type: "DEFAULT_FILTER_LIST", payload: data });
     return data;
   } catch (error) {
@@ -151,12 +150,12 @@ export async function setNewPlayer(values) {
 
   const requestOptions = {
     method: "POST",
-    headers: { "Content-Type": "application/json", "auth-token": JSON.parse(localStorage.getItem("currentUser")).token },
+    headers: { "Content-Type": "application/json", "token": JSON.parse(localStorage.getItem("currentUser")).token },
     body: JSON.stringify(values)
   };
   try {
-    let response = await fetch(`${ROOT_URL}/api/setPlayerData`, requestOptions);
-    let data = await response.json();
+    const response = await fetch(`${ROOT_URL}/api/setPlayerData`, requestOptions);
+    const data = await response.json();
     return data;
   } catch (error) {
     console.log(error + "try catch actions setPlayer");
@@ -166,11 +165,11 @@ export async function setNewPlayer(values) {
 export async function getGroups(dispatch) {
   const requestOptions = {
     method: "GET",
-    headers: { "Content-Type": "application/json", "auth-token": JSON.parse(localStorage.getItem("currentUser")).token },
+    headers: { "Content-Type": "application/json", "token": JSON.parse(localStorage.getItem("currentUser")).token },
   };
   try {
-    let response = await fetch(`${ROOT_URL}/api/getGroups`, requestOptions);
-    let data = await response.json();
+    const response = await fetch(`${ROOT_URL}/api/getGroups`, requestOptions);
+    const data = await response.json();
     dispatch({ type: "GROUPS", payload: data });
     return data;
   } catch (error) {
@@ -183,12 +182,12 @@ export async function setNewGroup(values) {
 
   const requestOptions = {
     method: "POST",
-    headers: { "Content-Type": "application/json", "auth-token": JSON.parse(localStorage.getItem("currentUser")).token },
+    headers: { "Content-Type": "application/json", "token": JSON.parse(localStorage.getItem("currentUser")).token },
     body: JSON.stringify(values)
   };
   try {
-    let response = await fetch(`${ROOT_URL}/api/setGroup`, requestOptions);
-    let data = await response.json();
+    const response = await fetch(`${ROOT_URL}/api/setGroup`, requestOptions);
+    const data = await response.json();
     return data;
   } catch (error) {
     console.log(error + "try catch actions setPlayer");
@@ -200,16 +199,16 @@ export const getGroupDataByFilter = async (dispatch, options) => {
 
   try {
 
-    let url = `${ROOT_URL}/api/getDefaultGroupFiltersData`;
+    const url = `${ROOT_URL}/api/getDefaultGroupFiltersData`;
 
     const requestOptions = {
       method: "POST",
-      headers: { "Content-Type": "application/json", "auth-token": JSON.parse(localStorage.getItem("currentUser")).token },
+      headers: { "Content-Type": "application/json", "token": JSON.parse(localStorage.getItem("currentUser")).token },
       body: JSON.stringify(options)
     };
 
-    let response = await fetch(url, requestOptions);
-    let data = await response.json();
+    const response = await fetch(url, requestOptions);
+    const data = await response.json();
     dispatch({ type: "GET_GROUPDATA_BY_FILTER", payload: data });
   }
   catch (error) {
@@ -222,17 +221,38 @@ export const getTournamentData = async (dispatch, options) => {
 
   try {
 
-    let url = `${ROOT_URL}/api/getTournamentsData`
+    const url = `${ROOT_URL}/api/getTournamentsData`
 
     const requestOptions = {
       method: "POST",
-      headers: { "Content-Type": "application/json", "auth-token": JSON.parse(localStorage.getItem("currentUser")).token },
+      headers: { "Content-Type": "application/json", "token": JSON.parse(localStorage.getItem("currentUser")).token },
       body: JSON.stringify(options)
     };
 
-    let response = await fetch(url, requestOptions);
-    let data = await response.json();
+    const response = await fetch(url, requestOptions);
+    const data = await response.json();
     dispatch({ type: "GET_TOURNAMENTDATA", payload: data });
+  }
+  catch (error) {
+    console.log(error)
+  }
+}
+
+export const getRemainingRequests = async (dispatch, options) => {
+
+  try {
+
+    const url = `${ROOT_URL}/api/remainingRequest`
+
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "token": JSON.parse(localStorage.getItem("currentUser")).token },
+      body: JSON.stringify(options)
+    };
+
+    const response = await fetch(url, requestOptions);
+    const data = await response.json();
+    dispatch({ type: "GET_REMAININGRQUESTS", payload: data });
   }
   catch (error) {
     console.log(error)
