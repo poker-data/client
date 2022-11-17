@@ -109,6 +109,10 @@ const TournamentStats = () => {
         break;
         case "suboptimaltwo": newData = state.tournamentsdata.stats.filter( element => parseFloat(element.guarantee) <= 100);
         break;
+        case "altavarianza1": newData = state.tournamentsdata.stats.filter( element => parseFloat(element.field) <= 4999 && parseFloat(element.field) >= 2500);
+        break;
+        case "altavarianza2": newData = state.tournamentsdata.stats.filter( element => parseFloat(element.field) >= 5000);
+        break;
         default : newData = state.tournamentsdata.stats;
         break;
 
@@ -167,6 +171,28 @@ const TournamentStats = () => {
               "&:hover": {borderColor:"black", background:"grey"}}}
               onClick={() => {handleButtonOptimal("suboptimaltwo")}}
               >Suboptima 2</Button>
+        <Button variant="outlined" 
+        sx={{ float:"left", 
+              fontWeight: 'bold',
+              border: 1, 
+              borderColor: "#454545",
+              margin:"0.2%", 
+              backgroundColor: '#454545',
+              color: '#ebe9eb' ,
+              "&:hover": {borderColor:"black", background:"grey"}}}
+              onClick={() => {handleButtonOptimal("altavarianza1")}}
+              >ALTA VARIANZA 1</Button>
+        <Button variant="outlined" 
+        sx={{ float:"left", 
+              fontWeight: 'bold',
+              border: 1, 
+              borderColor: "#454545",
+              margin:"0.2%", 
+              backgroundColor: '#454545',
+              color: '#ebe9eb' ,
+              "&:hover": {borderColor:"black", background:"grey"}}}
+              onClick={() => {handleButtonOptimal("altavarianza2")}}
+              >ALTA VARIANZA 2</Button>
     
         {(error !== "") ? ( <div className = "error">{error}</div>) : ""}
         <Notification
