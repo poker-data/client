@@ -27,7 +27,7 @@ const TournamentStats = () => {
       const [data, setData] = React.useState([]);
       const [error, setError] = React.useState('');
       const [page, setPage] = React.useState(0);
-      const [rowsPerPage, setRowsPerPage] = React.useState(5);
+      const [rowsPerPage, setRowsPerPage] = React.useState(50);
       const [notify, setNotify] = React.useState({isOpen:false, message:'', type:'error'})
 
       const [dense, setDense] = React.useState(true);
@@ -187,9 +187,9 @@ const TournamentStats = () => {
               <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Field</TableCell>
               <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Tipo</TableCell>
               <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Nombre</TableCell>
-              <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Habilidad media</TableCell>
+              {/*<TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Habilidad media</TableCell>
               <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Habilidad media por tipo</TableCell>
-              <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Participantes medios por tipo</TableCell>
+        <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Participantes medios por tipo</TableCell>*/}
               <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Duracion media por tipo</TableCell>
               <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Overlay</TableCell>
             </TableRow>
@@ -209,9 +209,9 @@ const TournamentStats = () => {
                 <TableCell sx={{ color:"#454545" }}>{row.field!=="-" ? row.field : "-"}</TableCell>
                 <TableCell sx={{ color:"#454545" }}>{row.game==="H" ? "NL Hold'em": row.game }</TableCell>
                 <TableCell sx={{ color:"#454545" }}>{row.name}</TableCell>
-                <TableCell sx={{ color:"#454545" }}>{row.AvAbility>row.TypeAvAbility ? "▲"+row.AvAbility : "▼"+row.AvAbility}</TableCell>
+                {/*<TableCell sx={{ color:"#454545" }}>{row.AvAbility>row.TypeAvAbility ? "▲"+row.AvAbility : "▼"+row.AvAbility}</TableCell>
                 <TableCell sx={{ color:"#454545" }}>{row.TypeAvAbility}</TableCell>
-                <TableCell sx={{ color:"#454545" }}>{row.TypeAvEntrants}</TableCell>
+            <TableCell sx={{ color:"#454545" }}>{row.TypeAvEntrants}</TableCell>*/}
                 <TableCell sx={{ color:"#454545" }}>{row.TypeAvDuration!=="-" ? parseSecondstoHours(row.TypeAvDuration): "-"}</TableCell>
                 <TableCell sx={{ color:"#454545" }}>{row.overlay}</TableCell>
               </TableRow>
@@ -222,7 +222,7 @@ const TournamentStats = () => {
         </TableContainer>
         <TablePagination
           sx={{ color:"#454545" }}
-          rowsPerPageOptions={[5, 25, 100]}
+          rowsPerPageOptions={[50, 75, 100]}
           component="div"
           count={data.length}
           rowsPerPage={rowsPerPage}

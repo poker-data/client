@@ -7,23 +7,15 @@ export const parseSecondstoDate = (date) => {
     return dateResult;
   }
 
-  export const parseSecondstoHours = (date) => {
-    let dateObj = new Date(date * 1000);
-    let extrazeroend= ''
-    let extrazerobeg=''
-
-    if(dateObj.getMinutes() < 1){
-      extrazeroend = '0'
-    }
-    if(dateObj.getMinutes() < 10){
-      extrazerobeg = '0'
-      extrazeroend = ''
-    }
-    
-    let dateResult = dateObj.getHours()+
-        ":"+ extrazerobeg +dateObj.getMinutes() + extrazeroend
+  export const parseSecondstoHours = (seconds) => {
+    var hour = Math.floor(seconds / 3600);
+    hour = (hour < 10)? '0' + hour : hour;
+    var minute = Math.floor((seconds / 60) % 60);
+    minute = (minute < 10)? '0' + minute : minute;
+    var second = seconds % 60;
+    second = (second < 10)? '0' + second : second;
+    return hour + ':' + minute + ':' + second;
         
-    return dateResult;
 }
 
 export const parseSecondstoDateWithSeconds = (date) => {
