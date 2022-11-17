@@ -231,7 +231,7 @@ const TournamentStats = () => {
                 {row.scheduledStartDate!=="-" ? parseSecondstoDateWithSeconds(row.scheduledStartDate) : row.scheduledStartDate}</TableCell>
                 <TableCell sx={{ color:"#454545" }}>{row.network}</TableCell>
                 <TableCell sx={{ color:"#454545" }}>{row.stake ? '$'+row.stake : row.stake}</TableCell>
-                <TableCell sx={{ color:"#454545" }}>{row.guarantee ? '$'+row.guarantee : row.guarantee}</TableCell>
+                <TableCell sx={{ color:"#454545" }}>{row.guarantee !== null ? row.guarantee : "-"}</TableCell>
                 <TableCell sx={{ color:"#454545" }}>{row.field!=="-" ? row.field : "-"}</TableCell>
                 <TableCell sx={{ color:"#454545" }}>{row.game==="H" ? "NL Hold'em": row.game }</TableCell>
                 <TableCell sx={{ color:"#454545" }}>{row.name}</TableCell>
