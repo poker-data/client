@@ -37,7 +37,7 @@ const TournamentStats = () => {
       React.useEffect( () => {  
         let cancel = false;
         let body = {
-          playerLevel: level.toString()
+          playerLevel: "5.1"
         }
         const fetchTournamentData = async () => {
             await getTournamentData(dispatch, body);
