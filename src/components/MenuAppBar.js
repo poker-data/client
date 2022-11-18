@@ -279,16 +279,9 @@ export default function MenuAppBar({ handleBtnClick }) {
 
             {auth && (
               <><div>
-                <IconButton
-                size="large"
-                edge="start"
-                color="inherit"
-                aria-label="menu"
-                sx={{marginLeft:"10%"}}
-              >
-                <RemainingRequests/>
+               
+                <RemainingRequests />
 
-              </IconButton>
               </div>
               <div className="avatar-container">
                 
