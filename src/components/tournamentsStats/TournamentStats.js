@@ -109,9 +109,9 @@ const TournamentStats = () => {
         break;
         case "suboptimaltwo": newData = state.tournamentsdata.stats.filter( element => parseFloat(element.guarantee) <= 100);
         break;
-        case "altavarianza1": newData = state.tournamentsdata.stats.filter( element => parseFloat(element.field) <= 4999 && parseFloat(element.field) >= 2500);
+        case "altavarianza1": newData = state.tournamentsdata.stats.filter( element => parseFloat(element.field) >= 5000);
         break;
-        case "altavarianza2": newData = state.tournamentsdata.stats.filter( element => parseFloat(element.field) >= 5000);
+        case "altavarianza2": newData = state.tournamentsdata.stats.filter( element => parseFloat(element.field) <= 4999 && parseFloat(element.field) >= 2500);
         break;
         default : newData = state.tournamentsdata.stats;
         break;
