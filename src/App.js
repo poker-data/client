@@ -12,9 +12,6 @@ function App() {
      document.body.style.backgroundColor = '#111315';
    }
  
-  // function changebackground(){
-  //   document.getElementById('id').style.backgroundColor = 'black' ; 
-  // }
   return (
     <AuthProvider>
 

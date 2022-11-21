@@ -1,19 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState } from "react";
 import { Dialog } from "@material-ui/core";
-import {
- // modifyUserBy_id,
-  useAuthState,
-  useAuthDispatch,
-} from "../../context";
 import { useStylesForm } from "./useStylesForm";
 import MenuItem from "@mui/material/MenuItem";
 import { Button, Grid, TextField, Stack, Box, FormControl, InputLabel, Select } from "@mui/material";
-import { alertEditUser, alertPassword } from "./Alerts";
+import { alertPassword } from "./Alerts";
 
 const AdminDashboard = ({ closeModal }) => {
-  const history = useHistory();
-  const dispatch = useAuthDispatch();
   const styles = useStylesForm();
   const [name, setName] = useState("");
   const [role, setRole] = useState("");
@@ -22,14 +14,14 @@ const AdminDashboard = ({ closeModal }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const body = {
+   /*  const body = {
       name: name,
       role: role,
       email: email,
       password: password,
     };
     // console.log(image)
-    var data = new FormData();
+    var data = new FormData(); */
     try {
       if (password.length < 11) {
         return alertPassword();
@@ -39,10 +31,6 @@ const AdminDashboard = ({ closeModal }) => {
       // console.log(error);
     }
   };
-  const handleImgSubmit = (e) => {
-    e.preventDefault();
-    // console.log(e.target.files[0])
-  }
 
 
   return (
@@ -50,7 +38,7 @@ const AdminDashboard = ({ closeModal }) => {
       <Dialog disableEnforceFocus open >
         <Stack
           className={styles.title}
-          sx={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", justifyContent: "center" }}
+          sx={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}
         >
           Editar usuario existente
         </Stack>

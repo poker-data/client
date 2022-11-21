@@ -12,11 +12,9 @@ import {Box,
         TableContainer,} from '@mui/material';
 import Switch from '@mui/material/Switch';
 import Notification from '../utils/Notification';
-import { useAuthState } from "../../context";
 
 
 const RoomAnnualTab = () => {
-      const state = useAuthState();
       const [data, setData] = React.useState([]);
       const [error, setError] = React.useState('');
       const [page, setPage] = React.useState(0);

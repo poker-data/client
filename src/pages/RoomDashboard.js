@@ -1,18 +1,9 @@
 import React from "react";
-
 import "./PlayerDashboard.css";
 import MenuAppBar from "../components/MenuAppBar";
-import { useAuthDispatch, useAuthState } from '../context'
 import Grid from '@mui/material/Grid';
-import PlayerAnnualTab from "../components/playerStats/PlayerAnnualTab";
-import PlayerMonthlyTab from "../components/playerStats/PlayerMonthlyTab";
-import PlayerWeeklyTab from "../components/playerStats/PlayerWeeklyTab";
 
 function RoomDashboard() {
-  const state = useAuthState();
-  const dispatch = useAuthDispatch();
-
-
   const [sidebarVisible, setSidebarVisible] = React.useState(false);
 
   const toggleSidebar = () => {

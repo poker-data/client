@@ -1,19 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import MenuAppBar from "../components/MenuAppBar";
 import "./HomePage.css";
-import Box from '@mui/material/Box';
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid'
-import { getPlayerStats, useAuthDispatch, useAuthState } from '../context'
 import Grid from '@mui/material/Grid';
-import PlayerStats from "../components/playerStats/PlayerStats";
-import LineChart from "../components/charts/LineChart";
 
 function HomePage() {
-  const state = useAuthState();
-  const dispatch = useAuthDispatch();
-
-  const userToken = JSON.parse(localStorage.getItem("currentUser")).token 
  //console.log("token", userToken);
   const [sidebarVisible, setSidebarVisible] = React.useState(false);
 

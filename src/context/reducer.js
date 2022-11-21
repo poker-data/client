@@ -5,10 +5,6 @@ let token = localStorage.getItem("currentUser")
   ? JSON.parse(localStorage.getItem("currentUser")).token
   : false;
 
-let role = localStorage.getItem("currentUser")
-  ? JSON.parse(localStorage.getItem("currentUser")).role
-  : "";
-
 export const initialState = {
   user: "" || user,
   token: "" || token,

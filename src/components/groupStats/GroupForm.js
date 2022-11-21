@@ -29,7 +29,6 @@ export default function GroupForm (props) {
 
     const {
         values,
-        setValues,
         errors,
         setErrors,
         handleInputChange

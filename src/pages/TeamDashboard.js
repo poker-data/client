@@ -1,8 +1,6 @@
 import React from "react";
-
 import "./PlayerDashboard.css";
 import MenuAppBar from "../components/MenuAppBar";
-import { useAuthDispatch, useAuthState } from '../context'
 import Grid from '@mui/material/Grid';
 import PlayerAnnualTab from "../components/playerStats/PlayerAnnualTab";
 import PlayerMonthlyTab from "../components/playerStats/PlayerMonthlyTab";
@@ -11,9 +9,6 @@ import RoomAnnualTab from "../components/roomStats/RoomAnnualTab";
 import RoomMonthlylTab from "../components/roomStats/RoomMonthlyTab";
 
 function TeamDashboard() {
-  const state = useAuthState();
-  const dispatch = useAuthDispatch();
-
 
   const [sidebarVisible, setSidebarVisible] = React.useState(false);
 
