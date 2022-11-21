@@ -1,8 +1,16 @@
-FROM node:16.14.2
+# STAGE 2
+FROM node:alpine
 WORKDIR /app
 COPY package.json ./
 COPY package-lock.json ./
-COPY . .
+COPY ./ ./
 RUN npm install
+COPY . /app
+RUN npm run build
+# STAGE 2
+FROM node:alpine
+WORKDIR /app
+RUN npm install -g webserver.local
+COPY --from=build /app/build ./build
 EXPOSE 3000
-CMD [ "npm", "start" ]
+CMD webserver.local -d ./build

@@ -1,6 +1,5 @@
 import HomePage from "../pages/HomePage";
 import PlayerDashboard from "../pages/PlayerDashboard";
-import TeamDashboard from "../pages/TeamDashboard";
 import TournamentsPage from "../pages/TournamentsPage";
 import LoginPage from "../pages/Login/LoginPage";
 import GroupPage from "../pages/GroupPage";
@@ -31,11 +30,6 @@ const routes = [
   {
     path: "/groupdashboard",
     component: GroupDashboard,
-    isPrivate: true,
-  },
-  {
-    path: "/teamdashboard",
-    component: TeamDashboard,
     isPrivate: true,
   },
   {

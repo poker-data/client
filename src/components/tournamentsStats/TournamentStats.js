@@ -33,11 +33,13 @@ const TournamentStats = () => {
       const [dense, setDense] = React.useState(true);
 
       const level = JSON.parse(localStorage.getItem("currentUser")).user.level;
+      const country = JSON.parse(localStorage.getItem("currentUser")).user.country;
       
       React.useEffect( () => {  
         let cancel = false;
         let body = {
-          playerLevel: level.toString()
+          playerLevel: level.toString(),
+          playerCountry: country
         }
         const fetchTournamentData = async () => {
             await getTournamentData(dispatch, body);
@@ -80,7 +82,8 @@ const TournamentStats = () => {
           type: 'info'
         })
         let body ={
-          playerLevel: level.toString()
+          playerLevel: level.toString(),
+          playerCountry: country
         }
           const getData = async () => {
             await getTournamentData(dispatch, body);
