@@ -1,126 +1,122 @@
-import React, { useState } from "react";
-import { Dialog } from "@material-ui/core";
-import { useStylesForm } from "./useStylesForm";
-import MenuItem from "@mui/material/MenuItem";
-import { Button, Grid, TextField, Stack, Box, FormControl, InputLabel, Select } from "@mui/material";
-import { alertPassword } from "./Alerts";
+import React, { useState, useEffect } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import { Box, Button } from '@mui/material';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import { useAuthState, useAuthDispatch } from '../../context';
+import { getIdUser, getUsers, logicalDeleteUser } from '../../context/actions';
+import UserEdit from './UserEdit';
+import { useStylesForm } from './useStylesForm';
 
-const AdminDashboard = ({ closeModal }) => {
+function AdminDashboard() {
+  const history = useHistory();
+  const state = useAuthState();
+  const dispatch = useAuthDispatch();
+  const allUsers = state.users;
   const styles = useStylesForm();
-  const [name, setName] = useState("");
-  const [role, setRole] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-   /*  const body = {
-      name: name,
-      role: role,
-      email: email,
-      password: password,
-    };
-    // console.log(image)
-    var data = new FormData(); */
-    try {
-      if (password.length < 11) {
-        return alertPassword();
-      }
-     
-    } catch (error) {
-      // console.log(error);
-    }
+  useEffect(async () => {
+    await getUsers(dispatch);
+  }, []);
+
+  const createUser = () => {
+    history.push('/usercreate');
   };
 
+  const deleteUser = async (id) => {
+    await logicalDeleteUser(dispatch, id);
+    window.location.reload();
+  };
+
+  /*   const editUser = (id) => {
+      history.push(`/useredit/${id}`)
+    } */
+
+  const llenar = async (id) => {
+    await getIdUser(dispatch, id);
+  };
+
+  const handleBack = () => {
+    history.push('/home');
+  };
 
   return (
     <>
-      <Dialog disableEnforceFocus open >
-        <Stack
-          className={styles.title}
-          sx={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}
-        >
-          Editar usuario existente
-        </Stack>
-        <Box>
-          <Grid container justifyContent="center" sx={{ flexDirection: "row" }} >
-            <Grid item sx={{ padding: "1rem" }}   >
-              <TextField
-                spacing={{ xs: 8 }}
-                label="Nombre"
-                variant="filled"
-                required
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            </Grid>
-            <Grid item sx={{ padding: "1rem" }} >
-              <TextField
-                spacing={{ xs: 8 }}
-                label="Email"
-                variant="filled"
-                type="email"
-                required
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-              />
-            </Grid>
-          </Grid>
-          <Grid item container sx={{ justifyContent: "center", alignItems: "center", flexDirection: "row" }} >
-            <Grid item  justifyContent="center"  xs={10} md={5}>
-             
-                <FormControl fullWidth >
-                  <InputLabel id="test-select-label">Rol</InputLabel>
-                  <Select
-                    required
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    name="role"
-                    label="Rol"
-                    value={role}
-                    onChange={e => setRole(e.target.value)}
-                  >
-                    <MenuItem value={"dev"}>Dev</MenuItem>
-                    <MenuItem value={"administrator"}>Administrator</MenuItem>
-                    <MenuItem value={"player"}>Player</MenuItem>
-                  </Select>
-                </FormControl>
-              
-            </Grid>
-
-            <Grid item sx={{ padding: "1rem" }}  >
-              <TextField
-                spacing={{ xs: 8 }}
-                label="Password"
-                variant="filled"
-                required
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-              />
-            </Grid>
-          </Grid>
-          <Grid item container sx={{ justifyContent: "center", alignItems: "center", flexDirection: "row" }} >
-           
-          </Grid>
-          <Stack className={styles.buttonsContainer} sx={{ flexDirection: "row", justifyContent: "space-around" }} >
-            <Grid className={styles.buttonL} >
-              <Button onClick={closeModal}>
-                Cancelar
-              </Button>
-            </Grid>
-            <Grid className={styles.buttonR} >
-              <Button
-                disabled_={!name.length < 0 || !role.length < 0 || !email.length < 0 || !password.length < 0}
-                onClick={handleSubmit}>
-                Guardar
-              </Button>
-            </Grid>
-          </Stack>
-
+      <Box
+        backgroundColor={'white'}
+        display="grid"
+        alignItems="center"
+        justifyContent="center"
+      >
+        <Box display="flex " alignItems="center" justifyContent="center">
+          <Typography className={styles.title}>Admin Dashboard</Typography>
         </Box>
-      </Dialog>
+        <Box>
+          <Button onClick={handleBack}>Back</Button>
+          <Button>ACA VA LA SEARCHBAR</Button>
+          <Button onClick={createUser}>Create User</Button>
+        </Box>
+        <Box>
+          <Button>ACA EL PAGINADO</Button>
+        </Box>
+
+        <TableContainer direction={'column'}>
+          <TableHead>
+            <TableRow>
+              <TableCell>Email</TableCell>
+              <TableCell>Username</TableCell>
+              <TableCell>Shark Username</TableCell>
+              <TableCell>Player Level</TableCell>
+              <TableCell>Admin</TableCell>
+              <TableCell>Delete</TableCell>
+              <TableCell>Edit</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {allUsers.map((row) =>
+              row.delete ? null : (
+                <TableRow key={row.name} value={row.name}>
+                  <TableCell>{row.email}</TableCell>
+                  <TableCell>{row.name}</TableCell>
+                  <TableCell>{row.shkUsername}</TableCell>
+                  <TableCell>{row.playerLevel}</TableCell>
+                  <TableCell>{!row.admin ? 'No' : 'Yes'}</TableCell>
+                  <TableCell>
+                    <IconButton
+                      aria-label="delete"
+                      onClick={() => deleteUser(row._id)}
+                    >
+                      <DeleteIcon />
+                    </IconButton>
+                  </TableCell>
+                  <TableCell>
+                    <Link to={`/useredit/${row._id}`}>
+                      <IconButton
+                        aria-label="delete"
+                        onClick={() => llenar(row._id)}
+                      >
+                        <EditIcon />
+                      </IconButton>
+                    </Link>
+                  </TableCell>
+                </TableRow>
+              )
+            )}
+          </TableBody>
+        </TableContainer>
+      </Box>
     </>
   );
-};
+}
 
 export default AdminDashboard;

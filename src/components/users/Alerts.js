@@ -52,8 +52,7 @@ export const alertDeleteUser = ({ deleteUserById , index, history })=>{
         // console.log(result)
         if (result) {
           deleteUserById(index, history);
-          swal({text: "El usuario ha sido eliminado",icon: "success",timmer:"1000", buttons: false });
-           
+          swal({text: "El usuario ha sido eliminado",icon: "success",timmer:"1000", buttons: false });           
         }
         else{
             swal({text: "El usuario no ha sido eliminado"});
@@ -63,10 +62,28 @@ export const alertDeleteUser = ({ deleteUserById , index, history })=>{
 
 export const alertPassword=()=>{
   swal({
-    title: "Contraseña demaciado corta",
+    title: "Contraseña demasiado corta",
     text: "Ingrese una contraseña de mas de 10 caracteres",
     icon: "error",
     button: "Aceptar",
+  });
+}
+
+export const alertRegister=()=>{
+  swal({
+    title: "Usuario creado.",
+    text: "Usuario registrado con exito!",
+    icon: "success",
+    button: "Aceptar",
+  });
+}
+
+export const alertEdit=()=>{
+  swal({
+    title: "Edited User.",
+    text: "User successfully edited!",
+    icon: "success",
+    button: "Accept",
   });
 }
 

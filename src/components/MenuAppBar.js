@@ -56,6 +56,10 @@ export default function MenuAppBar({ handleBtnClick }) {
     history.push("/tournaments");
   };
 
+  const handleAdminPanel =() => {
+    history.push('/admindashboard')
+  }
+
   const showModal = () => {
     if (!modal) {
       setModal(true);
@@ -246,8 +250,29 @@ export default function MenuAppBar({ handleBtnClick }) {
                     >
                       Group Statistics
                     </Typography>
+
+                    <Typography
+                      variant="h6"
+                      component="div"
+                      className="main-title"
+                      sx={{
+                        flexGrow: 1,
+                        fontSize: "30px",
+                        marginBottom: "4%",
+                        borderBottom: 1,
+                        borderColor: "white",
+                        color: "white",
+                        "@media screen and (max-width: 768px)": {
+                          fontSize: "14px",
+                        },
+                      }}
+                      onClick={handleAdminPanel}
+                    >
+                      Admin Dashboard
+                    </Typography>
                   
-                  </>)
+                  </>
+                  )
                     : null}
 
                   <Typography
