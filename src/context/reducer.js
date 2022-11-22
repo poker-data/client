@@ -21,7 +21,7 @@ export const initialState = {
   groups: [],
   defaultGroupFilteredList: [],
   tournamentData: [],
-  userId : []
+  userId : [],
   remainingRequests: [],
 };
 
@@ -103,7 +103,8 @@ export const AuthReducer = (initialState, action) => {
       return {
         ...initialState,
         userId: action.payload
-      }      case "GET_REMAININGRQUESTS":
+      };
+    case "GET_REMAININGRQUESTS":
         return {
           ...initialState,
           remainingRequests: action.payload.info,
