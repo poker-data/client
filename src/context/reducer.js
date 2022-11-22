@@ -25,6 +25,7 @@ export const initialState = {
   groups: [],
   defaultGroupFilteredList: [],
   tournamentData: [],
+  userId : []
 };
 
 export const AuthReducer = (initialState, action) => {
@@ -96,6 +97,16 @@ export const AuthReducer = (initialState, action) => {
           ...initialState,
           tournamentsdata: action.payload.info,
       };
+    case "GET_USERS":
+        return {
+          ...initialState,
+          users: action.payload.info
+        }
+    case "GET_ID_USER":
+      return {
+        ...initialState,
+        userId: action.payload
+      }
     default:
       try {
         return initialState

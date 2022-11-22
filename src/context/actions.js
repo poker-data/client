@@ -254,3 +254,65 @@ export const userRegister = async (payload) => {
     console.log(error)
   }
 }
+
+export async function getUsers(dispatch, payload) {
+  const requestOptions = {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "auth-token": JSON.parse(localStorage.getItem("currentUser")).token},
+    body: JSON.stringify(payload)
+  };
+  try {
+    let response = await fetch(`${ROOT_URL}/api/admindashboard/users`, requestOptions);
+    let data = await response.json();
+    dispatch({ type: "GET_USERS", payload: data });
+    return data;
+  } catch (error) {
+    dispatch({ type: "LOGIN_ERROR", error: error });
+  }
+}
+
+export async function getIdUser(dispatch, id) {
+  const requestOptions = {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "auth-token": JSON.parse(localStorage.getItem("currentUser")).token},
+  };
+  try {
+    let response = await fetch(`${ROOT_URL}/api/admindashboard/users`, requestOptions);
+    let data = await response.json();
+    let userIda = await data.info.filter(u => u._id === id)
+    dispatch({ type: "GET_ID_USER", payload: userIda });
+    return userIda;
+  } catch (error) {
+    dispatch({ type: "LOGIN_ERROR", error: error });
+  }
+}
+
+export async function logicalDeleteUser(dispatch, id) {
+  const requestOptions = {
+    method: "PUT",
+    headers: { "Content-Type": "application/json", "auth-token": JSON.parse(localStorage.getItem("currentUser")).token},
+  };
+  try {
+    let response = await fetch(`${ROOT_URL}/api/users/${id}`, requestOptions);
+    let data = await response.json();
+    return data;
+  } catch (error) {
+    dispatch({ type: "LOGIN_ERROR", error: error });
+  }
+}
+
+export async function userUpdate(dispatch, id, payload) {
+  const requestOptions = {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "auth-token": JSON.parse(localStorage.getItem("currentUser")).token},
+    body: JSON.stringify(payload)
+  };
+  console.log(requestOptions.body)
+  try {
+    let response = await fetch(`${ROOT_URL}/api/useredit/${id}`, requestOptions);
+    let data = await response.json();
+    return data;
+  } catch (error) {
+    dispatch({ type: "LOGIN_ERROR", error: error });
+  }
+}
