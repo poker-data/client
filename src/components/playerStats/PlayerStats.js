@@ -10,9 +10,6 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import NativeSelect from '@mui/material/NativeSelect';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import AddIcon from '@mui/icons-material/Add';
 import Popup from '../utils/Popup';
 import PlayerForm from './PlayerForm';
@@ -33,9 +30,6 @@ export default function PlayerStats({ userToken }) {
   const [selectedDate, setSelectedDate] = React.useState(initialDateState);
   const [player, setPlayer] = React.useState(initialPlayerState);
   const [room, setRoom] = React.useState(initialRoomState);
-
-
-
 
   const state = useAuthState();
   let dispatch = useAuthDispatch();

@@ -14,6 +14,7 @@ import "./MenuAppBar.css";
 import AdminDashboard from "./users/AdminDashboard";
 import { Drawer } from "@mui/material";
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
+import RemainingRequests from "./utils/RemainingRequests";
 
 export default function MenuAppBar({ handleBtnClick }) {
   const dispatch = useAuthDispatch();
@@ -302,7 +303,13 @@ export default function MenuAppBar({ handleBtnClick }) {
 
 
             {auth && (
+              <><div>
+               
+                <RemainingRequests />
+
+              </div>
               <div className="avatar-container">
+                
                 <Typography >{seller}</Typography>
                 <IconButton
                   size="large"
@@ -343,7 +350,7 @@ export default function MenuAppBar({ handleBtnClick }) {
                   <MenuItem onClick={handleClose}>My account</MenuItem>
                   <MenuItem onClick={handleSignOut}>Sign Out</MenuItem>
                 </Menu>
-              </div>
+              </div></>
             )}
           </Toolbar>
         </AppBar>

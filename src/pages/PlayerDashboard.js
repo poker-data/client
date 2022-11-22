@@ -1,8 +1,7 @@
 import React from "react";
-
 import "./PlayerDashboard.css";
 import MenuAppBar from "../components/MenuAppBar";
-import { useAuthDispatch, useAuthState } from '../context'
+import { useAuthState } from '../context'
 import Grid from '@mui/material/Grid';
 import PlayersDT from "../components/playerStats/PlayersDT";
 import LineChart from "../components/charts/LineChart";
@@ -11,7 +10,6 @@ import LineChart from "../components/charts/LineChart";
 
 function PlayerDashboard() {
   const state = useAuthState();
-  const dispatch = useAuthDispatch();
 
 
   const [sidebarVisible, setSidebarVisible] = React.useState(false);

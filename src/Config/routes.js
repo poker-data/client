@@ -1,7 +1,5 @@
 import HomePage from "../pages/HomePage";
-import SinPath from "../components/playerStats/SinPath";
 import PlayerDashboard from "../pages/PlayerDashboard";
-import TeamDashboard from "../pages/TeamDashboard";
 import TournamentsPage from "../pages/TournamentsPage";
 import LoginPage from "../pages/Login/LoginPage";
 import GroupPage from "../pages/GroupPage";
@@ -37,11 +35,6 @@ const routes = [
     isPrivate: true,
   },
   {
-    path: "/teamdashboard",
-    component: TeamDashboard,
-    isPrivate: true,
-  },
-  {
     path: "/tournaments",
     component: TournamentsPage,
     isPrivate: true,
@@ -68,12 +61,6 @@ const routes = [
   },
 
   
-  /* ,
-  {
-    path: "*",
-    component: SinPath,
-    isPrivate: false,
-  } */
 ];
 
 export default routes;

@@ -1,14 +1,10 @@
 import React from "react";
 import "./PlayerDashboard.css";
 import MenuAppBar from "../components/MenuAppBar";
-import { useAuthDispatch, useAuthState } from '../context'
 import Grid from '@mui/material/Grid';
 import TournamentStats from "../components/tournamentsStats/TournamentStats";
 
 function TournamentsPage() {
-  const state = useAuthState();
-  const dispatch = useAuthDispatch();
-
 
   const [sidebarVisible, setSidebarVisible] = React.useState(false);
 

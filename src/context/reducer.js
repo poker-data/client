@@ -5,10 +5,6 @@ let token = localStorage.getItem("currentUser")
   ? JSON.parse(localStorage.getItem("currentUser")).token
   : false;
 
-let role = localStorage.getItem("currentUser")
-  ? JSON.parse(localStorage.getItem("currentUser")).role
-  : "";
-
 export const initialState = {
   user: "" || user,
   token: "" || token,
@@ -26,6 +22,7 @@ export const initialState = {
   defaultGroupFilteredList: [],
   tournamentData: [],
   userId : []
+  remainingRequests: [],
 };
 
 export const AuthReducer = (initialState, action) => {
@@ -106,7 +103,12 @@ export const AuthReducer = (initialState, action) => {
       return {
         ...initialState,
         userId: action.payload
-      }
+      }      case "GET_REMAININGRQUESTS":
+        return {
+          ...initialState,
+          remainingRequests: action.payload.info,
+      };
+
     default:
       try {
         return initialState

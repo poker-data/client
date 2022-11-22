@@ -8,9 +8,6 @@ const initialFieldValues = {
     playerName:''
 }
 
-
-
-
 export default function PlayerForm (props) {
 
     const {addPlayer} = props

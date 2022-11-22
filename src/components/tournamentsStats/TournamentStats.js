@@ -16,8 +16,8 @@ import Notification from '../utils/Notification';
 import {useAuthDispatch, getTournamentData, useAuthState } from "../../context";
 import { parseSecondstoDateWithSeconds, parseSecondstoHours } from '../utils/Formatters';
 import RefreshIcon from '@mui/icons-material/Refresh';
+import DownloadIcon from '@mui/icons-material/Download';
 import Button from '@mui/material/Button';
-
 
 
 
@@ -27,22 +27,34 @@ const TournamentStats = () => {
       const [data, setData] = React.useState([]);
       const [error, setError] = React.useState('');
       const [page, setPage] = React.useState(0);
-      const [rowsPerPage, setRowsPerPage] = React.useState(5);
+      const [rowsPerPage, setRowsPerPage] = React.useState(50);
       const [notify, setNotify] = React.useState({isOpen:false, message:'', type:'error'})
 
       const [dense, setDense] = React.useState(true);
 
-
-
-      React.useEffect(() => {
-        let body ={}
-        const getData = async () => {
-          await getTournamentData(dispatch, body);
+      const level = JSON.parse(localStorage.getItem("currentUser")).user.level;
+      const country = JSON.parse(localStorage.getItem("currentUser")).user.country;
+      
+      React.useEffect( () => {  
+        let cancel = false;
+        let body = {
+          playerLevel: level.toString(),
+          playerCountry: country
         }
-        getData();
-        setData(state.tournamentsdata ? state.tournamentsdata.stats : [])
-  
-      }, [])
+        const fetchTournamentData = async () => {
+            await getTournamentData(dispatch, body);
+            if (cancel) {
+              setData([])
+              return;
+            }else{
+              let dataTournaments = state?.tournamentsdata?.stats??[]
+              setData(dataTournaments)
+            }
+        }
+        fetchTournamentData();
+        return () => { cancel = true };
+      },[])
+
 
      
 
@@ -62,21 +74,47 @@ const TournamentStats = () => {
     };
 
     const handleRefresh = async (event) => {
-      let body ={}
-      const response = await getTournamentData(dispatch, body);
-      let newData = state.tournamentsdata.stats.sort((a, b) => (a.scheduledStartDate > b.scheduledStartDate) ? 1 : -1)
-      state.tournamentsdata ? setData(newData) : setData([])
+
+      if (window.confirm('Esta seguro que desea realizar otra consulta hacia la API?')) {
+        setNotify({
+          isOpen: true,
+          message: 'Cargando consulta',
+          type: 'info'
+        })
+        let body ={
+          playerLevel: level.toString(),
+          playerCountry: country
+        }
+          const getData = async () => {
+            await getTournamentData(dispatch, body);
+          }
+        getData();
+        let newData = state.tournamentsdata.stats.sort((a, b) => (a.scheduledStartDate > b.scheduledStartDate) ? 1 : -1)
+        state.tournamentsdata ? setData(newData) : setData([])
+      }
+      else {
+        setNotify({
+          isOpen: true,
+          message: 'Consulta cancelada',
+          type: 'error'
+        })
+      } 
+     
     }
 
 
     const handleButtonOptimal = (level) => {
       let newData;
       switch(level) {
-        case "optimal": newData = state.tournamentsdata.stats.filter( element => parseFloat(element.field) <= 200 && parseFloat(element.field) > 100);
+        case "optimal": newData = state.tournamentsdata.stats.filter( element => parseFloat(element.field) <= 200 && parseFloat(element.guarantee) > 100);
         break;
         case "suboptimalone": newData = state.tournamentsdata.stats.filter( element => parseFloat(element.field) <= 500 && parseFloat(element.field) >= 201);
         break;
-        case "suboptimaltwo": newData = state.tournamentsdata.stats.filter( element => parseFloat(element.field) <= 100);
+        case "suboptimaltwo": newData = state.tournamentsdata.stats.filter( element => parseFloat(element.guarantee) <= 100);
+        break;
+        case "altavarianza1": newData = state.tournamentsdata.stats.filter( element => parseFloat(element.field) >= 5000);
+        break;
+        case "altavarianza2": newData = state.tournamentsdata.stats.filter( element => parseFloat(element.field) <= 4999 && parseFloat(element.field) >= 2500);
         break;
         default : newData = state.tournamentsdata.stats;
         break;
@@ -98,8 +136,10 @@ const TournamentStats = () => {
         </Typography>
         <IconButton sx={{float:"left", background:"#d3d3d3"}} 
           aria-label="delete" 
-          onClick={() => handleRefresh()}>
-                    <RefreshIcon/>
+          onClick={() => {
+            handleRefresh();
+          }}>
+                    {data.length<1?<DownloadIcon/>:<RefreshIcon/>}
           </IconButton>
         <Button variant="outlined" 
         sx={{ float:"left", 
@@ -134,6 +174,28 @@ const TournamentStats = () => {
               "&:hover": {borderColor:"black", background:"grey"}}}
               onClick={() => {handleButtonOptimal("suboptimaltwo")}}
               >Suboptima 2</Button>
+        <Button variant="outlined" 
+        sx={{ float:"left", 
+              fontWeight: 'bold',
+              border: 1, 
+              borderColor: "#454545",
+              margin:"0.2%", 
+              backgroundColor: '#454545',
+              color: '#ebe9eb' ,
+              "&:hover": {borderColor:"black", background:"grey"}}}
+              onClick={() => {handleButtonOptimal("altavarianza1")}}
+              >ALTA VARIANZA 1</Button>
+        <Button variant="outlined" 
+        sx={{ float:"left", 
+              fontWeight: 'bold',
+              border: 1, 
+              borderColor: "#454545",
+              margin:"0.2%", 
+              backgroundColor: '#454545',
+              color: '#ebe9eb' ,
+              "&:hover": {borderColor:"black", background:"grey"}}}
+              onClick={() => {handleButtonOptimal("altavarianza2")}}
+              >ALTA VARIANZA 2</Button>
     
         {(error !== "") ? ( <div className = "error">{error}</div>) : ""}
         <Notification
@@ -154,9 +216,9 @@ const TournamentStats = () => {
               <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Field</TableCell>
               <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Tipo</TableCell>
               <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Nombre</TableCell>
-              <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Habilidad media</TableCell>
+              {/*<TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Habilidad media</TableCell>
               <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Habilidad media por tipo</TableCell>
-              <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Participantes medios por tipo</TableCell>
+        <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Participantes medios por tipo</TableCell>*/}
               <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Duracion media por tipo</TableCell>
               <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Overlay</TableCell>
             </TableRow>
@@ -172,13 +234,13 @@ const TournamentStats = () => {
                 {row.scheduledStartDate!=="-" ? parseSecondstoDateWithSeconds(row.scheduledStartDate) : row.scheduledStartDate}</TableCell>
                 <TableCell sx={{ color:"#454545" }}>{row.network}</TableCell>
                 <TableCell sx={{ color:"#454545" }}>{row.stake ? '$'+row.stake : row.stake}</TableCell>
-                <TableCell sx={{ color:"#454545" }}>{row.guarantee ? '$'+row.guarantee : row.guarantee}</TableCell>
+                <TableCell sx={{ color:"#454545" }}>{row.guarantee !== null ? row.guarantee : "-"}</TableCell>
                 <TableCell sx={{ color:"#454545" }}>{row.field!=="-" ? row.field : "-"}</TableCell>
                 <TableCell sx={{ color:"#454545" }}>{row.game==="H" ? "NL Hold'em": row.game }</TableCell>
                 <TableCell sx={{ color:"#454545" }}>{row.name}</TableCell>
-                <TableCell sx={{ color:"#454545" }}>{row.AvAbility>row.TypeAvAbility ? "▲"+row.AvAbility : "▼"+row.AvAbility}</TableCell>
+                {/*<TableCell sx={{ color:"#454545" }}>{row.AvAbility>row.TypeAvAbility ? "▲"+row.AvAbility : "▼"+row.AvAbility}</TableCell>
                 <TableCell sx={{ color:"#454545" }}>{row.TypeAvAbility}</TableCell>
-                <TableCell sx={{ color:"#454545" }}>{row.TypeAvEntrants}</TableCell>
+            <TableCell sx={{ color:"#454545" }}>{row.TypeAvEntrants}</TableCell>*/}
                 <TableCell sx={{ color:"#454545" }}>{row.TypeAvDuration!=="-" ? parseSecondstoHours(row.TypeAvDuration): "-"}</TableCell>
                 <TableCell sx={{ color:"#454545" }}>{row.overlay}</TableCell>
               </TableRow>
@@ -189,7 +251,7 @@ const TournamentStats = () => {
         </TableContainer>
         <TablePagination
           sx={{ color:"#454545" }}
-          rowsPerPageOptions={[5, 25, 100]}
+          rowsPerPageOptions={[50, 75, 100]}
           component="div"
           count={data.length}
           rowsPerPage={rowsPerPage}
@@ -203,7 +265,9 @@ const TournamentStats = () => {
         control={<Switch checked={dense} onChange={handleChangeDense} />}
         label="Colapse"
       />
+      
       </Box>
+      
     );
 }
 
