@@ -130,21 +130,21 @@ export default function GroupStats({ userToken }) {
 
     <Grid container spacing={2}   >
       <Grid item xs={4} >
-        <Stack sx={{ margin: "2%" }}>
-          <h1 style={{ color: "#d3d3d3" }}>Groups</h1>
+        <Stack sx={{ margin: "0.9%" }}>
+          <h1 style={{ color: "#ffffff", fontFamily:"Barlow", textAlign:'center' }}>Grupos</h1>
           <div style={{ height: 640, width: '100%' }}>
             <DataGrid
-              sx={{ borderRadius: 2, border: 1, flex: '1 1 100%', fontWeight: 'bold', textAlign: 'center', background: "#d3d3d3", color: "#000000" }}
+              sx={{ borderRadius: 1, border: 1, flex: '1 1 100%', fontFamily:"Barlow",  textAlign: 'center', background: "#d3d3d3", color: "#000000" }}
               rows={rows} columns={columns}
             />
           </div>
         </Stack>
       </Grid>
 
-      <Box sx={{ minWidth: 120, margin: "1.9%" }}>
-        <h1 style={{ color: "#d3d3d3" }}>Group Filter</h1>
-        <FormControl sx={{ border: 1, borderRadius: 2, flex: '1 1 100%', textAlign: 'center', background: "#d3d3d3", color: "#d3d3d3" }} fullWidth>
-          <InputLabel id="demo-simple-select-label"> Group name</InputLabel>
+      <Box sx={{  minWidth: 120, margin: "1.9%" }}>
+        <h1 style={{ color: "#ffffff", fontFamily:"Barlow", textAlign:'center' }}>Obtener Estadisticas</h1>
+        <FormControl sx={{ width:340, border: 1, borderRadius: 1, flex: '1 1 100%', textAlign: 'center', background: "#d3d3d3", color: "#111315" }} fullWidth>
+          <InputLabel id="demo-simple-select-label">Grupo</InputLabel>
           <NativeSelect
             defaultValue=''
             inputProps={{
@@ -160,7 +160,7 @@ export default function GroupStats({ userToken }) {
           </NativeSelect>
           <Stack sx={{ margin: "2%", background: "#d3d3d3", color: "#000000", borderRadius: 2 }}>
             <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Filter type</InputLabel>
+              <InputLabel id="demo-simple-select-label">Filtro</InputLabel>
               <NativeSelect
                 defaultValue=''
                 inputProps={{
@@ -177,15 +177,17 @@ export default function GroupStats({ userToken }) {
               </NativeSelect>
             </FormControl>
           </Stack >
-          <Stack sx={{ display: "flex", flexDirection: "row", padding: "2%", margin: "3%" }}>
+          <Stack sx={{ background:"#111315", display: "flex", flexDirection: "row"}}>
 
             <Button variant="contained" color="primary" 
               sx={{ fontWeight: 'bold',
                     border: 1, 
-                    borderColor: "#454545", 
+                    borderColor: "#111315", 
                     margin: "3%", 
-                    backgroundColor: '#515151',
-                    color: '#ebe9eb' }}
+                    backgroundColor: '#2debab',
+                    color: '#111315',
+                    fontFamily:"Barlow",
+                    "&:hover": {borderColor:"#2debab", background:"#2debab"} }}
                onClick={handleSubmit} disabled={group._id ? false : true}>
               Apply
             </Button>
@@ -193,7 +195,14 @@ export default function GroupStats({ userToken }) {
               className="add"
               variant="contained"
               color="primary"
-              sx={{ fontWeight: 'bold', border: 1, borderColor: "#454545", margin: "3%", backgroundColor: '#454545', color: '#ebe9eb' }}
+              sx={{ fontWeight: 'bold',
+               border: 1, 
+               borderColor: "#111315",
+               margin: "3%",
+               backgroundColor: '#2debab', 
+               color: '#111315',
+               fontFamily:"Barlow",
+               "&:hover": {borderColor:"#2debab", background:"#2debab"}}}
               startIcon={<AddIcon />}
               onClick={() => setOpenGroupPopup(true)}
             >Add Group</Button>

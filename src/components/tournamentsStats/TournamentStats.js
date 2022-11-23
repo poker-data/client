@@ -25,7 +25,7 @@ const TournamentStats = () => {
       const state = useAuthState();
       let dispatch = useAuthDispatch();
       const [data, setData] = React.useState([]);
-      const [error, setError] = React.useState('');
+      const [error, setError] = React.useState();
       const [page, setPage] = React.useState(0);
       const [rowsPerPage, setRowsPerPage] = React.useState(50);
       const [notify, setNotify] = React.useState({isOpen:false, message:'', type:'error'})
@@ -46,8 +46,10 @@ const TournamentStats = () => {
             await getTournamentData(dispatch, body);
             if (cancel) {
               setData([])
+              setError("Error al cargar los datos")
               return;
             }else{
+              setError(null)
               setTitleName("Lista completa")
               var dataTournaments = state?.tournamentsdata?.stats??[]
               setData(dataTournaments)
@@ -140,6 +142,7 @@ const TournamentStats = () => {
       <Box sx={{ width: '100%' }}>
         
         <Paper sx={{ background:"#111315", border: 1, borderColor:"#111315", margin:"1%"}}>
+        
         <Typography
           sx={{ flex: '1 1 100%', fontFamily:"Barlow", fontWeight:'bold', textAlign:'center', background:"#000000", color:"#ffffff"}}
           variant="h4"
@@ -148,6 +151,7 @@ const TournamentStats = () => {
         >
           {titleName}
         </Typography>
+        {(error !== "") ? ( <div className = "error">{error}</div>) : ""}
         <IconButton sx={{float:"left", margin:"1%", background:"#111315", color:"#d3d3d3"}} 
           aria-label="delete" 
           onClick={() => {
@@ -215,13 +219,14 @@ const TournamentStats = () => {
               "&:hover": {borderColor:"#2debab", background:"#2debab"}}}
               onClick={() => {handleButtonOptimal("altavarianza2")}}
               >ALTA VARIANZA 2</Button>
-    
-        {(error !== "") ? ( <div className = "error">{error}</div>) : ""}
+        
         <Notification
           notify={notify}
           setNotify={setNotify}
         />
+        
         <TableContainer>
+        
         <Table sx={{ minWidth: 650 }}
             aria-labelledby="simple table"
             size={dense ? 'small' : 'medium'}>

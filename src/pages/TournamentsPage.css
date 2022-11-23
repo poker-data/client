@@ -10,6 +10,10 @@
       justify-content: space-between;
       flex-wrap: wrap;
     }
+    .error {
+        color: red;
+        font-weight: bold;
+      }
    
     .page-title {
       margin-bottom: 3%;
