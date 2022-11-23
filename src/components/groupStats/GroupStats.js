@@ -23,8 +23,6 @@ export default function GroupStats({ userToken }) {
   const initialFilterState = Object.freeze({filterType:"", _id:""})
   const initialGroupState = Object.freeze({groupName:"", shkName: "", _id:""})
 
-
-  const [selectedDate, setSelectedDate] = React.useState(initialDateState);
   const [filter, setFilter] = React.useState(initialFilterState);
   const [group, setGroup] = React.useState(initialGroupState);
 

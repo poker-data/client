@@ -1,5 +1,5 @@
 import React from "react";
-import "./PlayerDashboard.css";
+import "./TournamentsPage.css";
 import MenuAppBar from "../components/MenuAppBar";
 import Grid from '@mui/material/Grid';
 import TournamentStats from "../components/tournamentsStats/TournamentStats";
