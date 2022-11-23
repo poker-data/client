@@ -49,7 +49,7 @@ const TournamentStats = () => {
               return;
             }else{
               setTitleName("Lista completa")
-              let dataTournaments = state?.tournamentsdata?.stats??[]
+              var dataTournaments = state?.tournamentsdata?.stats??[]
               setData(dataTournaments)
             }
         }
@@ -94,7 +94,8 @@ const TournamentStats = () => {
             await getTournamentData(dispatch, body);
           }
         getData();
-        let newData = state?.tournamentsdata?.stats??[].sort((a, b) => (a.scheduledStartDate > b.scheduledStartDate) ? 1 : -1)
+        var dataTournaments = state?.tournamentsdata?.stats??[]
+        var newData = dataTournaments.sort((a, b) => (a.scheduledStartDate > b.scheduledStartDate) ? 1 : -1)
         state.tournamentsdata ? setData(newData) : setData([])
       }
       else {
@@ -109,24 +110,25 @@ const TournamentStats = () => {
 
 
     const handleButtonOptimal = (level) => {
-      let newData;
+      var dataTournaments = state?.tournamentsdata?.stats??[]
+      var newData;
       switch(level) {
-        case "optimal": newData = state?.tournamentsdata?.stats??[].filter( element => parseFloat(element.field) <= 200 && parseFloat(element.guarantee) > 100);
+        case "optimal": newData = dataTournaments.filter( element => parseFloat(element.field) <= 200 && parseFloat(element.guarantee) > 100);
         setTitleName('Optima');
         break;
-        case "suboptimalone": newData = state?.tournamentsdata?.stats??[].filter( element => parseFloat(element.field) <= 500 && parseFloat(element.field) >= 201);
+        case "suboptimalone": newData = dataTournaments.filter( element => parseFloat(element.field) <= 500 && parseFloat(element.field) >= 201);
         setTitleName('Suboptima 1');
         break;
-        case "suboptimaltwo": newData = state?.tournamentsdata?.stats??[].filter( element => parseFloat(element.guarantee) <= 100);
+        case "suboptimaltwo": newData = dataTournaments.filter( element => parseFloat(element.guarantee) <= 100);
         setTitleName('Suboptima 2');
         break;
-        case "altavarianza1": newData = state?.tournamentsdata?.stats??[].filter( element => parseFloat(element.field) >= 5000);
+        case "altavarianza1": newData = dataTournaments.filter( element => parseFloat(element.field) >= 5000);
         setTitleName('Alta varianza 1');
         break;
-        case "altavarianza2": newData = state?.tournamentsdata?.stats??[].filter( element => parseFloat(element.field) <= 4999 && parseFloat(element.field) >= 2500);
+        case "altavarianza2": newData = dataTournaments.filter( element => parseFloat(element.field) <= 4999 && parseFloat(element.field) >= 2500);
         setTitleName('Alta varianza 2');
         break;
-        default : newData = state?.tournamentsdata?.stats??[];
+        default : newData = dataTournaments;
         break;
 
       }      
