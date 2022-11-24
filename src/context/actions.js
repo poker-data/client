@@ -276,9 +276,9 @@ export async function getCountries(dispatch) {
     headers: { "Content-Type": "application/json", "token": JSON.parse(localStorage.getItem("currentUser")).token},
   };
   try {
-    let response = await fetch(`${ROOT_URL}/api/getRegions`, requestOptions);
-    console.log(response)
-    let data = await response.json();
+    const response = await fetch(`${ROOT_URL}/api/getRegions`, requestOptions);
+    //console.log(response)
+    const data = await response.json();
     dispatch({ type: "GET_COUNTRIES", payload: data });
     return data;
   } catch (error) {
@@ -322,7 +322,7 @@ export async function userUpdate(dispatch, id, payload) {
     headers: { "Content-Type": "application/json", "token": JSON.parse(localStorage.getItem("currentUser")).token},
     body: JSON.stringify(payload)
   };
-  console.log(requestOptions.body)
+  //console.log(requestOptions.body)
   try {
     const response = await fetch(`${ROOT_URL}/api/useredit/${id}`, requestOptions);
     const data = await response.json();

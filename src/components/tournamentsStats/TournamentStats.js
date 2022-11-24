@@ -63,9 +63,6 @@ const TournamentStats = () => {
 
 
      
-
-
-
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
@@ -106,7 +103,7 @@ const TournamentStats = () => {
               await getTournamentData(dispatch, body);
             }
           getData();
-          var dataTournaments = state?.tournamentsdata?.stats??[]
+          const dataTournaments = state?.tournamentsdata?.stats??[]
           var newData = dataTournaments.sort((a, b) => (a.scheduledStartDate > b.scheduledStartDate) ? 1 : -1)
           state.tournamentsdata ? setData(newData) : setData([])
           swal({text: "Peticion realizada", icon: "success"});           

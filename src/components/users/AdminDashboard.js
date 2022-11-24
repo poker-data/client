@@ -15,6 +15,7 @@ import { useAuthState, useAuthDispatch } from '../../context';
 import { getIdUser, getUsers, logicalDeleteUser } from '../../context/actions';
 import { useStylesForm } from './useStylesForm';
 import MenuAppBar from '../MenuAppBar';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 function AdminDashboard() {
   const history = useHistory();
@@ -28,7 +29,7 @@ function AdminDashboard() {
 
   useEffect(async () => {
     await getUsers(dispatch);
-  }, []);
+  }, [allUsers]);
 
   const createUser = () => {
     history.push('/usercreate');
@@ -57,8 +58,6 @@ const handleChangeRowsPerPage = (event) => {
 };
 
 
-
-
 const toggleSidebar = () => {
   if (!sidebarVisible) {
     setSidebarVisible(true);
@@ -69,43 +68,90 @@ const toggleSidebar = () => {
   return (
     <>
       <MenuAppBar handleBtnClick={toggleSidebar} />
+      {/* <Box sx={{background:"#111315", color:"#ffffff"}} display="flex " alignItems="center" justifyContent="center">
+          <Typography 
+          sx={{ flex: '1 1 100%', fontFamily:"Barlow", fontWeight:'bold', textAlign:'center', background:"#000000", color:"#ffffff"}}
+          variant="h4"
+          id="tableTitle"
+          component="div"
+          className={styles.title}>Tablero Administrador</Typography>
+        </Box> */}
       <Box
-        backgroundColor={'white'}
+        backgroundColor={'#111315'}
         display="grid"
         alignItems="center"
         justifyContent="center"
       >
-        <Box display="flex " alignItems="center" justifyContent="center">
-          <Typography className={styles.title}>Admin Dashboard</Typography>
-        </Box>
-        <Box>
-          <Button onClick={handleBack}>Back</Button>
+        
+        <Box sx={{background:"#111315"}}>
+
+        <IconButton
+                size="large"
+                edge="start"
+                color="inherit"
+                aria-label="menu"
+                sx={{
+                  float: 'left',
+                  "& svg": {
+                    fontSize: "35px",
+                    color: "#ebe9eb",
+                    fill: "#ebe9eb",
+                  },
+                }}
+                onClick={handleBack}
+              >
+                <ArrowBackIcon />
+
+              </IconButton>
+
+          
+          {/* <Button
+          sx={{ float:"left", 
+          fontWeight: 'bold',
+          border: 1, 
+          borderColor: "#2debab",
+          margin:"1%", 
+          backgroundColor: '#2debab',
+          color: '#111315' ,
+          fontFamily:"Barlow",
+          "&:hover": {borderColor:"#2debab", background:"#2debab"}}}
+           onClick={handleBack}>Back</Button> */}
           <Button>ACA VA LA SEARCHBAR</Button>
-          <Button onClick={createUser}>Create User</Button>
+          <Button 
+          sx={{ float:"right", 
+          fontWeight: 'bold',
+          border: 1, 
+          borderColor: "#2debab",
+          margin:"1%", 
+          backgroundColor: '#2debab',
+          color: '#111315' ,
+          fontFamily:"Barlow",
+          "&:hover": {borderColor:"#2debab", background:"#2debab"}}}
+          onClick={createUser}>Nuevo Usuario</Button>
         </Box>
-        <TableContainer direction={'column'}>
-          <TableHead>
+        <TableContainer sx={{background:"#d3d3d3"}} direction={'column'}>
+          <TableHead  style={{ backgroundColor: '#d3d3d3', height: 50}}>
             <TableRow>
-              <TableCell>Email</TableCell>
-              <TableCell>Username</TableCell>
-              <TableCell>Shark Username</TableCell>
-              <TableCell>Player Level</TableCell>
-              <TableCell>Region</TableCell>
-              <TableCell>Admin</TableCell>
-              <TableCell>Delete</TableCell>
-              <TableCell>Edit</TableCell>
+              <TableCell sx={{fontWeight: 'bold' , color:"#111315", fontFamily:"Barlow"}}>Email</TableCell>
+              <TableCell sx={{fontWeight: 'bold' , color:"#111315", fontFamily:"Barlow"}}>Usuario App</TableCell>
+              <TableCell sx={{fontWeight: 'bold' , color:"#111315", fontFamily:"Barlow"}}>Usuario Shark</TableCell>
+              <TableCell sx={{fontWeight: 'bold' , color:"#111315", fontFamily:"Barlow"}}>Nivel Jugador</TableCell>
+              <TableCell sx={{fontWeight: 'bold' , color:"#111315", fontFamily:"Barlow"}}>Zona</TableCell>
+              <TableCell sx={{fontWeight: 'bold' , color:"#111315", fontFamily:"Barlow"}}>Admin</TableCell>
+              <TableCell sx={{fontWeight: 'bold' , color:"#111315", fontFamily:"Barlow"}}>Eliminar</TableCell>
+              <TableCell sx={{fontWeight: 'bold' , color:"#111315", fontFamily:"Barlow"}}>Editar</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {allUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) =>
                 <TableRow key={row.name} value={row.email}>
-                  <TableCell>{row.email}</TableCell>
-                  <TableCell>{row.name}</TableCell>
-                  <TableCell>{row.shkUsername}</TableCell>
-                  <TableCell>{row.playerLevel}</TableCell>
-                  <TableCell>{row.country ? row.country : 'Not country assigned'}</TableCell>
-                  <TableCell>{!row.admin ? 'No' : 'Yes'}</TableCell>
-                  <TableCell>
+                  <TableCell sx={{color:"#111315", fontFamily:"Barlow"}}>{row.email}</TableCell>
+                  <TableCell sx={{color:"#111315", fontFamily:"Barlow"}}>{row.name}</TableCell>
+                  <TableCell sx={{color:"#111315", fontFamily:"Barlow"}}>{row.shkUsername}</TableCell>
+                  <TableCell sx={{color:"#111315", fontFamily:"Barlow"}}>{row.playerLevel}</TableCell>
+                  <TableCell sx={{color:"#111315", fontFamily:"Barlow"}}>{row.country ? row.country : 'No hay pais asignado'}</TableCell>
+                  <TableCell sx={{color:"#111315", fontFamily:"Barlow"}}>{!row.admin ? 'No' : 'Si'}</TableCell>
+                  <TableCell sx={{color:"#111315", fontFamily:"Barlow"}}>
                     <IconButton
                       aria-label="delete"
                       onClick={() => deleteUser(row._id)}
@@ -113,7 +159,7 @@ const toggleSidebar = () => {
                       <DeleteIcon />
                     </IconButton>
                   </TableCell>
-                  <TableCell>
+                  <TableCell sx={{color:"#111315"}}>
                     <Link to={`/useredit/${row._id}`}>
                       <IconButton
                         aria-label="delete"
@@ -127,7 +173,7 @@ const toggleSidebar = () => {
             )}
           </TableBody>
           <TablePagination
-          sx={{ color:"#454545" }}
+          sx={{ color:"#454545", backgroundColor: '#d3d3d3', fontFamily:"Barlow"}}
           rowsPerPageOptions={[10, 25, 50]}
           component="div"
           count={allUsers.length}
@@ -137,6 +183,7 @@ const toggleSidebar = () => {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
         </TableContainer>
+        
       </Box>
     </>
   );

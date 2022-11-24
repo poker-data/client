@@ -65,7 +65,7 @@ export const alertDeleteUser = ({ deleteUserById , index, history })=>{
 export const alertPassword=()=>{
   swal({
     title: "Contraseña demasiado corta",
-    text: "Ingrese una contraseña de mas de 10 caracteres",
+    text: "Ingrese una contraseña de mas de 8 caracteres",
     icon: "error",
     button: "Aceptar",
   });

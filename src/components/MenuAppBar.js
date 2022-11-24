@@ -251,7 +251,7 @@ export default function MenuAppBar({ handleBtnClick }) {
                       Group Statistics
                     </Typography>
 
-             {/*        <Typography
+                    <Typography
                       variant="h6"
                       component="div"
                       className="main-title"
@@ -269,7 +269,7 @@ export default function MenuAppBar({ handleBtnClick }) {
                       onClick={handleAdminPanel}
                     >
                       Admin Dashboard
-                    </Typography> */}
+                    </Typography> 
                   
                   </>
                   )

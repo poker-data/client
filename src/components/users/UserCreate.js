@@ -26,6 +26,8 @@ import {
 } from '@mui/material';
 import { alertEditUser, alertPassword, alertRegister } from './Alerts';
 import { getCountries, userRegister } from '../../context/actions';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import IconButton from "@mui/material/IconButton";
 
 const UserCreate = () => {
   const state = useAuthState();
@@ -55,7 +57,7 @@ const UserCreate = () => {
       country: country
     };
     try {
-      if (password.length < 11) {
+      if (password.length < 8) {
         return alertPassword();
       } else {
         dispatch(userRegister(body));
@@ -68,6 +70,7 @@ const UserCreate = () => {
         setLevel('');
         setCountry('');
         setChecked(false);
+        history.push('/admindashboard');
       }
     } catch (error) {
       // console.log(error);
@@ -131,75 +134,155 @@ const UserCreate = () => {
   }, []);
 
   return (
-    <Box display="grid" justifyContent={'center'}>
+    <Box display="grid" 
+    sx={{    
+      background:"#111315"
+    }} 
+    justifyContent={'center'}>
       <Box
-        backgroundColor={'white'}
+        sx={{
+          background:"#111315",
+          borderRadius: 2
+        }}
         height={'80vh'}
         width={'50vw'}
         marginTop="10vh"
       >
+         <IconButton
+                size="large"
+                edge="start"
+                color="inherit"
+                aria-label="menu"
+                sx={{
+                  "& svg": {
+                    fontSize: "35px",
+                    color: "#ebe9eb",
+                    fill: "#ebe9eb",
+                  },
+                }}
+                onClick={handleBack}
+              >
+                <ArrowBackIcon />
+
+              </IconButton>
         <Stack
           className={styles.title}
           sx={{
-            flexDirection: 'row',
             justifyContent: 'space-between',
-            alignItems: 'center',
-            justifyContent: 'center',
+            fontFamily:"Barlow",
+            color:"#2debab"
+  
           }}
         >
-          Create User
+          CREAR NUEVO USUARIO
         </Stack>
-        <Box>
-          <Grid container justifyContent="center" sx={{ flexDirection: 'row' }}>
-            <Grid item sx={{ padding: '1rem' }}>
+        <Box >
+          <Grid container 
+          sx={{ 
+            justifyContent: "space-between" ,
+            flexDirection:"row"
+
+             }}>
+            <Grid item sx={{ background:"#454545", width:"100%" , borderRadius:1}}>
               <TextField
-                spacing={{ xs: 8 }}
+                
                 label="Name"
                 variant="filled"
                 required
                 value={name}
+                sx={{ 
+                  margin:"2%",
+                  background:"#ffffff",
+                  borderRadius:2}}
                 onChange={(e) => setName(e.target.value)}
               />
-            </Grid>
-            <Grid item sx={{ padding: '1rem' }}>
               <TextField
-                spacing={{ xs: 8 }}
+                
                 label="Email"
                 variant="filled"
                 type="email"
                 required
                 value={email}
+                sx={{ 
+                  margin:"2%",
+                  float:"right",
+                  background:"#ffffff",
+                  borderRadius:2}}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </Grid>
+
             <Grid
               container
-              justifyContent="center"
-              sx={{ flexDirection: 'row' }}
+
             >
-              <Grid item sx={{ padding: '1rem' }}>
+              <Grid item sx={{  flexDirection: 'row',  background:"#454545", width:"100%" }}>
                 <TextField
                   spacing={{ xs: 8 }}
                   label="Shark Username"
                   variant="filled"
                   required
                   value={shkUsername}
+                  sx={{ 
+                    margin:"2%",
+                    background:"#ffffff",
+                    borderRadius:2}}
                   onChange={(e) => setShkUsername(e.target.value)}
                 />
+
+              <TextField
+                spacing={{ xs: 8 }}
+                label="Password"
+                variant="filled"
+                required
+                value={password}
+                sx={{ 
+                  margin:"2%",
+                  background:"#ffffff",
+                  float:"right",
+                  borderRadius:2}}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+
+
               </Grid>
+              
             </Grid>
+
           </Grid>
-          <Grid
-            item
-            container
-            sx={{
-              justifyContent: 'center',
-              alignItems: 'center',
-              flexDirection: 'row',
-            }}
-          >
-            <Grid item justifyContent="center" xs={10} md={5}>
-              <FormControl fullWidth>
+          <Grid item sx={{ background:"#454545"}}>
+              <Stack sx={{color:"#2debab", fontWeight:"bold",fontFamily:"Barlow", marginLeft:"2%", marginBottom:"2%"}}>¿Es Admin?</Stack>
+              <Checkbox
+                checked={checked}
+                sx={{
+                background:"#ffffff",
+                marginBottom:"2%",
+                marginLeft:"7%",
+                "&:hover": { background:"#ffffff"}}}
+                onChange={handleChangeAdmin}
+                inputProps={{ 'aria-label': 'controlled' }}
+              >
+              
+             </Checkbox>
+              
+             
+            </Grid>
+
+            <Grid
+            container 
+            sx={{ 
+              justifyContent: "space-between" ,
+              flexDirection:"row",
+              background:"#454545",
+              borderBottomLeftRadius:5,
+              borderBottomRightRadius:5
+  
+               }}>
+
+
+
+<Grid item sx={{ background:"#454545", width:"50%", borderBottomLeftRadius:5}}>
+              <FormControl fullWidth >
                 <InputLabel id="test-select-label">Level</InputLabel>
                 <Select
                   required
@@ -208,6 +291,10 @@ const UserCreate = () => {
                   name="role"
                   label="Rol"
                   value={level}
+                  sx={{ 
+                    margin:"2%",
+                    background:"#ffffff",
+                    borderRadius:2}}
                   onChange={(e) => setLevel(e.target.value)}
                 >
                   <MenuItem value={'1'}>1</MenuItem>
@@ -222,7 +309,7 @@ const UserCreate = () => {
               </FormControl>
               
             </Grid>
-            <Grid item justifyContent="center" xs={10} md={5}>
+            <Grid item sx={{ background:"#454545", width:"50%", borderBottomRightRadius:5}}>
               <FormControl fullWidth>
                 <InputLabel id="test-select-label">Country</InputLabel>
                 <Select
@@ -232,6 +319,10 @@ const UserCreate = () => {
                   name="role"
                   label="Rol"
                   value={country}
+                  sx={{ 
+                    margin:"2%",
+                    background:"#ffffff",
+                    borderRadius:2}}
                   onChange={(e) => setCountry(e.target.value)}
                 >
                   {countries.map(c => 
@@ -241,43 +332,51 @@ const UserCreate = () => {
               </FormControl>
               
             </Grid>
-            <Grid item sx={{ padding: '1rem' }}>
-              <Stack>Admin</Stack>
-              <Checkbox
-                checked={checked}
-                onChange={handleChangeAdmin}
-                inputProps={{ 'aria-label': 'controlled' }}
-              />
-            </Grid>
-            <Grid item sx={{ padding: '1rem' }}>
-              <TextField
-                spacing={{ xs: 8 }}
-                label="Password"
-                variant="filled"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </Grid>
+
+
+
           </Grid>
-          <Grid
-            item
-            container
-            sx={{
-              justifyContent: 'center',
-              alignItems: 'center',
-              flexDirection: 'row',
-            }}
-          ></Grid>
+
+            
+            
+
+         
+          
           <Stack
             className={styles.buttonsContainer}
-            sx={{ flexDirection: 'row', justifyContent: 'space-around' }}
+            sx={{ 
+
+              background:"#111315",
+              alignItems:"center",
+           }}
           >
             <Grid className={styles.buttonL}>
-              <Button onClick={handleBack}>Back</Button>
+           
+              {/* <Button 
+              sx={{ float:"left", 
+              fontWeight: 'bold',
+              border: 1, 
+              borderColor: "#454545",
+              margin:"1%", 
+              backgroundColor: '#2debab',
+              color: '#111315' ,
+              fontFamily:"Barlow",
+              "&:hover": {borderColor:"#2debab", background:"#2debab"}}}
+              onClick={handleBack}>Back</Button> */}
+
             </Grid>
             <Grid className={styles.buttonR}>
               <Button
+              size="large"
+              sx={{ float:"left", 
+              fontWeight: 'bold',
+              border: 1, 
+              borderColor: "#454545",
+              margin:"1%", 
+              backgroundColor: '#2debab',
+              color: '#111315' ,
+              fontFamily:"Barlow",
+              "&:hover": {borderColor:"#2debab", background:"#2debab"}}}
                 disabled_={
                   !name.length < 0 ||
                   !level.length < 0 ||
