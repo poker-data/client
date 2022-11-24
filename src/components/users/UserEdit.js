@@ -24,17 +24,19 @@ import {
 } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import { useStylesForm } from './useStylesForm';
-import { getUsers, userUpdate } from '../../context/actions';
+import { getCountries, getUsers, userUpdate } from '../../context/actions';
 
 function UserEdit() {
   const state = useAuthState();
   const allUsersId = state.userId;
+  const countries = state.countries;
   const { id } = useParams();
   const dispatch = useAuthDispatch();
   const history = useHistory();
   const styles = useStylesForm();
   const [name, setName] = useState('');
   const [level, setLevel] = useState('');
+  const [country, setCountry] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [admin, setAdmin] = useState('');
@@ -43,12 +45,14 @@ function UserEdit() {
   const [loading, setLoading] = useState('');
 
   const handleSubmit = async (e) => {
+    
     e.preventDefault();
     const body = {
       playerLevel: level ? level : allUsersId[0].level,
       email: email ? email : allUsersId[0].email,
       shkUsername: shkUsername ? shkUsername : allUsersId[0].shkUsername,
       admin: admin ? admin : allUsersId[0].admin,
+      country: country ? country : allUsersId[0].country
     };
     try {
       await userUpdate(dispatch, id, body);
@@ -65,6 +69,7 @@ function UserEdit() {
   };
 
   useEffect(async () => {
+    await getCountries(dispatch)
     if (allUsersId && allUsersId.length < 0) {
       setLoading(true);
     } else {
@@ -73,6 +78,7 @@ function UserEdit() {
       setShkUsername(allUsersId[0]?.shkUsername);
       setLevel(allUsersId[0]?.playerLevel);
       setAdmin(allUsersId[0]?.admin);
+      setCountry(allUsersId[0]?.country);
     }
   }, [allUsersId]);
 
@@ -164,6 +170,25 @@ function UserEdit() {
                   </Select>
                 </FormControl>
               </Grid>
+              <Grid item justifyContent="center" xs={10} md={5}>
+              <FormControl fullWidth>
+                <InputLabel id="test-select-label">Country</InputLabel>
+                <Select
+                  required
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  name="role"
+                  label="Rol"
+                  value={country}
+                  onChange={(e) => setCountry(e.target.value)}
+                >
+                  {countries.map(c => 
+                        <MenuItem value={c.region} key={c.region}>{c.region}</MenuItem>
+                  )}
+                </Select>
+              </FormControl>
+              
+            </Grid>
               <Grid item sx={{ padding: '1rem' }}>
                 <Stack>Admin</Stack>
                 <Select

@@ -25,14 +25,17 @@ import {
   Typography,
 } from '@mui/material';
 import { alertEditUser, alertPassword, alertRegister } from './Alerts';
-import { userRegister } from '../../context/actions';
+import { getCountries, userRegister } from '../../context/actions';
 
 const UserCreate = () => {
+  const state = useAuthState();
   const history = useHistory();
   const dispatch = useAuthDispatch();
   const styles = useStylesForm();
+  const countries = state.countries
   const [name, setName] = useState('');
   const [level, setLevel] = useState('');
+  const [country, setCountry] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [admin, setAdmin] = useState('');
@@ -48,6 +51,7 @@ const UserCreate = () => {
       shkUsername: shkUsername,
       password: password,
       admin: admin,
+      country: country
     };
     try {
       if (password.length < 11) {
@@ -60,7 +64,8 @@ const UserCreate = () => {
         setPassword('');
         setAdmin('');
         setShkUsername('');
-        setLevel(1);
+        setLevel('');
+        setCountry('');
         setChecked(false);
       }
     } catch (error) {
@@ -103,7 +108,6 @@ const UserCreate = () => {
 
   function TabPanel(props) {
     const { children, value, index, ...other } = props;
-
     return (
       <div
         role="tabpanel"
@@ -121,13 +125,17 @@ const UserCreate = () => {
     );
   }
 
+  useEffect(async () => {
+    await getCountries(dispatch);
+  }, []);
+
   return (
     <Box display="grid" justifyContent={'center'}>
       <Box
         backgroundColor={'white'}
-        height={'70vh'}
+        height={'80vh'}
         width={'50vw'}
-        marginTop="15vh"
+        marginTop="10vh"
       >
         <Stack
           className={styles.title}
@@ -211,6 +219,26 @@ const UserCreate = () => {
                   <MenuItem value={'8'}>8</MenuItem>
                 </Select>
               </FormControl>
+              
+            </Grid>
+            <Grid item justifyContent="center" xs={10} md={5}>
+              <FormControl fullWidth>
+                <InputLabel id="test-select-label">Country</InputLabel>
+                <Select
+                  required
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  name="role"
+                  label="Rol"
+                  value={country}
+                  onChange={(e) => setCountry(e.target.value)}
+                >
+                  {countries.map(c => 
+                        <MenuItem value={c.region} key={c.region}>{c.region}</MenuItem>
+                  )}
+                </Select>
+              </FormControl>
+              
             </Grid>
             <Grid item sx={{ padding: '1rem' }}>
               <Stack>Admin</Stack>
