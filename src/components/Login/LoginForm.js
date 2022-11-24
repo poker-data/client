@@ -1,6 +1,6 @@
 import React from "react";
 import CustomInput from "./CustomInput";
-import { Grid, Button, InputAdornment, IconButton, TextField } from "@mui/material";
+import { Grid, Button, InputAdornment, IconButton } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { loginUser, useAuthDispatch } from "../../context";
 import { useHistory } from "react-router-dom";
@@ -43,7 +43,7 @@ const LoginForm = () => {
           setError("Usuario o contraseña incorrectos");
           return;
         }
-        history.push("/home");
+        history.push("/tournaments");
       } catch (error) {
         setError("Usuario o contraseña incorrectos");
         //console.log(error);
@@ -77,22 +77,22 @@ const LoginForm = () => {
         alignItems="center"
         justifyContent="center"
         style={{ minHeight: "100vh" }}
-        sx={{background: "#111315", borderRadius: 1, color: "#ebe9eb" }}
+        sx={{background: "#111315", color: "#ebe9eb" }}
       >
         <p
           className="title_text"
-          style={{ color: "#2debab"}}
+          style={{ color: "#2debab", fontFamily:"Barlow" }}
           
         >
-          <strong>Bienvenido</strong>
+          <strong>BIENVENIDO</strong>
         </p>
 
         <Grid container item justifyContent="center" xs={12}>
           <CustomInput
-            type={"text"}
-            label={"Correo"}
+            type="text"
+            label="Correo"
             handleChange={setUser}
-           
+
           />
         </Grid>
 
@@ -100,7 +100,7 @@ const LoginForm = () => {
           
         <CustomInput
             type={showPassword ? "text" : "password"}
-            label={"Contrasena"}
+            label="Contrasena"
             handleChange={setPassword}
             InputProps={{ endAdornment: <EndAdornment /> }}
           />
@@ -116,10 +116,10 @@ const LoginForm = () => {
               sx={{fontSize: "20px",
               fontWeight: 'bold', 
               border: 1, 
-              borderColor: "#454545",
-               backgroundColor: '#2debab', 
-               color: '#111315',
-               "&:hover": {borderColor:"#2debab", borderColor: "#454545", background:"#2debab"} }}
+              fontFamily:"Barlow",
+              backgroundColor: '#2debab', 
+              color: '#111315',
+               "&:hover": {borderColor:"#2debab", background:"#2debab"} }}
             >
               Inicia Sesion
             </Button>

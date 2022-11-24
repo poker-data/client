@@ -1,11 +1,11 @@
 import React from "react";
 import Grid from '@mui/material/Grid';
 import { DataGrid, } from "@mui/x-data-grid";
-import { Button, Stack, Select, TextField } from "@mui/material";
+import { Button, Stack, TextField } from "@mui/material";
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
-import { getPlayerStats, useAuthDispatch, getPlayers, useAuthState, getPlayerByFilter, getRooms, setNewPlayer, getDefaultFilterList, getGroups, setNewGroup } from "../../context";
+import {  useAuthDispatch, getPlayers, useAuthState, getPlayerByFilter, getRooms, setNewPlayer } from "../../context";
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -15,8 +15,7 @@ import Popup from '../utils/Popup';
 import PlayerForm from './PlayerForm';
 import { useHistory } from 'react-router-dom';
 
-export default function PlayerStats({ userToken }) {
-  //console.log("userToken", userToken);
+export default function PlayerStats() {
   const history = useHistory();
   const [openPopup, setOpenPopup] = React.useState(false)
   const [notify, setNotify] = React.useState({ isOpen: false, message: '', type: 'error' })
@@ -127,7 +126,14 @@ export default function PlayerStats({ userToken }) {
           <h1 style={{ color: "#ffffff", fontFamily:"Barlow", textAlign:'center' }}>Jugadores</h1>
           <div style={{ height: 640, width: '100%' }}>
             <DataGrid
-              sx={{ borderRadius: 1, border: 1, flex: '1 1 100%', fontFamily:"Barlow", textAlign: 'center', background: "#d3d3d3", color: "#000000" }}
+              sx={{  
+                    border: 1,
+                    flex: '1 1 100%',
+                    fontFamily:"Barlow",
+                    textAlign: 'center',
+                    background: "#d3d3d3",
+                    color: "#000000",
+                    "& .MuiDataGrid-columnHeaderTitle": {fontWeight:"bold"} }}
               rows={rows} columns={columns}
             />
           </div>
@@ -136,7 +142,7 @@ export default function PlayerStats({ userToken }) {
 
       <Box sx={{ minWidth: 120, margin: "1.9%"}}>
         <h1 style={{ color: "#ffffff", fontFamily:"Barlow", textAlign:'center' }}>Obtener Estadisticas</h1>
-        <FormControl sx={{ border: 1, borderRadius: 1, flex: '1 1 100%', textAlign: 'center', background: "#d3d3d3", color: "#111315" }} fullWidth>
+        <FormControl sx={{ border: 1, flex: '1 1 100%', textAlign: 'center', background: "#d3d3d3", color: "#111315" }} fullWidth>
           <InputLabel id="demo-simple-select-label"> Jugador</InputLabel>
           <NativeSelect
             defaultValue=''

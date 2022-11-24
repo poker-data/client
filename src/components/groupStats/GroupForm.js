@@ -1,4 +1,4 @@
-import { FormControl, Grid, InputLabel, MenuItem, Select, TextField, Paper, Button } from '@mui/material';
+import { FormControl, Grid, TextField, Paper, Button } from '@mui/material';
 import React from 'react';
 import { Box } from '@mui/system';
 import { UseForm, Form } from '../playerStats/UseForm';

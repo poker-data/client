@@ -6,8 +6,6 @@ import GroupStats from "../components/groupStats/GroupStats";
 
 function GroupPage() {
 
-  const userToken = JSON.parse(localStorage.getItem("currentUser")).token 
- //console.log("token", userToken);
   const [sidebarVisible, setSidebarVisible] = React.useState(false);
 
   const toggleSidebar = () => {
@@ -22,7 +20,7 @@ function GroupPage() {
     <>
       <MenuAppBar handleBtnClick={toggleSidebar} />
       <Grid container spacing={3} sx={{ marginLeft: "2%", marginTop: "2%" }}>
-        <GroupStats userToken={ userToken }/>
+        <GroupStats />
         
       </Grid>
       
