@@ -17,6 +17,7 @@ import { useAuthState, useAuthDispatch } from '../../context';
 import { getIdUser, getUsers, logicalDeleteUser } from '../../context/actions';
 import UserEdit from './UserEdit';
 import { useStylesForm } from './useStylesForm';
+import MenuAppBar from '../MenuAppBar';
 
 function AdminDashboard() {
   const history = useHistory();
@@ -26,6 +27,7 @@ function AdminDashboard() {
   const styles = useStylesForm();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [sidebarVisible, setSidebarVisible] = React.useState(false);
 
   useEffect(async () => {
     await getUsers(dispatch);
@@ -57,8 +59,19 @@ const handleChangeRowsPerPage = (event) => {
   setPage(0);
 };
 
+
+
+
+const toggleSidebar = () => {
+  if (!sidebarVisible) {
+    setSidebarVisible(true);
+  } else {
+    setSidebarVisible(false);
+  }
+};
   return (
     <>
+      <MenuAppBar handleBtnClick={toggleSidebar} />
       <Box
         backgroundColor={'white'}
         display="grid"
