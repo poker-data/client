@@ -41,6 +41,7 @@ const UserCreate = () => {
   const [admin, setAdmin] = useState('');
   const [checked, setChecked] = useState(false);
   const [shkUsername, setShkUsername] = useState('');
+  const [value, setValue] = useState(0);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -100,7 +101,7 @@ const UserCreate = () => {
     };
   }
 
-  const [value, setValue] = useState(0);
+  
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
