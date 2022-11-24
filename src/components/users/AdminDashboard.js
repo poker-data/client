@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { Box, Button } from '@mui/material';
+import { Box, Button,TablePagination } from '@mui/material';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -14,13 +14,17 @@ import EditIcon from '@mui/icons-material/Edit';
 import { useAuthState, useAuthDispatch } from '../../context';
 import { getIdUser, getUsers, logicalDeleteUser } from '../../context/actions';
 import { useStylesForm } from './useStylesForm';
+import MenuAppBar from '../MenuAppBar';
 
 function AdminDashboard() {
   const history = useHistory();
   const state = useAuthState();
   const dispatch = useAuthDispatch();
-  const allUsers = state.users;
+  const allUsers = state.users.filter(d => d.delete !== true);
   const styles = useStylesForm();
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [sidebarVisible, setSidebarVisible] = React.useState(false);
 
   useEffect(async () => {
     await getUsers(dispatch);
@@ -35,10 +39,6 @@ function AdminDashboard() {
     window.location.reload();
   };
 
-  /*   const editUser = (id) => {
-      history.push(`/useredit/${id}`)
-    } */
-
   const llenar = async (id) => {
     await getIdUser(dispatch, id);
   };
@@ -47,8 +47,28 @@ function AdminDashboard() {
     history.push('/home');
   };
 
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+};
+
+const handleChangeRowsPerPage = (event) => {
+  setRowsPerPage(+event.target.value);
+  setPage(0);
+};
+
+
+
+
+const toggleSidebar = () => {
+  if (!sidebarVisible) {
+    setSidebarVisible(true);
+  } else {
+    setSidebarVisible(false);
+  }
+};
   return (
     <>
+      <MenuAppBar handleBtnClick={toggleSidebar} />
       <Box
         backgroundColor={'white'}
         display="grid"
@@ -63,10 +83,6 @@ function AdminDashboard() {
           <Button>ACA VA LA SEARCHBAR</Button>
           <Button onClick={createUser}>Create User</Button>
         </Box>
-        <Box>
-          <Button>ACA EL PAGINADO</Button>
-        </Box>
-
         <TableContainer direction={'column'}>
           <TableHead>
             <TableRow>
@@ -74,19 +90,20 @@ function AdminDashboard() {
               <TableCell>Username</TableCell>
               <TableCell>Shark Username</TableCell>
               <TableCell>Player Level</TableCell>
+              <TableCell>Region</TableCell>
               <TableCell>Admin</TableCell>
               <TableCell>Delete</TableCell>
               <TableCell>Edit</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {allUsers.map((row) =>
-              row.delete ? null : (
-                <TableRow key={row.name} value={row.name}>
+            {allUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) =>
+                <TableRow key={row.name} value={row.email}>
                   <TableCell>{row.email}</TableCell>
                   <TableCell>{row.name}</TableCell>
                   <TableCell>{row.shkUsername}</TableCell>
                   <TableCell>{row.playerLevel}</TableCell>
+                  <TableCell>{row.country ? row.country : 'Not country assigned'}</TableCell>
                   <TableCell>{!row.admin ? 'No' : 'Yes'}</TableCell>
                   <TableCell>
                     <IconButton
@@ -106,10 +123,19 @@ function AdminDashboard() {
                       </IconButton>
                     </Link>
                   </TableCell>
-                </TableRow>
-              )
+                </TableRow>             
             )}
           </TableBody>
+          <TablePagination
+          sx={{ color:"#454545" }}
+          rowsPerPageOptions={[10, 25, 50]}
+          component="div"
+          count={allUsers.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
         </TableContainer>
       </Box>
     </>

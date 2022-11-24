@@ -23,6 +23,7 @@ export const initialState = {
   tournamentData: [],
   userId : [],
   remainingRequests: [],
+  countries: [],
 };
 
 export const AuthReducer = (initialState, action) => {
@@ -103,6 +104,11 @@ export const AuthReducer = (initialState, action) => {
       return {
         ...initialState,
         userId: action.payload
+      };
+    case "GET_COUNTRIES":
+      return {
+        ...initialState,
+        countries: action.payload.info
       };
     case "GET_REMAININGRQUESTS":
         return {

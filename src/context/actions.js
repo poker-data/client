@@ -241,7 +241,7 @@ export const getTournamentData = async (dispatch, options) => {
 export const userRegister = async (payload) => {
   const requestOptions = {
     method : "POST",
-    headers: { "Content-Type": "application/json", "auth-token": JSON.parse(localStorage.getItem("currentUser")).token },
+    headers: { "Content-Type": "application/json", "token": JSON.parse(localStorage.getItem("currentUser")).token },
     body: JSON.stringify(payload)
   }
   try {
@@ -257,7 +257,7 @@ export const userRegister = async (payload) => {
 export async function getUsers(dispatch, payload) {
   const requestOptions = {
     method: "POST",
-    headers: { "Content-Type": "application/json", "auth-token": JSON.parse(localStorage.getItem("currentUser")).token},
+    headers: { "Content-Type": "application/json", "token": JSON.parse(localStorage.getItem("currentUser")).token},
     body: JSON.stringify(payload)
   };
   try {
@@ -270,10 +270,26 @@ export async function getUsers(dispatch, payload) {
   }
 }
 
+export async function getCountries(dispatch) {
+  const requestOptions = {
+    method: "GET",
+    headers: { "Content-Type": "application/json", "token": JSON.parse(localStorage.getItem("currentUser")).token},
+  };
+  try {
+    let response = await fetch(`${ROOT_URL}/api/getRegions`, requestOptions);
+    console.log(response)
+    let data = await response.json();
+    dispatch({ type: "GET_COUNTRIES", payload: data });
+    return data;
+  } catch (error) {
+    dispatch({ type: "LOGIN_ERROR", error: error });
+  }
+}
+
 export async function getIdUser(dispatch, id) {
   const requestOptions = {
     method: "POST",
-    headers: { "Content-Type": "application/json", "auth-token": JSON.parse(localStorage.getItem("currentUser")).token},
+    headers: { "Content-Type": "application/json", "token": JSON.parse(localStorage.getItem("currentUser")).token},
   };
   try {
     const response = await fetch(`${ROOT_URL}/api/admindashboard/users`, requestOptions);
@@ -289,7 +305,7 @@ export async function getIdUser(dispatch, id) {
 export async function logicalDeleteUser(dispatch, id) {
   const requestOptions = {
     method: "PUT",
-    headers: { "Content-Type": "application/json", "auth-token": JSON.parse(localStorage.getItem("currentUser")).token},
+    headers: { "Content-Type": "application/json", "token": JSON.parse(localStorage.getItem("currentUser")).token},
   };
   try {
     const response = await fetch(`${ROOT_URL}/api/users/${id}`, requestOptions);
@@ -303,7 +319,7 @@ export async function logicalDeleteUser(dispatch, id) {
 export async function userUpdate(dispatch, id, payload) {
   const requestOptions = {
     method: "POST",
-    headers: { "Content-Type": "application/json", "auth-token": JSON.parse(localStorage.getItem("currentUser")).token},
+    headers: { "Content-Type": "application/json", "token": JSON.parse(localStorage.getItem("currentUser")).token},
     body: JSON.stringify(payload)
   };
   console.log(requestOptions.body)
