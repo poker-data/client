@@ -77,20 +77,20 @@ const LoginForm = () => {
         alignItems="center"
         justifyContent="center"
         style={{ minHeight: "100vh" }}
-        sx={{background: "#ebe9eb", borderRadius: 1, color: "#ebe9eb" }}
+        sx={{background: "#111315", borderRadius: 1, color: "#ebe9eb" }}
       >
         <p
           className="title_text"
-          style={{ color: "black"}}
+          style={{ color: "#2debab"}}
           
         >
-          <strong>Login</strong>
+          <strong>Bienvenido</strong>
         </p>
 
         <Grid container item justifyContent="center" xs={12}>
           <CustomInput
             type={"text"}
-            label={"Correo de usuario"}
+            label={"Correo"}
             handleChange={setUser}
            
           />
@@ -100,7 +100,7 @@ const LoginForm = () => {
           
         <CustomInput
             type={showPassword ? "text" : "password"}
-            label={"contrasena"}
+            label={"Contrasena"}
             handleChange={setPassword}
             InputProps={{ endAdornment: <EndAdornment /> }}
           />
@@ -113,7 +113,13 @@ const LoginForm = () => {
               fullWidth
               onClick={submitCredentials}
               className="login-btn"
-              sx={{fontSize: "20px",fontWeight: 'bold', border: 1, borderColor: "#454545", backgroundColor: '#454545', color: '#ebe9eb' }}
+              sx={{fontSize: "20px",
+              fontWeight: 'bold', 
+              border: 1, 
+              borderColor: "#454545",
+               backgroundColor: '#2debab', 
+               color: '#111315',
+               "&:hover": {borderColor:"#2debab", borderColor: "#454545", background:"#2debab"} }}
             >
               Inicia Sesion
             </Button>

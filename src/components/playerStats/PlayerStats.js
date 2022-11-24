@@ -96,8 +96,8 @@ export default function PlayerStats({ userToken }) {
 
 
   const columns = [
-    { field: 'Name', headerName: 'Name', width: 200 },
-    { field: 'shkUsername', headerName: 'Username', width: 200 },
+    { field: 'Name', headerName: 'Nombre', width: 200 },
+    { field: 'shkUsername', headerName: 'Usuario', width: 200 },
   ];
 
   //addPlayer
@@ -123,21 +123,21 @@ export default function PlayerStats({ userToken }) {
 
     <Grid container spacing={2} >
       <Grid item xs={4} >
-        <Stack sx={{ margin: "2%" }}>
-          <h1 style={{ color: "#d3d3d3" }}>Players</h1>
+        <Stack sx={{ margin: "0.9%" }}>
+          <h1 style={{ color: "#ffffff", fontFamily:"Barlow", textAlign:'center' }}>Jugadores</h1>
           <div style={{ height: 640, width: '100%' }}>
             <DataGrid
-              sx={{ borderRadius: 2, border: 1, flex: '1 1 100%', fontWeight: 'bold', textAlign: 'center', background: "#d3d3d3", color: "#000000" }}
+              sx={{ borderRadius: 1, border: 1, flex: '1 1 100%', fontFamily:"Barlow", textAlign: 'center', background: "#d3d3d3", color: "#000000" }}
               rows={rows} columns={columns}
             />
           </div>
         </Stack>
       </Grid>
 
-      <Box sx={{ minWidth: 120, margin: "1.9%" }}>
-        <h1 style={{ color: "#d3d3d3" }}>Player Filter</h1>
-        <FormControl sx={{ border: 1, borderRadius: 2, flex: '1 1 100%', textAlign: 'center', background: "#d3d3d3", color: "#d3d3d3" }} fullWidth>
-          <InputLabel id="demo-simple-select-label"> Player</InputLabel>
+      <Box sx={{ minWidth: 120, margin: "1.9%"}}>
+        <h1 style={{ color: "#ffffff", fontFamily:"Barlow", textAlign:'center' }}>Obtener Estadisticas</h1>
+        <FormControl sx={{ border: 1, borderRadius: 1, flex: '1 1 100%', textAlign: 'center', background: "#d3d3d3", color: "#111315" }} fullWidth>
+          <InputLabel id="demo-simple-select-label"> Jugador</InputLabel>
           <NativeSelect
             defaultValue=''
             inputProps={{
@@ -178,7 +178,7 @@ export default function PlayerStats({ userToken }) {
             </Stack>
 
             <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Room</InputLabel>
+              <InputLabel id="demo-simple-select-label">Sala</InputLabel>
               <NativeSelect
                 defaultValue=''
                 inputProps={{
@@ -195,18 +195,36 @@ export default function PlayerStats({ userToken }) {
               </NativeSelect>
             </FormControl>
           </Stack >
-          <Stack sx={{ display: "flex", flexDirection: "row", padding: "2%", margin: "3%" }}>
+          <Stack sx={{ background:"#111315", display: "flex", flexDirection: "row"}}>
             {/* <FormGroup>
               <FormControlLabel sx={{ color:"#454545"}}control={<Checkbox defaultChecked />} label="Clear Filter" />
              </FormGroup> */}
-            <Button variant="contained" color="primary" sx={{ fontWeight: 'bold', border: 1, borderColor: "#454545", margin: "3%", backgroundColor: '#515151', color: '#ebe9eb' }} onClick={handleSubmit} disabled={player._id ? false : true}>
+            <Button variant="contained" color="primary" 
+            sx={{ fontWeight: 'bold',
+             border: 1,
+             borderColor: "#111315",
+             margin: "3%",
+             backgroundColor: '#2debab',
+             color: '#111315',
+             fontFamily:"Barlow",
+            "&:hover": {borderColor:"#2debab", background:"#2debab"}}} 
+            onClick={handleSubmit} disabled={player._id ? false : true}>
               Apply
             </Button>
             <Button
               className="add"
               variant="contained"
               color="primary"
-              sx={{ fontWeight: 'bold', border: 1, borderColor: "#454545", margin: "3%", backgroundColor: '#454545', color: '#ebe9eb' }}
+              sx={{ 
+                fontWeight: 'bold',
+                border: 1,
+                borderColor: "#111315",
+                margin: "3%", 
+                backgroundColor: '#2debab',
+                color: '#111315',
+                fontFamily:"Barlow",
+                "&:hover": {borderColor:"#2debab", background:"#2debab"} }}
+
               startIcon={<AddIcon />}
               onClick={() => setOpenPopup(true)}
             >Add Player</Button>

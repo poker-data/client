@@ -25,10 +25,11 @@ const TournamentStats = () => {
       const state = useAuthState();
       let dispatch = useAuthDispatch();
       const [data, setData] = React.useState([]);
-      const [error, setError] = React.useState('');
+      const [error, setError] = React.useState();
       const [page, setPage] = React.useState(0);
       const [rowsPerPage, setRowsPerPage] = React.useState(50);
       const [notify, setNotify] = React.useState({isOpen:false, message:'', type:'error'})
+      const [titleName, setTitleName] = React.useState('Lista completa');
 
       const [dense, setDense] = React.useState(true);
 
@@ -41,18 +42,23 @@ const TournamentStats = () => {
           playerLevel: level.toString(),
           playerCountry: country
         }
-        const fetchTournamentData = async () => {
+       const fetchTournamentData = async () => {
             await getTournamentData(dispatch, body);
             if (cancel) {
               setData([])
+              setError("Error al cargar los datos")
               return;
             }else{
-              let dataTournaments = state?.tournamentsdata?.stats??[]
+              setError(null)
+              setTitleName("Lista completa")
+              var dataTournaments = state?.tournamentsdata?.stats??[]
               setData(dataTournaments)
             }
         }
         fetchTournamentData();
         return () => { cancel = true };
+
+
       },[])
 
 
@@ -81,6 +87,7 @@ const TournamentStats = () => {
           message: 'Cargando consulta',
           type: 'info'
         })
+        setTitleName('Lista completa')
         let body ={
           playerLevel: level.toString(),
           playerCountry: country
@@ -89,7 +96,8 @@ const TournamentStats = () => {
             await getTournamentData(dispatch, body);
           }
         getData();
-        let newData = state.tournamentsdata.stats.sort((a, b) => (a.scheduledStartDate > b.scheduledStartDate) ? 1 : -1)
+        var dataTournaments = state?.tournamentsdata?.stats??[]
+        var newData = dataTournaments.sort((a, b) => (a.scheduledStartDate > b.scheduledStartDate) ? 1 : -1)
         state.tournamentsdata ? setData(newData) : setData([])
       }
       else {
@@ -104,19 +112,25 @@ const TournamentStats = () => {
 
 
     const handleButtonOptimal = (level) => {
-      let newData;
+      var dataTournaments = state?.tournamentsdata?.stats??[]
+      var newData;
       switch(level) {
-        case "optimal": newData = state.tournamentsdata.stats.filter( element => parseFloat(element.field) <= 200 && parseFloat(element.guarantee) > 100);
+        case "optimal": newData = dataTournaments.filter( element => parseFloat(element.field) <= 200 && parseFloat(element.guarantee) > 100);
+        setTitleName('Optima');
         break;
-        case "suboptimalone": newData = state.tournamentsdata.stats.filter( element => parseFloat(element.field) <= 500 && parseFloat(element.field) >= 201);
+        case "suboptimalone": newData = dataTournaments.filter( element => parseFloat(element.field) <= 500 && parseFloat(element.field) >= 201);
+        setTitleName('Suboptima 1');
         break;
-        case "suboptimaltwo": newData = state.tournamentsdata.stats.filter( element => parseFloat(element.guarantee) <= 100);
+        case "suboptimaltwo": newData = dataTournaments.filter( element => parseFloat(element.guarantee) <= 100);
+        setTitleName('Suboptima 2');
         break;
-        case "altavarianza1": newData = state.tournamentsdata.stats.filter( element => parseFloat(element.field) >= 5000);
+        case "altavarianza1": newData = dataTournaments.filter( element => parseFloat(element.field) >= 5000);
+        setTitleName('Alta varianza 1');
         break;
-        case "altavarianza2": newData = state.tournamentsdata.stats.filter( element => parseFloat(element.field) <= 4999 && parseFloat(element.field) >= 2500);
+        case "altavarianza2": newData = dataTournaments.filter( element => parseFloat(element.field) <= 4999 && parseFloat(element.field) >= 2500);
+        setTitleName('Alta varianza 2');
         break;
-        default : newData = state.tournamentsdata.stats;
+        default : newData = dataTournaments;
         break;
 
       }      
@@ -124,17 +138,21 @@ const TournamentStats = () => {
     }
 
     return (
+      
       <Box sx={{ width: '100%' }}>
-        <Paper sx={{ background:"#d3d3d3", color:"#ebe9eb" , border: 1, borderColor:"#000000"}}>
+        
+        <Paper sx={{ background:"#111315", border: 1, borderColor:"#111315", margin:"1%"}}>
+        
         <Typography
-          sx={{ flex: '1 1 100%', fontWeight:'bold', textAlign:'center', background:"#000000", color:"#ebe9eb"}}
+          sx={{ flex: '1 1 100%', fontFamily:"Barlow", fontWeight:'bold', textAlign:'center', background:"#000000", color:"#ffffff"}}
           variant="h4"
           id="tableTitle"
           component="div"
         >
-          Upcoming Tournaments
+          {titleName}
         </Typography>
-        <IconButton sx={{float:"left", background:"#d3d3d3"}} 
+        {(error !== "") ? ( <div className = "error">{error}</div>) : ""}
+        <IconButton sx={{float:"left", margin:"1%", background:"#111315", color:"#d3d3d3"}} 
           aria-label="delete" 
           onClick={() => {
             handleRefresh();
@@ -145,22 +163,24 @@ const TournamentStats = () => {
         sx={{ float:"left", 
               fontWeight: 'bold',
               border: 1, 
-              borderColor: "#454545",
-              margin:"0.2%", 
-              backgroundColor: '#454545',
-              color: '#ebe9eb' ,
-              "&:hover": {borderColor:"black", background:"grey"}}}
+              borderColor: "#2debab",
+              margin:"1%", 
+              backgroundColor: '#2debab',
+              color: '#111315' ,
+              fontFamily:"Barlow",
+              "&:hover": {borderColor:"#2debab", background:"#2debab"}}}
               onClick={() => {handleButtonOptimal("optimal")}}
               >Optima</Button>
         <Button variant="outlined" 
         sx={{ float:"left", 
               fontWeight: 'bold',
               border: 1, 
-              borderColor: "#454545",
-              margin:"0.2%", 
-              backgroundColor: '#454545',
-              color: '#ebe9eb' ,
-              "&:hover": {borderColor:"black", background:"grey"}}}
+              borderColor: "#2debab",
+              margin:"1%", 
+              backgroundColor: '#2debab',
+              color: '#111315' ,
+              fontFamily:"Barlow",
+              "&:hover": {borderColor:"#2debab", background:"#2debab"}}}
               onClick={() => {handleButtonOptimal("suboptimalone")}}
               >Suboptima 1</Button>
         <Button variant="outlined" 
@@ -168,10 +188,11 @@ const TournamentStats = () => {
               fontWeight: 'bold',
               border: 1, 
               borderColor: "#454545",
-              margin:"0.2%", 
-              backgroundColor: '#454545',
-              color: '#ebe9eb' ,
-              "&:hover": {borderColor:"black", background:"grey"}}}
+              margin:"1%", 
+              backgroundColor: '#2debab',
+              color: '#111315' ,
+              fontFamily:"Barlow",
+              "&:hover": {borderColor:"#2debab", background:"#2debab"}}}
               onClick={() => {handleButtonOptimal("suboptimaltwo")}}
               >Suboptima 2</Button>
         <Button variant="outlined" 
@@ -179,10 +200,11 @@ const TournamentStats = () => {
               fontWeight: 'bold',
               border: 1, 
               borderColor: "#454545",
-              margin:"0.2%", 
-              backgroundColor: '#454545',
-              color: '#ebe9eb' ,
-              "&:hover": {borderColor:"black", background:"grey"}}}
+              margin:"1%", 
+              backgroundColor: '#2debab',
+              color: '#111315' ,
+              fontFamily:"Barlow",
+              "&:hover": {borderColor:"#2debab", background:"#2debab"}}}
               onClick={() => {handleButtonOptimal("altavarianza1")}}
               >ALTA VARIANZA 1</Button>
         <Button variant="outlined" 
@@ -190,59 +212,58 @@ const TournamentStats = () => {
               fontWeight: 'bold',
               border: 1, 
               borderColor: "#454545",
-              margin:"0.2%", 
-              backgroundColor: '#454545',
-              color: '#ebe9eb' ,
-              "&:hover": {borderColor:"black", background:"grey"}}}
+              margin:"1%", 
+              backgroundColor: '#2debab',
+              color: '#111315' ,
+              fontFamily:"Barlow",
+              "&:hover": {borderColor:"#2debab", background:"#2debab"}}}
               onClick={() => {handleButtonOptimal("altavarianza2")}}
               >ALTA VARIANZA 2</Button>
-    
-        {(error !== "") ? ( <div className = "error">{error}</div>) : ""}
+        
         <Notification
           notify={notify}
           setNotify={setNotify}
         />
+        
         <TableContainer>
+        
         <Table sx={{ minWidth: 650 }}
             aria-labelledby="simple table"
             size={dense ? 'small' : 'medium'}>
-          <TableHead>
-            <TableRow>
-              <TableCell sx={{fontWeight: 'bold' , color:"#454545" }}>ID</TableCell>
-              <TableCell sx={{fontWeight: 'bold', color:"#454545"}}>Fecha</TableCell>
-              <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Sala</TableCell>
-              <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Stake</TableCell>
-              <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Garantia</TableCell>
-              <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Field</TableCell>
-              <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Tipo</TableCell>
-              <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Nombre</TableCell>
-              {/*<TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Habilidad media</TableCell>
-              <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Habilidad media por tipo</TableCell>
-        <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Participantes medios por tipo</TableCell>*/}
-              <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Duracion media por tipo</TableCell>
-              <TableCell sx={{fontWeight: 'bold', color:"#454545" }}>Overlay</TableCell>
+          <TableHead style={{ backgroundColor: '#d3d3d3', height: 50}}> 
+            <TableRow >
+              <TableCell sx={{fontWeight: 'bold' , color:"#111315", fontFamily:"Barlow"}}>ID</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"#111315", fontFamily:"Barlow"}}>Fecha</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"#111315" , fontFamily:"Barlow"}}>Sala</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"#111315" , fontFamily:"Barlow"}}>Buyin</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"#111315" , fontFamily:"Barlow"}}>Garantizado</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"#111315" , fontFamily:"Barlow"}}>Field</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"#111315" , fontFamily:"Barlow"}}>Nombre</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"#111315" , fontFamily:"Barlow"}}>Duracion</TableCell>
+              <TableCell sx={{fontWeight: 'bold', color:"#111315" , fontFamily:"Barlow"}}>Overlay</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, key) => (
-              <TableRow
+              <TableRow 
+                style={{ backgroundColor: '#d3d3d3', height: 10 }}
                 hover
                 tabIndex={-1}
                 key={key}>
-                <TableCell sx={{ color:"#454545" }}>{row.id}</TableCell>
-                <TableCell sx={{ color:"#454545" }}>
+                <TableCell sx={{ color:"#111315", fontFamily:"Barlow", width:5}}>{row.id}</TableCell>
+                <TableCell sx={{ color:"#111315",  fontFamily:"Barlow"}}>
                 {row.scheduledStartDate!=="-" ? parseSecondstoDateWithSeconds(row.scheduledStartDate) : row.scheduledStartDate}</TableCell>
-                <TableCell sx={{ color:"#454545" }}>{row.network}</TableCell>
-                <TableCell sx={{ color:"#454545" }}>{row.stake ? '$'+row.stake : row.stake}</TableCell>
-                <TableCell sx={{ color:"#454545" }}>{row.guarantee !== null ? row.guarantee : "-"}</TableCell>
-                <TableCell sx={{ color:"#454545" }}>{row.field!=="-" ? row.field : "-"}</TableCell>
-                <TableCell sx={{ color:"#454545" }}>{row.game==="H" ? "NL Hold'em": row.game }</TableCell>
-                <TableCell sx={{ color:"#454545" }}>{row.name}</TableCell>
-                {/*<TableCell sx={{ color:"#454545" }}>{row.AvAbility>row.TypeAvAbility ? "▲"+row.AvAbility : "▼"+row.AvAbility}</TableCell>
-                <TableCell sx={{ color:"#454545" }}>{row.TypeAvAbility}</TableCell>
-            <TableCell sx={{ color:"#454545" }}>{row.TypeAvEntrants}</TableCell>*/}
-                <TableCell sx={{ color:"#454545" }}>{row.TypeAvDuration!=="-" ? parseSecondstoHours(row.TypeAvDuration): "-"}</TableCell>
-                <TableCell sx={{ color:"#454545" }}>{row.overlay}</TableCell>
+                <TableCell sx={{ color:"#111315" , fontFamily:"Barlow"}}>{row.network}</TableCell>
+                <TableCell sx={{ color:"#111315" , fontFamily:"Barlow"}}>{row.stake ? '$'+row.stake : row.stake}</TableCell>
+                <TableCell sx={{ color:"#111315" , fontFamily:"Barlow"}}>{row.guarantee !== null ? row.guarantee : "-"}</TableCell>
+                <TableCell sx={{ color:"#111315" , fontFamily:"Barlow"}}>{row.field!=="-" ? row.field : "-"}</TableCell>
+                <TableCell sx={{ color:"#111315", fontFamily:"Barlow"}}>{row.name}</TableCell>
+               {/* <TableCell sx={{ color:"#111315", fontFamily:"Barlow"}}>{row.game==="H" ? "NL Hold'em": row.game }</TableCell>
+                <TableCell sx={{ color:"#111315" }}>{row.AvAbility>row.TypeAvAbility ? "▲"+row.AvAbility : "▼"+row.AvAbility}</TableCell>
+                <TableCell sx={{ color:"#111315" }}>{row.TypeAvAbility}</TableCell>
+            <TableCell sx={{ color:"#111315" }}>{row.TypeAvEntrants}</TableCell>*/}
+                <TableCell sx={{ color:"#111315" , fontFamily:"Barlow"}}>{row.TypeAvDuration!=="-" ? parseSecondstoHours(row.TypeAvDuration): "-"}</TableCell>
+                <TableCell sx={{ color:"#111315" , fontFamily:"Barlow"}}>{row.overlay}</TableCell>
               </TableRow>
             ))}
 
@@ -250,7 +271,7 @@ const TournamentStats = () => {
           </Table>
         </TableContainer>
         <TablePagination
-          sx={{ color:"#454545" }}
+          sx={{ color:"#454545", backgroundColor: '#d3d3d3', fontFamily:"Barlow"}}
           rowsPerPageOptions={[50, 75, 100]}
           component="div"
           count={data.length}
@@ -261,8 +282,8 @@ const TournamentStats = () => {
         />
       </Paper>
       <FormControlLabel
-        sx = {{ color:"#d3d3d3" }}
-        control={<Switch checked={dense} onChange={handleChangeDense} />}
+        sx = {{ color:"#ffffff"}}
+        control={<Switch style={{ color:"#2debab"}} checked={dense} onChange={handleChangeDense} />}
         label="Colapse"
       />
       

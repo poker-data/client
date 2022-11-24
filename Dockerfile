@@ -1,16 +1,12 @@
-# STAGE 2
+# STAGE 1
 FROM node:16-alpine AS build
 WORKDIR /app
 COPY package.json ./
-COPY package-lock.json ./
-COPY . .
-RUN npm ci
+RUN yarn install
 COPY . /app
-RUN npm run build
+RUN yarn build
 # STAGE 2
-FROM node:16-alpine
-WORKDIR /app
-RUN npm install -g webserver.local
-COPY --from=build /app/build ./build
-EXPOSE 3000
-CMD webserver.local -d ./build
+FROM ngnix:stable-alpine
+COPY --from=build /app/build /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]

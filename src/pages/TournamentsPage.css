@@ -3,12 +3,17 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Barlow', sans-serif;
+
   }
   #charts-container {
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
     }
+    .error {
+        color: red;
+        font-weight: bold;
+      }
    
     .page-title {
       margin-bottom: 3%;
