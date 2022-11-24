@@ -7,8 +7,6 @@ export const alertAddUser = ({ addNewUser , newUser , history, })=>{
   swal({
     title: "Agregar usuario nuevo?",
     buttons: ["Cancelar", "Aceptar"],
-   
-    
    }).then((result) => {
     //  console.log(result)
     if (result) {
@@ -86,8 +84,10 @@ export const alertEdit=()=>{
     text: "User successfully edited!",
     icon: "success",
     button: "Accept",
-  });
+  })
 }
+
+
 
 export const genericErrorAlert=(title,subtitle)=>{
   swal({
@@ -97,4 +97,3 @@ export const genericErrorAlert=(title,subtitle)=>{
     button: "Aceptar",
   });
 }
-

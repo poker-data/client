@@ -19,6 +19,39 @@
       margin-bottom: 3%;
     }
     
+    .swal-overlay {
+      background-color: rgba(43, 165, 137, 0.75);
+    }
+
+    .swal-button--confirm {
+      color: #111315;
+      font-family: "Barlow";
+      padding: 7px 19px;
+      border-radius: 2px;
+      background-color: #2debab;
+      font-size: 12px;
+      border: 1px solid #111315;
+    }
+
+    .swal-button--cancel {
+      color: #111315;
+      font-family: "Barlow";
+      padding: 7px 19px;
+      border-radius: 2px;
+      background-color: #2debab;
+      font-size: 12px;
+      border: 1px solid #111315;
+    }
+
+    .swal-text {
+      font-family: "Barlow";
+      font-size: 25px;
+      display: block;
+      text-align: center;
+      color: #111315;
+    }
+
+    
     @media screen and (max-width: 768px) {
       .chart-container {
         width: 100%;

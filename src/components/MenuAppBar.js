@@ -19,7 +19,7 @@ import RemainingRequests from "./utils/RemainingRequests";
 export default function MenuAppBar({ handleBtnClick }) {
   const dispatch = useAuthDispatch();
   const state = useAuthState();
-  let seller = state?.user?.name ?? "";
+  const userName = JSON.parse(localStorage.getItem("currentUser")).user.name;
   const avatar = state?.imageLink ? state.imageLink : null;
 
   // console.log(state);
@@ -251,7 +251,7 @@ export default function MenuAppBar({ handleBtnClick }) {
                       Group Statistics
                     </Typography>
 
-                    <Typography
+             {/*        <Typography
                       variant="h6"
                       component="div"
                       className="main-title"
@@ -269,7 +269,7 @@ export default function MenuAppBar({ handleBtnClick }) {
                       onClick={handleAdminPanel}
                     >
                       Admin Dashboard
-                    </Typography>
+                    </Typography> */}
                   
                   </>
                   )
@@ -310,7 +310,7 @@ export default function MenuAppBar({ handleBtnClick }) {
               </div>
               <div className="avatar-container">
                 
-                <Typography >{seller}</Typography>
+                <Typography >{userName}</Typography>
                 <IconButton
                   size="large"
                   aria-label="account of current user"

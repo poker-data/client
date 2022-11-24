@@ -26,9 +26,7 @@ function TournamentsPage() {
         <TournamentStats/>
     
       </Grid>
-      
-
-      {}
+    
     </>
   );
 }

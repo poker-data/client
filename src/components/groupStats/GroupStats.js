@@ -1,7 +1,7 @@
 import React from "react";
 import Grid from '@mui/material/Grid';
 import { DataGrid, } from "@mui/x-data-grid";
-import { Button, Stack, Select, TextField } from "@mui/material";
+import { Button, Stack } from "@mui/material";
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
@@ -12,14 +12,13 @@ import Popup from '../utils/Popup';
 import GroupForm from './GroupForm';
 import { useHistory } from 'react-router-dom';
 import CircularIndeterminate from "../utils/CircularIndeterminate";
+import Notification from '../utils/Notification';
 
-export default function GroupStats({ userToken }) {
-  //console.log("userToken", userToken);
+export default function GroupStats() {
   const history = useHistory();
-  const [openPopup, setOpenPopup] = React.useState(false)
   const [openGroupPopup, setOpenGroupPopup] = React.useState(false)
   const [notify, setNotify] = React.useState({ isOpen: false, message: '', type: 'error' })
-  const initialDateState = Object.freeze({ from: '', to: '' })
+
   const initialFilterState = Object.freeze({filterType:"", _id:""})
   const initialGroupState = Object.freeze({groupName:"", shkName: "", _id:""})
 
@@ -28,7 +27,7 @@ export default function GroupStats({ userToken }) {
 
   const [defaultFilterList, setDefaultFilterList] = React.useState([]);
   const [groupList, setGroupList] = React.useState([]);
-  const [groupToCreate, setGroupToCreate] = React.useState({ groupName: '' });
+
 
   const [isLoading, setIsLoading] = React.useState(false);
 
@@ -129,12 +128,24 @@ export default function GroupStats({ userToken }) {
 
 
     <Grid container spacing={2}   >
+      <Notification
+          notify={notify}
+          setNotify={setNotify}
+        />
       <Grid item xs={4} >
         <Stack sx={{ margin: "0.9%" }}>
           <h1 style={{ color: "#ffffff", fontFamily:"Barlow", textAlign:'center' }}>Grupos</h1>
           <div style={{ height: 640, width: '100%' }}>
             <DataGrid
-              sx={{ borderRadius: 1, border: 1, flex: '1 1 100%', fontFamily:"Barlow",  textAlign: 'center', background: "#d3d3d3", color: "#000000" }}
+              sx={{ 
+                border: 1,
+                flex: '1 1 100%', 
+                fontFamily:"Barlow", 
+                textAlign: 'center', 
+                background: "#d3d3d3", 
+                color: "#000000",
+                "& .MuiDataGrid-columnHeaderTitle": {fontWeight:"bold"} 
+               }}
               rows={rows} columns={columns}
             />
           </div>
@@ -143,7 +154,7 @@ export default function GroupStats({ userToken }) {
 
       <Box sx={{  minWidth: 120, margin: "1.9%" }}>
         <h1 style={{ color: "#ffffff", fontFamily:"Barlow", textAlign:'center' }}>Obtener Estadisticas</h1>
-        <FormControl sx={{ width:340, border: 1, borderRadius: 1, flex: '1 1 100%', textAlign: 'center', background: "#d3d3d3", color: "#111315" }} fullWidth>
+        <FormControl sx={{ width:340, border: 1, flex: '1 1 100%', textAlign: 'center', background: "#d3d3d3", color: "#111315" }} fullWidth>
           <InputLabel id="demo-simple-select-label">Grupo</InputLabel>
           <NativeSelect
             defaultValue=''
@@ -153,12 +164,12 @@ export default function GroupStats({ userToken }) {
             }}
             label="Groups"
             onChange={handleGroupChange}
-            sx={{ margin: "2%", padding: '2%', background: "#d3d3d3", borderRadius: 1, color: "#000000" }}
+            sx={{ margin: "2%", padding: '2%', background: "#d3d3d3", color: "#000000" }}
           >
             {<option value={group.shkName}></option>}
             {groupList.length > 0 ? groupList.map((group) => { return (<option key={group._id} value={group._id}> {group.groupName} </option>) }) : <option value="">No hay grupos</option>}
           </NativeSelect>
-          <Stack sx={{ margin: "2%", background: "#d3d3d3", color: "#000000", borderRadius: 2 }}>
+          <Stack sx={{ margin: "2%", background: "#d3d3d3", color: "#000000" }}>
             <FormControl fullWidth>
               <InputLabel id="demo-simple-select-label">Filtro</InputLabel>
               <NativeSelect

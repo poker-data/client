@@ -18,7 +18,7 @@ import { parseSecondstoDateWithSeconds, parseSecondstoHours } from '../utils/For
 import RefreshIcon from '@mui/icons-material/Refresh';
 import DownloadIcon from '@mui/icons-material/Download';
 import Button from '@mui/material/Button';
-
+import swal from 'sweetalert';
 
 
 const TournamentStats = () => {
@@ -81,32 +81,41 @@ const TournamentStats = () => {
 
     const handleRefresh = async (event) => {
 
-      if (window.confirm('Esta seguro que desea realizar otra consulta hacia la API?')) {
-        setNotify({
-          isOpen: true,
-          message: 'Cargando consulta',
-          type: 'info'
-        })
-        setTitleName('Lista completa')
-        let body ={
-          playerLevel: level.toString(),
-          playerCountry: country
-        }
-          const getData = async () => {
-            await getTournamentData(dispatch, body);
+      swal({
+        title: "Realizar una nueva consulta?",
+        buttons: {
+          confirm: {
+            text: "Aceptar",
+            value: true,
+            visible: true,
+          },
+          cancel: {
+            text: "Cancelar",
+            value: null,
+            visible: true,
           }
-        getData();
-        var dataTournaments = state?.tournamentsdata?.stats??[]
-        var newData = dataTournaments.sort((a, b) => (a.scheduledStartDate > b.scheduledStartDate) ? 1 : -1)
-        state.tournamentsdata ? setData(newData) : setData([])
-      }
-      else {
-        setNotify({
-          isOpen: true,
-          message: 'Consulta cancelada',
-          type: 'error'
+        }
+        }).then((result) => {
+        if (result) {
+          setTitleName('Lista completa')
+          const body ={
+            playerLevel: level.toString(),
+            playerCountry: country
+          }
+            const getData = async () => {
+              await getTournamentData(dispatch, body);
+            }
+          getData();
+          var dataTournaments = state?.tournamentsdata?.stats??[]
+          var newData = dataTournaments.sort((a, b) => (a.scheduledStartDate > b.scheduledStartDate) ? 1 : -1)
+          state.tournamentsdata ? setData(newData) : setData([])
+          swal({text: "Peticion realizada", icon: "success"});           
+        }
+        else{
+            swal({text: "Peticion cancelada"});
+        }
         })
-      } 
+
      
     }
 
