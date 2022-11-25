@@ -98,25 +98,8 @@ function UserEdit() {
           backgroundColor={'#111315'}
           height={'70vh'}
           width={'50vw'}
-          marginTop={'15vh'}
+          marginTop={'5vh'}
         >
-          <IconButton
-                size="large"
-                edge="start"
-                color="inherit"
-                aria-label="menu"
-                sx={{
-                  "& svg": {
-                    fontSize: "35px",
-                    color: "#ebe9eb",
-                    fill: "#ebe9eb",
-                  },
-                }}
-                onClick={handleBack}
-              >
-                <ArrowBackIcon />
-
-              </IconButton>
           <Stack
             className={styles.title}
             sx={{
@@ -127,6 +110,30 @@ function UserEdit() {
           >
             EDITAR USUARIO
           </Stack>
+          <IconButton
+                size="large"
+                edge="start"
+                aria-label="menu"
+                sx={{
+                  float:"left",
+                  "& svg": {
+                    fontSize: "35px",
+                    color: "#111315",
+                    fill: "#ebe9eb",
+                  },
+                }}
+                onClick={handleBack}
+              >
+                <ArrowBackIcon />
+                <Typography 
+                sx={{
+                  color:"#2debab",
+                  fontFamily:"Barlow",
+                  fontSize:"25px",
+                  marginLef:"20%"}}>Regresar</Typography>
+
+              </IconButton>
+          
           <Box>
             <Grid
               container 
@@ -168,8 +175,7 @@ function UserEdit() {
               item
               container
               sx={{ 
-                justifyContent: "space-between" ,
-                flexDirection:"row",
+             
                 background:"#454545",
                 borderBottomLeftRadius:5,
                 borderBottomRightRadius:5

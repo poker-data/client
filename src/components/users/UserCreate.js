@@ -134,38 +134,63 @@ const UserCreate = () => {
   }, []);
 
   return (
+    
+
+
     <Box display="grid" 
     sx={{    
       background:"#111315"
     }} 
     justifyContent={'center'}>
+      
+     
       <Box
         sx={{
           background:"#111315",
           borderRadius: 2
         }}
-        height={'80vh'}
+        height={'70vh'}
         width={'50vw'}
-        marginTop="10vh"
+        marginTop="5vh"
       >
-         <IconButton
-                size="large"
-                edge="start"
-                color="inherit"
-                aria-label="menu"
-                sx={{
-                  "& svg": {
-                    fontSize: "35px",
-                    color: "#ebe9eb",
-                    fill: "#ebe9eb",
-                  },
-                }}
-                onClick={handleBack}
-              >
-                <ArrowBackIcon />
-
-              </IconButton>
         <Stack
+            className={styles.title}
+            sx={{
+              justifyContent: 'space-between',
+              fontFamily:"Barlow",
+              color:"#2debab"
+            }}
+          >
+            CREAR NUEVO USUARIO
+          </Stack>
+         <IconButton
+    size="large"
+    edge="start"
+    aria-label="menu"
+    sx={{
+      float:"left",
+      "& svg": {
+        fontSize: "35px",
+        color: "#111315",
+        fill: "#ebe9eb",
+      },
+    }}
+    onClick={handleBack}
+  >
+    <ArrowBackIcon />
+    <Typography 
+    sx={{
+      color:"#2debab",
+      fontFamily:"Barlow",
+      fontSize:"25px",
+      marginLef:"20%"}}>Regresar</Typography>
+  </IconButton>
+
+  
+         
+        <Box >
+        
+              {/* <Stack
           className={styles.title}
           sx={{
             justifyContent: 'space-between',
@@ -175,8 +200,7 @@ const UserCreate = () => {
           }}
         >
           CREAR NUEVO USUARIO
-        </Stack>
-        <Box >
+        </Stack> */}
           <Grid container 
           sx={{ 
             justifyContent: "space-between" ,
@@ -264,7 +288,7 @@ const UserCreate = () => {
               >
               
              </Checkbox>
-              
+            
              
             </Grid>
 
@@ -280,8 +304,7 @@ const UserCreate = () => {
                }}>
 
 
-
-<Grid item sx={{ background:"#454545", width:"50%", borderBottomLeftRadius:5}}>
+            <Grid item sx={{ background:"#454545", width:"50%", borderBottomLeftRadius:5}}>
               <FormControl fullWidth >
                 <InputLabel id="test-select-label">Level</InputLabel>
                 <Select
@@ -333,42 +356,9 @@ const UserCreate = () => {
               
             </Grid>
 
-
-
-          </Grid>
-
-            
-            
-
-         
-          
-          <Stack
-            className={styles.buttonsContainer}
-            sx={{ 
-
-              background:"#111315",
-              alignItems:"center",
-           }}
-          >
-            <Grid className={styles.buttonL}>
-           
-              {/* <Button 
-              sx={{ float:"left", 
-              fontWeight: 'bold',
-              border: 1, 
-              borderColor: "#454545",
-              margin:"1%", 
-              backgroundColor: '#2debab',
-              color: '#111315' ,
-              fontFamily:"Barlow",
-              "&:hover": {borderColor:"#2debab", background:"#2debab"}}}
-              onClick={handleBack}>Back</Button> */}
-
-            </Grid>
-            <Grid className={styles.buttonR}>
-              <Button
+            <Button
               size="large"
-              sx={{ float:"left", 
+              sx={{ 
               fontWeight: 'bold',
               border: 1, 
               borderColor: "#454545",
@@ -385,10 +375,13 @@ const UserCreate = () => {
                 }
                 onClick={handleSubmit}
               >
-                Create
+                ACEPTAR
               </Button>
-            </Grid>
-          </Stack>
+
+
+
+          </Grid>     
+          
         </Box>
       </Box>
     </Box>
