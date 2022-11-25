@@ -1,9 +1,10 @@
 import React from "react";
 import CustomInput from "./CustomInput";
-import { Grid, Button, InputAdornment, IconButton } from "@mui/material";
+import { Grid,Box, Button, InputAdornment, IconButton } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { loginUser, useAuthDispatch } from "../../context";
 import { useHistory } from "react-router-dom";
+import logo from "../../assets/Asset29.png";
 
 import "./LoginForm.css";
 
@@ -79,13 +80,11 @@ const LoginForm = () => {
         style={{ minHeight: "100vh" }}
         sx={{background: "#111315", color: "#ebe9eb" }}
       >
-        <p
-          className="title_text"
-          style={{ color: "#2debab", fontFamily:"Barlow" }}
-          
-        >
-          <strong>BIENVENIDO</strong>
-        </p>
+        <Box>
+          <img src={logo} alt="Logo"/>
+
+        </Box>
+        
 
         <Grid container item justifyContent="center" xs={12}>
           <CustomInput
