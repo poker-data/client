@@ -307,8 +307,11 @@ export default function MenuAppBar({ handleBtnClick }) {
                
                 <RemainingRequests />
 
+
               </div>
+              
               <div className="avatar-container">
+                
                 
                 <Typography >{userName}</Typography>
                 <IconButton
