@@ -1,7 +1,7 @@
 import React from "react";
 import "./GroupDashboard.css";
 import MenuAppBar from "../components/MenuAppBar";
-import { useAuthDispatch, useAuthState } from '../context'
+import { useAuthState } from '../context'
 import Grid from '@mui/material/Grid';
 import GroupsDT from "../components/groupStats/GroupsDT";
 import LineChart from "../components/charts/LineChart";
@@ -9,9 +9,6 @@ import LineChart from "../components/charts/LineChart";
 
 function GroupDashboard() {
   const state = useAuthState();
-  const dispatch = useAuthDispatch();
-
-
   const [sidebarVisible, setSidebarVisible] = React.useState(false);
 
   const toggleSidebar = () => {

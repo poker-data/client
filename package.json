@@ -1,10 +1,10 @@
 {
-  "name": "route-guards",
+  "name": "bbzlatam",
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": "16.14.2",
-    "npm": "8.5.0"
+    "node": ">=16.14.2",
+    "npm": ">=8.5.0"
   },
   "dependencies": {
     "@emotion/react": "^11.8.1",
@@ -40,7 +40,7 @@
   "scripts": {
     "start": "react-scripts start",
     "test": "react-scripts test",
-    "build": "react-scripts --max_old_space_size=8192 build",
+    "build": "react-scripts --max_old_space_size=2000 build",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

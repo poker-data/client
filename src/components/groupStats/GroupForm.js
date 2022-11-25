@@ -1,4 +1,4 @@
-import { FormControl, Grid, InputLabel, MenuItem, Select, TextField, Paper, Button } from '@mui/material';
+import { FormControl, Grid, TextField, Paper, Button } from '@mui/material';
 import React from 'react';
 import { Box } from '@mui/system';
 import { UseForm, Form } from '../playerStats/UseForm';
@@ -29,7 +29,6 @@ export default function GroupForm (props) {
 
     const {
         values,
-        setValues,
         errors,
         setErrors,
         handleInputChange
@@ -53,7 +52,7 @@ export default function GroupForm (props) {
     
 
   return (
-      <Paper sx={{ borderRadius: 1, margin: '5px 5px', maxWidth: 450}}>
+      <Paper sx={{ background:"#111315", borderRadius: 1, margin: '5px 5px', maxWidth: 450}}>
           <Form onSubmit={handleSubmit}>
             <Grid container>
                     <Grid item xs={6}>
@@ -62,8 +61,9 @@ export default function GroupForm (props) {
                             size="small"
                             type="text" 
                             variant="outlined"
-                            label="Sharkscope Name"
+                            label="Nombre del Grupo"
                             name="shkName"
+                            sx={{background:"#ffffff", borderRadius: 1}}
                             value={values.shkName ? values.shkName : ''}
                             onChange = {handleInputChange}
                             {...(errors.shkName & {error:true})}
@@ -75,8 +75,9 @@ export default function GroupForm (props) {
                             size="small"
                             type="text" 
                             variant="outlined"
-                            label="Name"
+                            label="Nombre Identificativo"
                             name="groupName"
+                            sx={{background:"#ffffff", borderRadius: 1}}
                             value={values.groupName}
                             onChange = {handleInputChange}
                             {...(errors.name & {error:true})}
@@ -111,9 +112,16 @@ export default function GroupForm (props) {
               type="submit"
               className="add-player" 
               variant="contained" 
-              sx={{fontWeight: 'bold', border:1, borderColor:"black",margin: "3%", backgroundColor:'#454545', color:'#ebe9eb'}} 
-              
-          >ADD</Button>
+              sx={{
+                fontWeight: 'bold',
+                border:1,
+                borderColor:"black",
+                margin: "3%",
+                backgroundColor:'#2debab',
+                color: '#111315',
+                fontFamily:"Barlow",
+                "&:hover": {borderColor:"#111315", background:"#2debab"}}}
+          >AGREGAR</Button>
       </Form>
       </Paper>
   )

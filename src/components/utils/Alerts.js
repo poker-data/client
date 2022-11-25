@@ -7,8 +7,6 @@ export const alertAddUser = ({ addNewUser , newUser , history, })=>{
   swal({
     title: "Agregar usuario nuevo?",
     buttons: ["Cancelar", "Aceptar"],
-   
-    
    }).then((result) => {
     //  console.log(result)
     if (result) {
@@ -65,7 +63,7 @@ export const alertDeleteUser = ({ deleteUserById , index, history })=>{
 export const alertPassword=()=>{
   swal({
     title: "Contraseña demasiado corta",
-    text: "Ingrese una contraseña de mas de 8 caracteres",
+    text: "Ingrese una contraseña de mas de 10 caracteres",
     icon: "error",
     button: "Aceptar",
   });
@@ -86,8 +84,10 @@ export const alertEdit=()=>{
     text: "User successfully edited!",
     icon: "success",
     button: "Accept",
-  });
+  })
 }
+
+
 
 export const genericErrorAlert=(title,subtitle)=>{
   swal({
@@ -97,4 +97,3 @@ export const genericErrorAlert=(title,subtitle)=>{
     button: "Aceptar",
   });
 }
-

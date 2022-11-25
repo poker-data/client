@@ -17,11 +17,10 @@ export default function CustomInput({ label, handleChange, type, InputProps }) {
         fullWidth
       //  InputProps={InputProps ? InputProps : null}
       sx={{
-        input: {
-          color: "black",
-          background: "#fff"
-        }
-      }}
+      color: "#111315",
+      fontFamily: "Barlow",
+      background: "#ffffff",
+      borderRadius:1 }}
         onChange={handleTextChange}
       />
     </Grid>

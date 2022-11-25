@@ -1,19 +1,11 @@
-import React, { useEffect, useState } from "react";
-
+import React from "react";
 import MenuAppBar from "../components/MenuAppBar";
 import "./GroupPage.css";
-import Box from '@mui/material/Box';
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid'
-import {  useAuthDispatch, useAuthState } from '../context'
 import Grid from '@mui/material/Grid';
 import GroupStats from "../components/groupStats/GroupStats";
 
 function GroupPage() {
-  const state = useAuthState();
-  const dispatch = useAuthDispatch();
 
-  const userToken = JSON.parse(localStorage.getItem("currentUser")).token 
- //console.log("token", userToken);
   const [sidebarVisible, setSidebarVisible] = React.useState(false);
 
   const toggleSidebar = () => {
@@ -28,7 +20,7 @@ function GroupPage() {
     <>
       <MenuAppBar handleBtnClick={toggleSidebar} />
       <Grid container spacing={3} sx={{ marginLeft: "2%", marginTop: "2%" }}>
-        <GroupStats userToken={ userToken }/>
+        <GroupStats />
         
       </Grid>
       

@@ -1,42 +1,33 @@
 import React from "react";
 import Grid from '@mui/material/Grid';
 import { DataGrid, } from "@mui/x-data-grid";
-import { Button, Stack, Select, TextField } from "@mui/material";
+import { Button, Stack } from "@mui/material";
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import { useAuthDispatch,  useAuthState, getGroupDataByFilter, getDefaultFilterList, getGroups, setNewGroup } from "../../context";
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import NativeSelect from '@mui/material/NativeSelect';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import AddIcon from '@mui/icons-material/Add';
 import Popup from '../utils/Popup';
 import GroupForm from './GroupForm';
 import { useHistory } from 'react-router-dom';
 import CircularIndeterminate from "../utils/CircularIndeterminate";
+import Notification from '../utils/Notification';
 
-export default function GroupStats({ userToken }) {
-  //console.log("userToken", userToken);
+export default function GroupStats() {
   const history = useHistory();
-  const [openPopup, setOpenPopup] = React.useState(false)
   const [openGroupPopup, setOpenGroupPopup] = React.useState(false)
   const [notify, setNotify] = React.useState({ isOpen: false, message: '', type: 'error' })
-  const initialDateState = Object.freeze({ from: '', to: '' })
+
   const initialFilterState = Object.freeze({filterType:"", _id:""})
   const initialGroupState = Object.freeze({groupName:"", shkName: "", _id:""})
 
-
-  const [selectedDate, setSelectedDate] = React.useState(initialDateState);
   const [filter, setFilter] = React.useState(initialFilterState);
   const [group, setGroup] = React.useState(initialGroupState);
 
   const [defaultFilterList, setDefaultFilterList] = React.useState([]);
   const [groupList, setGroupList] = React.useState([]);
-  const [groupToCreate, setGroupToCreate] = React.useState({ groupName: '' });
+
 
   const [isLoading, setIsLoading] = React.useState(false);
 
@@ -137,22 +128,34 @@ export default function GroupStats({ userToken }) {
 
 
     <Grid container spacing={2}   >
+      <Notification
+          notify={notify}
+          setNotify={setNotify}
+        />
       <Grid item xs={4} >
-        <Stack sx={{ margin: "2%" }}>
-          <h1 style={{ color: "#d3d3d3" }}>Groups</h1>
+        <Stack sx={{ margin: "0.9%" }}>
+          <h1 style={{ color: "#ffffff", fontFamily:"Barlow", textAlign:'center' }}>Grupos</h1>
           <div style={{ height: 640, width: '100%' }}>
             <DataGrid
-              sx={{ borderRadius: 2, border: 1, flex: '1 1 100%', fontWeight: 'bold', textAlign: 'center', background: "#d3d3d3", color: "#000000" }}
+              sx={{ 
+                border: 1,
+                flex: '1 1 100%', 
+                fontFamily:"Barlow", 
+                textAlign: 'center', 
+                background: "#d3d3d3", 
+                color: "#000000",
+                "& .MuiDataGrid-columnHeaderTitle": {fontWeight:"bold"} 
+               }}
               rows={rows} columns={columns}
             />
           </div>
         </Stack>
       </Grid>
 
-      <Box sx={{ minWidth: 120, margin: "1.9%" }}>
-        <h1 style={{ color: "#d3d3d3" }}>Group Filter</h1>
-        <FormControl sx={{ border: 1, borderRadius: 2, flex: '1 1 100%', textAlign: 'center', background: "#d3d3d3", color: "#d3d3d3" }} fullWidth>
-          <InputLabel id="demo-simple-select-label"> Group name</InputLabel>
+      <Box sx={{  minWidth: 120, margin: "1.9%" }}>
+        <h1 style={{ color: "#ffffff", fontFamily:"Barlow", textAlign:'center' }}>Obtener Estadisticas</h1>
+        <FormControl sx={{ width:340, border: 1, flex: '1 1 100%', textAlign: 'center', background: "#d3d3d3", color: "#111315" }} fullWidth>
+          <InputLabel id="demo-simple-select-label">Grupo</InputLabel>
           <NativeSelect
             defaultValue=''
             inputProps={{
@@ -161,14 +164,14 @@ export default function GroupStats({ userToken }) {
             }}
             label="Groups"
             onChange={handleGroupChange}
-            sx={{ margin: "2%", padding: '2%', background: "#d3d3d3", borderRadius: 1, color: "#000000" }}
+            sx={{ margin: "2%", padding: '2%', background: "#d3d3d3", color: "#000000" }}
           >
             {<option value={group.shkName}></option>}
             {groupList.length > 0 ? groupList.map((group) => { return (<option key={group._id} value={group._id}> {group.groupName} </option>) }) : <option value="">No hay grupos</option>}
           </NativeSelect>
-          <Stack sx={{ margin: "2%", background: "#d3d3d3", color: "#000000", borderRadius: 2 }}>
+          <Stack sx={{ margin: "2%", background: "#d3d3d3", color: "#000000" }}>
             <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Filter type</InputLabel>
+              <InputLabel id="demo-simple-select-label">Filtro</InputLabel>
               <NativeSelect
                 defaultValue=''
                 inputProps={{
@@ -185,15 +188,17 @@ export default function GroupStats({ userToken }) {
               </NativeSelect>
             </FormControl>
           </Stack >
-          <Stack sx={{ display: "flex", flexDirection: "row", padding: "2%", margin: "3%" }}>
+          <Stack sx={{ background:"#111315", display: "flex", flexDirection: "row"}}>
 
             <Button variant="contained" color="primary" 
               sx={{ fontWeight: 'bold',
                     border: 1, 
-                    borderColor: "#454545", 
+                    borderColor: "#111315", 
                     margin: "3%", 
-                    backgroundColor: '#515151',
-                    color: '#ebe9eb' }}
+                    backgroundColor: '#2debab',
+                    color: '#111315',
+                    fontFamily:"Barlow",
+                    "&:hover": {borderColor:"#2debab", background:"#2debab"} }}
                onClick={handleSubmit} disabled={group._id ? false : true}>
               Apply
             </Button>
@@ -201,7 +206,14 @@ export default function GroupStats({ userToken }) {
               className="add"
               variant="contained"
               color="primary"
-              sx={{ fontWeight: 'bold', border: 1, borderColor: "#454545", margin: "3%", backgroundColor: '#454545', color: '#ebe9eb' }}
+              sx={{ fontWeight: 'bold',
+               border: 1, 
+               borderColor: "#111315",
+               margin: "3%",
+               backgroundColor: '#2debab', 
+               color: '#111315',
+               fontFamily:"Barlow",
+               "&:hover": {borderColor:"#2debab", background:"#2debab"}}}
               startIcon={<AddIcon />}
               onClick={() => setOpenGroupPopup(true)}
             >Add Group</Button>

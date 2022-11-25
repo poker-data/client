@@ -1,19 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import MenuAppBar from "../components/MenuAppBar";
 import "./HomePage.css";
-import Box from '@mui/material/Box';
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid'
-import { getPlayerStats, useAuthDispatch, useAuthState } from '../context'
 import Grid from '@mui/material/Grid';
-import PlayerStats from "../components/playerStats/PlayerStats";
-import LineChart from "../components/charts/LineChart";
+import { Box } from "@mui/system";
 
 function HomePage() {
-  const state = useAuthState();
-  const dispatch = useAuthDispatch();
-
-  const userToken = JSON.parse(localStorage.getItem("currentUser")).token 
  //console.log("token", userToken);
   const [sidebarVisible, setSidebarVisible] = React.useState(false);
 
@@ -29,54 +21,12 @@ function HomePage() {
     <>
       <MenuAppBar handleBtnClick={toggleSidebar} />
       <Grid container spacing={3} sx={{ marginLeft: "2%", marginTop: "2%" }}>
+        <Box>
+          <img src="../assets/Full.png"/>
 
+        </Box>
       </Grid>
       
-
-      {/*  <Grid
-        container
-        // spacing={3}
-        // direction="column"
-        // alignItems="center"
-        justifyContent="center"
-        style={{ minHeight: "100vh" }}
-      >
-        <Grid container item justifyContent="space-betwean" alignItems="center" xs={6}>
-          <Card
-            sx={{ width: "100%", height: "70%" }}
-          // sx={{ minWidth: 275 }}
-          >
-            <CardContent>
-               <Typography
-                sx={{ fontSize: 18 }}
-                color="text.secondary"
-                gutterBottom
-              >
-                Metricas
-              </Typography> 
-              <HomeComissionPieChart invoices={invoices} />
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid container item justifyContent="center" alignItems="center" xs={6}>
-          <Card
-            sx={{ width: "100%", height: "70%" }}
-          // sx={{ minWidth: 275 }}
-          >
-            <CardContent>
-             <Typography
-                sx={{ fontSize: 18 }}
-                color="text.secondary"
-                gutterBottom
-              >
-                Comisiones
-              </Typography> 
-              <HomeBarChart invoices={invoices} />
-            </CardContent>
-          </Card>
-        </Grid>
-      </Grid>
-     */}
     </>
   );
 }

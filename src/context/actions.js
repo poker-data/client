@@ -6,9 +6,9 @@ export async function loginUser(dispatch, loginPayload) {
   try {
     dispatch({ type: "REQUEST_LOGIN" });
 
-    let response = await axios.post(`${ROOT_URL}/login`, loginPayload);
+    const response = await axios.post(`${ROOT_URL}/login`, loginPayload);
 
-    let data = response.data
+    const data = response.data
 
     if (response.data.ok) { 
 
@@ -43,8 +43,8 @@ export async function getPlayerStats(dispatch, name, body) {
     body: JSON.stringify(body)
   };
 
-  let response = await fetch(`${ROOT_URL}/api/playerData/${name}`, requestOptions);
-  let data = await response.json();
+  const response = await fetch(`${ROOT_URL}/api/playerData/${name}`, requestOptions);
+  const data = await response.json();
   const finalData = []
   data.info.Response.PlayerResponse.PlayerView.Player.Statistics.StatisticalDataSet[0].Data.map(stat => finalData.push(stat["Y"]));
   //finalData.sort(( a, b )=> b - a );
@@ -61,8 +61,8 @@ export async function getPlayers(dispatch) {
   };
 
   try {
-    let response = await fetch(`${ROOT_URL}/api/getPlayers`, requestOptions);
-    let data = await response.json();
+    const response = await fetch(`${ROOT_URL}/api/getPlayers`, requestOptions);
+    const data = await response.json();
     dispatch({ type: "GET_PLAYERS", payload: data });
     return data;
   } catch (error) {
@@ -77,7 +77,7 @@ export const getPlayerByFilter = async (dispatch, options) => {
 
   try {
   
-    let url = `${ROOT_URL}/api/playerDataFiltered/${name}`;
+    const url = `${ROOT_URL}/api/playerDataFiltered/${name}`;
 
     const requestOptions = {
       method: "POST",
@@ -237,6 +237,101 @@ export const getTournamentData = async (dispatch, options) => {
     console.log(error)
   }
 }
+
+export const userRegister = async (payload) => {
+  const requestOptions = {
+    method : "POST",
+    headers: { "Content-Type": "application/json", "token": JSON.parse(localStorage.getItem("currentUser")).token },
+    body: JSON.stringify(payload)
+  }
+  try {
+    const response = await fetch(`${ROOT_URL}/register`, requestOptions)
+    const data = await response.json()
+    return data
+
+  } catch(error){
+    console.log(error)
+  }
+}
+
+export async function getUsers(dispatch, payload) {
+  const requestOptions = {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "token": JSON.parse(localStorage.getItem("currentUser")).token},
+    body: JSON.stringify(payload)
+  };
+  try {
+    const response = await fetch(`${ROOT_URL}/api/admindashboard/users`, requestOptions);
+    const data = await response.json();
+    dispatch({ type: "GET_USERS", payload: data });
+    return data;
+  } catch (error) {
+    dispatch({ type: "LOGIN_ERROR", error: error });
+  }
+}
+
+export async function getCountries(dispatch) {
+  const requestOptions = {
+    method: "GET",
+    headers: { "Content-Type": "application/json", "token": JSON.parse(localStorage.getItem("currentUser")).token},
+  };
+  try {
+    const response = await fetch(`${ROOT_URL}/api/getRegions`, requestOptions);
+    //console.log(response)
+    const data = await response.json();
+    dispatch({ type: "GET_COUNTRIES", payload: data });
+    return data;
+  } catch (error) {
+    dispatch({ type: "LOGIN_ERROR", error: error });
+  }
+}
+
+export async function getIdUser(dispatch, id) {
+  const requestOptions = {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "token": JSON.parse(localStorage.getItem("currentUser")).token},
+  };
+  try {
+    const response = await fetch(`${ROOT_URL}/api/admindashboard/users`, requestOptions);
+    const data = await response.json();
+    const userIda = await data.info.filter(u => u._id === id)
+    dispatch({ type: "GET_ID_USER", payload: userIda });
+    return userIda;
+  } catch (error) {
+    dispatch({ type: "LOGIN_ERROR", error: error });
+  }
+}
+
+export async function logicalDeleteUser(dispatch, id) {
+  const requestOptions = {
+    method: "PUT",
+    headers: { "Content-Type": "application/json", "token": JSON.parse(localStorage.getItem("currentUser")).token},
+  };
+  try {
+    const response = await fetch(`${ROOT_URL}/api/users/${id}`, requestOptions);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    dispatch({ type: "LOGIN_ERROR", error: error });
+  }
+}
+
+export async function userUpdate(dispatch, id, payload) {
+  const requestOptions = {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "token": JSON.parse(localStorage.getItem("currentUser")).token},
+    body: JSON.stringify(payload)
+  };
+  //console.log(requestOptions.body)
+  try {
+    const response = await fetch(`${ROOT_URL}/api/useredit/${id}`, requestOptions);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    dispatch({ type: "LOGIN_ERROR", error: error });
+  }
+}
+
 
 export const getRemainingRequests = async (dispatch, options) => {
 

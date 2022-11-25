@@ -19,7 +19,7 @@ import RemainingRequests from "./utils/RemainingRequests";
 export default function MenuAppBar({ handleBtnClick }) {
   const dispatch = useAuthDispatch();
   const state = useAuthState();
-  let seller = state?.user?.name ?? "";
+  const userName = JSON.parse(localStorage.getItem("currentUser")).user.name;
   const avatar = state?.imageLink ? state.imageLink : null;
 
   // console.log(state);
@@ -55,6 +55,10 @@ export default function MenuAppBar({ handleBtnClick }) {
     
     history.push("/tournaments");
   };
+
+  const handleAdminPanel =() => {
+    history.push('/admindashboard')
+  }
 
   const showModal = () => {
     if (!modal) {
@@ -246,8 +250,29 @@ export default function MenuAppBar({ handleBtnClick }) {
                     >
                       Group Statistics
                     </Typography>
+
+                    <Typography
+                      variant="h6"
+                      component="div"
+                      className="main-title"
+                      sx={{
+                        flexGrow: 1,
+                        fontSize: "30px",
+                        marginBottom: "4%",
+                        borderBottom: 1,
+                        borderColor: "white",
+                        color: "white",
+                        "@media screen and (max-width: 768px)": {
+                          fontSize: "14px",
+                        },
+                      }}
+                      onClick={handleAdminPanel}
+                    >
+                      Admin Dashboard
+                    </Typography> 
                   
-                  </>)
+                  </>
+                  )
                     : null}
 
                   <Typography
@@ -285,7 +310,7 @@ export default function MenuAppBar({ handleBtnClick }) {
               </div>
               <div className="avatar-container">
                 
-                <Typography >{seller}</Typography>
+                <Typography >{userName}</Typography>
                 <IconButton
                   size="large"
                   aria-label="account of current user"
@@ -321,9 +346,9 @@ export default function MenuAppBar({ handleBtnClick }) {
                   open={Boolean(anchorEl)}
                   onClose={handleClose}
                 >
-                  {/* <MenuItem onClick={handleClose}>Profile</MenuItem> */}
-                  <MenuItem onClick={handleClose}>My account</MenuItem>
-                  <MenuItem onClick={handleSignOut}>Sign Out</MenuItem>
+                  {/* <MenuItem onClick={handleClose}>Profile</MenuItem> 
+                  <MenuItem onClick={handleClose}>My account</MenuItem>*/}
+                  <MenuItem onClick={handleSignOut}>Cerrar Sesion</MenuItem>
                 </Menu>
               </div></>
             )}

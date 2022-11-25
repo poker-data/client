@@ -8,9 +8,6 @@ const initialFieldValues = {
     playerName:''
 }
 
-
-
-
 export default function PlayerForm (props) {
 
     const {addPlayer} = props
@@ -57,17 +54,18 @@ export default function PlayerForm (props) {
     
 
   return (
-      <Paper sx={{ borderRadius: 1, margin: '5px 5px', maxWidth: 450}}>
+      <Paper sx={{ background:"#111315", borderRadius: 1, margin: '5px 5px', maxWidth: 450}}>
           <Form onSubmit={handleSubmit}>
-            <Grid container>
+            <Grid container >
                     <Grid item xs={6}>
                         <TextField
                             autoComplete="off"
                             size="small"
                             type="text" 
                             variant="outlined"
-                            label="Name"
+                            label="Nombre"
                             name="playerName"
+                            sx={{background:"#ffffff", borderRadius: 1}}
                             value={values.playerName}
                             onChange = {handleInputChange}
                             {...(errors.name & {error:true})}
@@ -79,8 +77,9 @@ export default function PlayerForm (props) {
                             size="small"
                             type="text" 
                             variant="outlined"
-                            label="Username"
+                            label="Usuario"
                             name="shkUsername"
+                            sx={{background:"#ffffff", borderRadius: 1}}
                             value={values.shkUsername ? values.shkUsername : ''}
                             onChange = {handleInputChange}
                             {...(errors.shkUsername & {error:true})}
@@ -115,9 +114,17 @@ export default function PlayerForm (props) {
               type="submit"
               className="add-player" 
               variant="contained" 
-              sx={{fontWeight: 'bold', border:1, borderColor:"black",margin: "3%", backgroundColor:'#454545', color:'#ebe9eb'}} 
+              sx={{
+                fontWeight: 'bold',
+                border:1,
+                borderColor:"black",
+                margin: "3%",
+                backgroundColor:'#2debab',
+                color: '#111315',
+                fontFamily:"Barlow",
+                "&:hover": {borderColor:"#111315", background:"#2debab"}}} 
               
-          >ADD</Button>
+          >AGREGAR</Button>
       </Form>
       </Paper>
   )

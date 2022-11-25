@@ -1,138 +1,192 @@
-import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
-import { Dialog } from "@material-ui/core";
-import {
- // modifyUserBy_id,
-  useAuthState,
-  useAuthDispatch,
-} from "../../context";
-import { useStylesForm } from "./useStylesForm";
-import MenuItem from "@mui/material/MenuItem";
-import { Button, Grid, TextField, Stack, Box, FormControl, InputLabel, Select } from "@mui/material";
-import { alertEditUser, alertPassword } from "./Alerts";
+import React, { useState, useEffect } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import { Box, Button,TablePagination } from '@mui/material';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import { useAuthState, useAuthDispatch } from '../../context';
+import { getIdUser, getUsers, logicalDeleteUser } from '../../context/actions';
+import { useStylesForm } from './useStylesForm';
+import MenuAppBar from '../MenuAppBar';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
-const AdminDashboard = ({ closeModal }) => {
+function AdminDashboard() {
   const history = useHistory();
+  const state = useAuthState();
   const dispatch = useAuthDispatch();
+  const allUsers = state.users.filter(d => d.delete !== true);
   const styles = useStylesForm();
-  const [name, setName] = useState("");
-  const [role, setRole] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [sidebarVisible, setSidebarVisible] = React.useState(false);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const body = {
-      name: name,
-      role: role,
-      email: email,
-      password: password,
-    };
-    // console.log(image)
-    var data = new FormData();
-    try {
-      if (password.length < 11) {
-        return alertPassword();
-      }
-     
-    } catch (error) {
-      // console.log(error);
-    }
+  useEffect(async () => {
+    await getUsers(dispatch);
+  }, [allUsers]);
+
+  const createUser = () => {
+    history.push('/usercreate');
   };
-  const handleImgSubmit = (e) => {
-    e.preventDefault();
-    // console.log(e.target.files[0])
+
+  const deleteUser = async (id) => {
+    await logicalDeleteUser(dispatch, id);
+    window.location.reload();
+  };
+
+  const llenar = async (id) => {
+    await getIdUser(dispatch, id);
+  };
+
+  const handleBack = () => {
+    history.push('/home');
+  };
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+};
+
+const handleChangeRowsPerPage = (event) => {
+  setRowsPerPage(+event.target.value);
+  setPage(0);
+};
+
+
+const toggleSidebar = () => {
+  if (!sidebarVisible) {
+    setSidebarVisible(true);
+  } else {
+    setSidebarVisible(false);
   }
-
-
+};
   return (
     <>
-      <Dialog disableEnforceFocus open >
-        <Stack
-          className={styles.title}
-          sx={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", justifyContent: "center" }}
-        >
-          Editar usuario existente
-        </Stack>
-        <Box>
-          <Grid container justifyContent="center" sx={{ flexDirection: "row" }} >
-            <Grid item sx={{ padding: "1rem" }}   >
-              <TextField
-                spacing={{ xs: 8 }}
-                label="Nombre"
-                variant="filled"
-                required
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            </Grid>
-            <Grid item sx={{ padding: "1rem" }} >
-              <TextField
-                spacing={{ xs: 8 }}
-                label="Email"
-                variant="filled"
-                type="email"
-                required
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-              />
-            </Grid>
-          </Grid>
-          <Grid item container sx={{ justifyContent: "center", alignItems: "center", flexDirection: "row" }} >
-            <Grid item  justifyContent="center"  xs={10} md={5}>
-             
-                <FormControl fullWidth >
-                  <InputLabel id="test-select-label">Rol</InputLabel>
-                  <Select
-                    required
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    name="role"
-                    label="Rol"
-                    value={role}
-                    onChange={e => setRole(e.target.value)}
-                  >
-                    <MenuItem value={"dev"}>Dev</MenuItem>
-                    <MenuItem value={"administrator"}>Administrator</MenuItem>
-                    <MenuItem value={"player"}>Player</MenuItem>
-                  </Select>
-                </FormControl>
-              
-            </Grid>
+      <MenuAppBar handleBtnClick={toggleSidebar} />
+      {/* <Box sx={{background:"#111315", color:"#ffffff"}} display="flex " alignItems="center" justifyContent="center">
+          <Typography 
+          sx={{ flex: '1 1 100%', fontFamily:"Barlow", fontWeight:'bold', textAlign:'center', background:"#000000", color:"#ffffff"}}
+          variant="h4"
+          id="tableTitle"
+          component="div"
+          className={styles.title}>Tablero Administrador</Typography>
+        </Box> */}
+      <Box
+        backgroundColor={'#111315'}
+        display="grid"
+        alignItems="center"
+        justifyContent="center"
+      >
+        
+        <Box sx={{background:"#111315"}}>
 
-            <Grid item sx={{ padding: "1rem" }}  >
-              <TextField
-                spacing={{ xs: 8 }}
-                label="Password"
-                variant="filled"
-                required
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-              />
-            </Grid>
-          </Grid>
-          <Grid item container sx={{ justifyContent: "center", alignItems: "center", flexDirection: "row" }} >
-           
-          </Grid>
-          <Stack className={styles.buttonsContainer} sx={{ flexDirection: "row", justifyContent: "space-around" }} >
-            <Grid className={styles.buttonL} >
-              <Button onClick={closeModal}>
-                Cancelar
-              </Button>
-            </Grid>
-            <Grid className={styles.buttonR} >
-              <Button
-                disabled_={!name.length < 0 || !role.length < 0 || !email.length < 0 || !password.length < 0}
-                onClick={handleSubmit}>
-                Guardar
-              </Button>
-            </Grid>
-          </Stack>
+        <IconButton
+                size="large"
+                edge="start"
+                color="inherit"
+                aria-label="menu"
+                sx={{
+                  float: 'left',
+                  "& svg": {
+                    fontSize: "35px",
+                    color: "#ebe9eb",
+                    fill: "#ebe9eb",
+                  },
+                }}
+                onClick={handleBack}
+              >
+                <ArrowBackIcon />
 
+              </IconButton>
+
+          
+          {/* <Button
+          sx={{ float:"left", 
+          fontWeight: 'bold',
+          border: 1, 
+          borderColor: "#2debab",
+          margin:"1%", 
+          backgroundColor: '#2debab',
+          color: '#111315' ,
+          fontFamily:"Barlow",
+          "&:hover": {borderColor:"#2debab", background:"#2debab"}}}
+           onClick={handleBack}>Back</Button> */}
+          <Button>ACA VA LA SEARCHBAR</Button>
+          <Button 
+          sx={{ float:"right", 
+          fontWeight: 'bold',
+          border: 1, 
+          borderColor: "#2debab",
+          margin:"1%", 
+          backgroundColor: '#2debab',
+          color: '#111315' ,
+          fontFamily:"Barlow",
+          "&:hover": {borderColor:"#2debab", background:"#2debab"}}}
+          onClick={createUser}>Nuevo Usuario</Button>
         </Box>
-      </Dialog>
+        <TableContainer sx={{background:"#d3d3d3"}} direction={'column'}>
+          <TableHead  style={{ backgroundColor: '#d3d3d3', height: 50}}>
+            <TableRow>
+              <TableCell sx={{fontWeight: 'bold' , color:"#111315", fontFamily:"Barlow"}}>Email</TableCell>
+              <TableCell sx={{fontWeight: 'bold' , color:"#111315", fontFamily:"Barlow"}}>Usuario App</TableCell>
+              <TableCell sx={{fontWeight: 'bold' , color:"#111315", fontFamily:"Barlow"}}>Usuario Shark</TableCell>
+              <TableCell sx={{fontWeight: 'bold' , color:"#111315", fontFamily:"Barlow"}}>Nivel Jugador</TableCell>
+              <TableCell sx={{fontWeight: 'bold' , color:"#111315", fontFamily:"Barlow"}}>Zona</TableCell>
+              <TableCell sx={{fontWeight: 'bold' , color:"#111315", fontFamily:"Barlow"}}>Admin</TableCell>
+              <TableCell sx={{fontWeight: 'bold' , color:"#111315", fontFamily:"Barlow"}}>Eliminar</TableCell>
+              <TableCell sx={{fontWeight: 'bold' , color:"#111315", fontFamily:"Barlow"}}>Editar</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {allUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) =>
+                <TableRow key={row.name} value={row.email}>
+                  <TableCell sx={{color:"#111315", fontFamily:"Barlow"}}>{row.email}</TableCell>
+                  <TableCell sx={{color:"#111315", fontFamily:"Barlow"}}>{row.name}</TableCell>
+                  <TableCell sx={{color:"#111315", fontFamily:"Barlow"}}>{row.shkUsername}</TableCell>
+                  <TableCell sx={{color:"#111315", fontFamily:"Barlow"}}>{row.playerLevel}</TableCell>
+                  <TableCell sx={{color:"#111315", fontFamily:"Barlow"}}>{row.country ? row.country : 'No hay pais asignado'}</TableCell>
+                  <TableCell sx={{color:"#111315", fontFamily:"Barlow"}}>{!row.admin ? 'No' : 'Si'}</TableCell>
+                  <TableCell sx={{color:"#111315", fontFamily:"Barlow"}}>
+                    <IconButton
+                      aria-label="delete"
+                      onClick={() => deleteUser(row._id)}
+                    >
+                      <DeleteIcon />
+                    </IconButton>
+                  </TableCell>
+                  <TableCell sx={{color:"#111315"}}>
+                    <Link to={`/useredit/${row._id}`}>
+                      <IconButton
+                        aria-label="delete"
+                        onClick={() => llenar(row._id)}
+                      >
+                        <EditIcon />
+                      </IconButton>
+                    </Link>
+                  </TableCell>
+                </TableRow>             
+            )}
+          </TableBody>
+          <TablePagination
+          sx={{ color:"#454545", backgroundColor: '#d3d3d3', fontFamily:"Barlow"}}
+          rowsPerPageOptions={[10, 25, 50]}
+          component="div"
+          count={allUsers.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
+        </TableContainer>
+        
+      </Box>
     </>
   );
-};
+}
 
 export default AdminDashboard;

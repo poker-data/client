@@ -5,10 +5,6 @@ let token = localStorage.getItem("currentUser")
   ? JSON.parse(localStorage.getItem("currentUser")).token
   : false;
 
-let role = localStorage.getItem("currentUser")
-  ? JSON.parse(localStorage.getItem("currentUser")).role
-  : "";
-
 export const initialState = {
   user: "" || user,
   token: "" || token,
@@ -25,7 +21,9 @@ export const initialState = {
   groups: [],
   defaultGroupFilteredList: [],
   tournamentData: [],
+  userId : [],
   remainingRequests: [],
+  countries: [],
 };
 
 export const AuthReducer = (initialState, action) => {
@@ -97,13 +95,33 @@ export const AuthReducer = (initialState, action) => {
           ...initialState,
           tournamentsdata: action.payload.info,
       };
-      case "GET_REMAININGRQUESTS":
+    case "GET_USERS":
+        return {
+          ...initialState,
+          users: action.payload.info
+        }
+    case "GET_ID_USER":
+      return {
+        ...initialState,
+        userId: action.payload
+      };
+    case "GET_COUNTRIES":
+      return {
+        ...initialState,
+        countries: action.payload.info
+      };
+    case "GET_REMAININGRQUESTS":
         return {
           ...initialState,
           remainingRequests: action.payload.info,
       };
 
     default:
-      throw new Error(`Unhandled action type: ${action.type}`);
+      try {
+        return initialState
+      } catch (error) {
+        throw new Error(`Unhandled action type: ${action.type}, ${error}`);
+      }
+      
   }
 };
