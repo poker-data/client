@@ -15,6 +15,7 @@ import { useAuthState, useAuthDispatch } from '../../context';
 import { getIdUser, getUsers, logicalDeleteUser } from '../../context/actions';
 import { useStylesForm } from './useStylesForm';
 import MenuAppBar from '../MenuAppBar';
+import Popup from '../utils/Popup';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 function AdminDashboard() {
@@ -26,6 +27,7 @@ function AdminDashboard() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [sidebarVisible, setSidebarVisible] = React.useState(false);
+  const [openGroupPopup, setOpenGroupPopup] = React.useState(false)
 
   useEffect(async () => {
     await getUsers(dispatch);
@@ -154,7 +156,7 @@ const toggleSidebar = () => {
                   <TableCell sx={{color:"#111315", fontFamily:"Barlow"}}>
                     <IconButton
                       aria-label="delete"
-                      onClick={() => deleteUser(row._id)}
+                      onClick={() => setOpenGroupPopup(true)}
                     >
                       <DeleteIcon />
                     </IconButton>
@@ -183,7 +185,15 @@ const toggleSidebar = () => {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
         </TableContainer>
+        <Popup
+          title="Eliminar Usuario"
+          openPopup={openGroupPopup}
+          setOpenPopup={setOpenGroupPopup}>
+            Hola no me bores
+          <Button onClick={() => setOpenGroupPopup(false)}>Eliminar</Button>
+          <Button onClick={() => setOpenGroupPopup(false)}>Cancelar</Button>
         
+        </Popup>
       </Box>
     </>
   );
