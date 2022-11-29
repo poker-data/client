@@ -1,4 +1,5 @@
 import swal from 'sweetalert';
+import { logicalDeleteUser } from '../../context/actions';
 
 export const alertAddUser = ({ addNewUser , newUser , history, })=>{
   // console.log(addNewUser);
@@ -46,14 +47,14 @@ export const alertEditUser = ({ modifyUserBy_id , index, body, history,uploadImg
     })
   };
 
-export const alertDeleteUser = ({ deleteUserById , index, history })=>{
+export const alertDeleteUser = ( dispatch, index)=>{
      swal({
         title: "Eliminar el usuario elegido?",
         buttons: ["Cancelar", "Aceptar"],
         }).then((result) => {
         // console.log(result)
         if (result) {
-          deleteUserById(index, history);
+          logicalDeleteUser(dispatch, index);
           swal({text: "El usuario ha sido eliminado",icon: "success",timmer:"1000", buttons: false });           
         }
         else{
@@ -95,6 +96,15 @@ export const alertEdit=()=>{
     text: "User successfully edited!",
     icon: "success",
     button: "Accept",
+  });
+}
+
+export const alertDelete=()=>{
+  swal({
+    title: "Usuario Eliminado.",
+    text: "Usuario eliminado correctamente.",
+    icon: "success",
+    button: "Aceptar",
   });
 }
 

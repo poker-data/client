@@ -15,7 +15,10 @@ import { useAuthState, useAuthDispatch } from '../../context';
 import { getIdUser, getUsers, logicalDeleteUser } from '../../context/actions';
 import { useStylesForm } from './useStylesForm';
 import MenuAppBar from '../MenuAppBar';
+import Popup from '../utils/Popup';
+import swal from 'sweetalert';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { alertDelete, alertDeleteUser } from './Alerts';
 
 function AdminDashboard() {
   const history = useHistory();
@@ -29,6 +32,8 @@ function AdminDashboard() {
   const [name, setName] = useState('')
 
   const [search, setSearch ] = useState()
+  const [openGroupPopup, setOpenGroupPopup] = React.useState(false)
+  const [idDelete, setIdDeleted] = useState()
 
   useEffect(async () => {
      getUsers(dispatch);
@@ -41,8 +46,9 @@ function AdminDashboard() {
   };
 
   const deleteUser = async (id) => {
-    await logicalDeleteUser(dispatch, id);
-    window.location.reload();
+    await logicalDeleteUser(dispatch, id);  
+    alertDelete()
+    setOpenGroupPopup(false)
   };
 
   const fill = async (id) => {
@@ -52,6 +58,8 @@ function AdminDashboard() {
   const handleBack = () => {
     history.push('/home');
   };
+
+
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -82,6 +90,7 @@ const filter = (terminoBusqueda) => {
 }
 
 
+
 const toggleSidebar = () => {
   if (!sidebarVisible) {
     setSidebarVisible(true);
@@ -92,14 +101,7 @@ const toggleSidebar = () => {
   return (
     <>
       <MenuAppBar handleBtnClick={toggleSidebar} />
-      {/* <Box sx={{background:"#111315", color:"#ffffff"}} display="flex " alignItems="center" justifyContent="center">
-          <Typography 
-          sx={{ flex: '1 1 100%', fontFamily:"Barlow", fontWeight:'bold', textAlign:'center', background:"#000000", color:"#ffffff"}}
-          variant="h4"
-          id="tableTitle"
-          component="div"
-          className={styles.title}>Tablero Administrador</Typography>
-        </Box> */}
+
       <Box
         backgroundColor={'#111315'}
         display="grid"
@@ -182,7 +184,7 @@ const toggleSidebar = () => {
                   <TableCell sx={{color:"#111315", fontFamily:"Barlow"}}>
                     <IconButton
                       aria-label="delete"
-                      onClick={() => deleteUser(row._id)}
+                      onClick={()=> alertDeleteUser(dispatch, row._id)}
                     >
                       <DeleteIcon />
                     </IconButton>
@@ -211,7 +213,6 @@ const toggleSidebar = () => {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
         </TableContainer>
-        
       </Box>
     </>
   );
