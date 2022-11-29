@@ -48,7 +48,6 @@ export const alertEditUser = ({ modifyUserBy_id , index, body, history,uploadImg
   };
 
 export const alertDeleteUser = ( dispatch, index)=>{
-  console.log(index)
      swal({
         title: "Eliminar el usuario elegido?",
         buttons: ["Cancelar", "Aceptar"],
