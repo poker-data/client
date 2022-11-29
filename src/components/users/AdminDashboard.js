@@ -15,7 +15,10 @@ import { useAuthState, useAuthDispatch } from '../../context';
 import { getIdUser, getUsers, logicalDeleteUser } from '../../context/actions';
 import { useStylesForm } from './useStylesForm';
 import MenuAppBar from '../MenuAppBar';
+import Popup from '../utils/Popup';
+import swal from 'sweetalert';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { alertDelete, alertDeleteUser } from './Alerts';
 
 function AdminDashboard() {
   const history = useHistory();
@@ -26,6 +29,8 @@ function AdminDashboard() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [sidebarVisible, setSidebarVisible] = React.useState(false);
+  const [openGroupPopup, setOpenGroupPopup] = React.useState(false)
+  const [idDelete, setIdDeleted] = useState()
 
   useEffect(async () => {
     await getUsers(dispatch);
@@ -36,8 +41,9 @@ function AdminDashboard() {
   };
 
   const deleteUser = async (id) => {
-    await logicalDeleteUser(dispatch, id);
-    window.location.reload();
+    await logicalDeleteUser(dispatch, id);  
+    alertDelete()
+    setOpenGroupPopup(false)
   };
 
   const llenar = async (id) => {
@@ -48,6 +54,8 @@ function AdminDashboard() {
     history.push('/home');
   };
 
+
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
 };
@@ -56,6 +64,7 @@ const handleChangeRowsPerPage = (event) => {
   setRowsPerPage(+event.target.value);
   setPage(0);
 };
+
 
 
 const toggleSidebar = () => {
@@ -68,14 +77,7 @@ const toggleSidebar = () => {
   return (
     <>
       <MenuAppBar handleBtnClick={toggleSidebar} />
-      {/* <Box sx={{background:"#111315", color:"#ffffff"}} display="flex " alignItems="center" justifyContent="center">
-          <Typography 
-          sx={{ flex: '1 1 100%', fontFamily:"Barlow", fontWeight:'bold', textAlign:'center', background:"#000000", color:"#ffffff"}}
-          variant="h4"
-          id="tableTitle"
-          component="div"
-          className={styles.title}>Tablero Administrador</Typography>
-        </Box> */}
+
       <Box
         backgroundColor={'#111315'}
         display="grid"
@@ -104,18 +106,6 @@ const toggleSidebar = () => {
 
               </IconButton>
 
-          
-          {/* <Button
-          sx={{ float:"left", 
-          fontWeight: 'bold',
-          border: 1, 
-          borderColor: "#2debab",
-          margin:"1%", 
-          backgroundColor: '#2debab',
-          color: '#111315' ,
-          fontFamily:"Barlow",
-          "&:hover": {borderColor:"#2debab", background:"#2debab"}}}
-           onClick={handleBack}>Back</Button> */}
           <Button>ACA VA LA SEARCHBAR</Button>
           <Button 
           sx={{ float:"right", 
@@ -144,7 +134,7 @@ const toggleSidebar = () => {
           </TableHead>
           <TableBody>
             {allUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) =>
-                <TableRow key={row.name} value={row.email}>
+                <TableRow key={row._id} value={row.email}>
                   <TableCell sx={{color:"#111315", fontFamily:"Barlow"}}>{row.email}</TableCell>
                   <TableCell sx={{color:"#111315", fontFamily:"Barlow"}}>{row.name}</TableCell>
                   <TableCell sx={{color:"#111315", fontFamily:"Barlow"}}>{row.shkUsername}</TableCell>
@@ -154,7 +144,7 @@ const toggleSidebar = () => {
                   <TableCell sx={{color:"#111315", fontFamily:"Barlow"}}>
                     <IconButton
                       aria-label="delete"
-                      onClick={() => deleteUser(row._id)}
+                      onClick={()=> alertDeleteUser(dispatch, row._id)}
                     >
                       <DeleteIcon />
                     </IconButton>
@@ -183,7 +173,6 @@ const toggleSidebar = () => {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
         </TableContainer>
-        
       </Box>
     </>
   );
