@@ -66,6 +66,7 @@ const handleInputChange = (e) => {
   e.preventDefault();
   setSearch(e.target.value)
   filter(e.target.value)
+  setPage(0)
 
 }
 

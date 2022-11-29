@@ -190,7 +190,7 @@ function UserEdit() {
                     id="demo-simple-select"
                     name="role"
                     label="Rol"
-                    value={level}
+                    value={level ?? ''}
                     sx={{ 
                       margin:"2%",
                       background:"#ffffff",
@@ -217,7 +217,7 @@ function UserEdit() {
                   id="demo-simple-select"
                   name="role"
                   label="Rol"
-                  value={country}
+                  value={country ?? ''}
                   sx={{ 
                     margin:"2%",
                     background:"#ffffff",
