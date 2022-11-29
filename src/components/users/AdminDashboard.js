@@ -26,11 +26,16 @@ function AdminDashboard() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [sidebarVisible, setSidebarVisible] = React.useState(false);
+  const [name, setName] = useState('')
+
+  const [search, setSearch ] = useState()
 
   useEffect(async () => {
-    await getUsers(dispatch);
+     getUsers(dispatch);
   }, [allUsers]);
 
+  const [usuarios,setUsuarios] = useState(allUsers)
+  const [tablaUsuarios, setTablaUsuarios] = useState(allUsers)
   const createUser = () => {
     history.push('/usercreate');
   };
@@ -40,7 +45,7 @@ function AdminDashboard() {
     window.location.reload();
   };
 
-  const llenar = async (id) => {
+  const fill = async (id) => {
     await getIdUser(dispatch, id);
   };
 
@@ -56,6 +61,24 @@ const handleChangeRowsPerPage = (event) => {
   setRowsPerPage(+event.target.value);
   setPage(0);
 };
+
+const handleInputChange = (e) => {
+  e.preventDefault();
+  setSearch(e.target.value)
+  filter(e.target.value)
+
+}
+
+const filter = (terminoBusqueda) => {
+  var resultadosBusqueda=tablaUsuarios.filter((elemento)=>{
+    if(elemento.name.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
+    || elemento.email.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
+    ){
+      return elemento;
+    }
+  });
+  setUsuarios(resultadosBusqueda);
+}
 
 
 const toggleSidebar = () => {
@@ -116,20 +139,11 @@ const toggleSidebar = () => {
           fontFamily:"Barlow",
           "&:hover": {borderColor:"#2debab", background:"#2debab"}}}
            onClick={handleBack}>Back</Button> */}
-          <Button 
-          sx={{ float:"right", 
-          fontWeight: 'bold',
-          border: 1, 
-          borderColor: "#2debab",
-          margin:"1%", 
-          backgroundColor: '#2debab',
-          color: '#111315' ,
-          fontFamily:"Barlow",
-          "&:hover": {borderColor:"#2debab", background:"#2debab"}}}
-          >Buscar</Button>
 
-          <TextField id="outlined-basic" label="Buscar" variant="outlined" />
-
+          <TextField                 sx={{ 
+                  margin:"2%",
+                  background:"#d3d3d3",
+                  borderRadius:2}} id="outlined-basic" label="Buscar" variant="outlined" value={search} onChange={(e) => handleInputChange(e)} />
           <Button 
           sx={{ float:"right", 
           fontWeight: 'bold',
@@ -156,7 +170,7 @@ const toggleSidebar = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {allUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) =>
+            {usuarios.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) =>
                 <TableRow key={row._id} value={row.email}>
                   <TableCell sx={{color:"#111315", fontFamily:"Barlow"}}>{row.email}</TableCell>
                   <TableCell sx={{color:"#111315", fontFamily:"Barlow"}}>{row.name}</TableCell>
@@ -176,7 +190,7 @@ const toggleSidebar = () => {
                     <Link to={`/useredit/${row._id}`}>
                       <IconButton
                         aria-label="delete"
-                        onClick={() => llenar(row._id)}
+                        onClick={() => fill(row._id)}
                       >
                         <EditIcon />
                       </IconButton>
@@ -189,7 +203,7 @@ const toggleSidebar = () => {
           sx={{ color:"#454545", backgroundColor: '#d3d3d3', fontFamily:"Barlow"}}
           rowsPerPageOptions={[10, 25, 50]}
           component="div"
-          count={allUsers.length}
+          count={usuarios.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
