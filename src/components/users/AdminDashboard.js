@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { Box, Button,TablePagination } from '@mui/material';
+import { Box, Button,TablePagination, TextField } from '@mui/material';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -116,7 +116,20 @@ const toggleSidebar = () => {
           fontFamily:"Barlow",
           "&:hover": {borderColor:"#2debab", background:"#2debab"}}}
            onClick={handleBack}>Back</Button> */}
-          <Button>ACA VA LA SEARCHBAR</Button>
+          <Button 
+          sx={{ float:"right", 
+          fontWeight: 'bold',
+          border: 1, 
+          borderColor: "#2debab",
+          margin:"1%", 
+          backgroundColor: '#2debab',
+          color: '#111315' ,
+          fontFamily:"Barlow",
+          "&:hover": {borderColor:"#2debab", background:"#2debab"}}}
+          >Buscar</Button>
+
+          <TextField id="outlined-basic" label="Buscar" variant="outlined" />
+
           <Button 
           sx={{ float:"right", 
           fontWeight: 'bold',
@@ -144,7 +157,7 @@ const toggleSidebar = () => {
           </TableHead>
           <TableBody>
             {allUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) =>
-                <TableRow key={row.name} value={row.email}>
+                <TableRow key={row._id} value={row.email}>
                   <TableCell sx={{color:"#111315", fontFamily:"Barlow"}}>{row.email}</TableCell>
                   <TableCell sx={{color:"#111315", fontFamily:"Barlow"}}>{row.name}</TableCell>
                   <TableCell sx={{color:"#111315", fontFamily:"Barlow"}}>{row.shkUsername}</TableCell>

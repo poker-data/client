@@ -80,6 +80,15 @@ export const alertRegister=()=>{
   });
 }
 
+export const alertEmailExist=()=>{
+  swal({
+    title: "Error",
+    text: "El email seleccionado ya existe.",
+    icon: "error",
+    button: "Aceptar",
+  });
+}
+
 export const alertEdit=()=>{
   swal({
     title: "Edited User.",
