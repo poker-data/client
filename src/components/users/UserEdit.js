@@ -59,6 +59,7 @@ function UserEdit() {
     };
     try {
       await userUpdate(dispatch, id, body);
+      await getUsers(dispatch)
       alertEdit();
       history.push('/admindashboard');
     } catch (error) {

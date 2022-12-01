@@ -25,7 +25,7 @@ import {
   Typography,
 } from '@mui/material';
 import { alertEditUser, alertEmailExist, alertPassword, alertRegister } from './Alerts';
-import { getCountries, userRegister } from '../../context/actions';
+import { getCountries, getUsers, userRegister } from '../../context/actions';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import IconButton from "@mui/material/IconButton";
 
@@ -61,7 +61,6 @@ const UserCreate = () => {
         return alertPassword();
       } else {
         const newUser = await userRegister(body)
-        console.log(newUser.info.name)
         if(!newUser.info.error){
           alertRegister();
           setName('');
@@ -72,6 +71,7 @@ const UserCreate = () => {
           setLevel('');
           setCountry('');
           setChecked(false);
+          await getUsers(dispatch)
           history.push('/admindashboard');
         } else if(newUser.info.error){
           alertEmailExist()
