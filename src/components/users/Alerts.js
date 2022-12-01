@@ -1,5 +1,5 @@
 import swal from 'sweetalert';
-import { logicalDeleteUser } from '../../context/actions';
+import { getUsers, logicalDeleteUser } from '../../context/actions';
 
 export const alertAddUser = ({ addNewUser , newUser , history, })=>{
   // console.log(addNewUser);
@@ -47,16 +47,20 @@ export const alertEditUser = ({ modifyUserBy_id , index, body, history,uploadImg
     })
   };
 
-export const alertDeleteUser = ( dispatch, index)=>{
+export const alertDeleteUser =  ( dispatch, index)=>{
      swal({
         title: "Eliminar el usuario elegido?",
         buttons: ["Cancelar", "Aceptar"],
-        }).then((result) => {
+        }).then( async (result) => {
         // console.log(result)
         if (result) {
-          logicalDeleteUser(dispatch, index);
-          swal({text: "El usuario ha sido eliminado",icon: "success",timmer:"1000", buttons: false });           
+          await logicalDeleteUser(dispatch, index);
+          swal({text: "El usuario ha sido eliminado",icon: "success",timmer:"1000", buttons: false }); 
+/*           setTimeout(()=>{
+            window.location.reload()
+          },'1000')   */        
         }
+
         else{
             swal({text: "El usuario no ha sido eliminado"});
         }
@@ -81,12 +85,21 @@ export const alertRegister=()=>{
   });
 }
 
+export const alertEmailExist=()=>{
+  swal({
+    title: "Error",
+    text: "El email seleccionado ya existe.",
+    icon: "error",
+    button: "Aceptar",
+  });
+}
+
 export const alertEdit=()=>{
   swal({
-    title: "Edited User.",
-    text: "User successfully edited!",
+    title: "Editar Usuario.",
+    text: "Usuario editado con exito!",
     icon: "success",
-    button: "Accept",
+    button: "Aceptar",
   });
 }
 

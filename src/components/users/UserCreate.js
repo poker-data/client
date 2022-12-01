@@ -24,8 +24,8 @@ import {
   Tab,
   Typography,
 } from '@mui/material';
-import { alertEditUser, alertPassword, alertRegister } from './Alerts';
-import { getCountries, userRegister } from '../../context/actions';
+import { alertEditUser, alertEmailExist, alertPassword, alertRegister } from './Alerts';
+import { getCountries, getUsers, userRegister } from '../../context/actions';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import IconButton from "@mui/material/IconButton";
 
@@ -60,17 +60,23 @@ const UserCreate = () => {
       if (password.length < 8) {
         return alertPassword();
       } else {
-        dispatch(userRegister(body));
-        alertRegister();
-        setName('');
-        setEmail('');
-        setPassword('');
-        setAdmin('');
-        setShkUsername('');
-        setLevel('');
-        setCountry('');
-        setChecked(false);
-        history.push('/admindashboard');
+        const newUser = await userRegister(body)
+        if(!newUser.info.error){
+          alertRegister();
+          setName('');
+          setEmail('');
+          setPassword('');
+          setAdmin('');
+          setShkUsername('');
+          setLevel('');
+          setCountry('');
+          setChecked(false);
+          await getUsers(dispatch)
+          history.push('/admindashboard');
+        } else if(newUser.info.error){
+          alertEmailExist()
+        }
+
       }
     } catch (error) {
       // console.log(error);
