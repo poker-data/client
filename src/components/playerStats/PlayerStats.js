@@ -5,7 +5,14 @@ import { Button, Stack, TextField } from "@mui/material";
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
-import {  useAuthDispatch, getPlayers, useAuthState, getPlayerByFilter, getRooms, setNewPlayer } from "../../context";
+import {  useAuthDispatch, 
+  getPlayers, 
+  useAuthState, 
+  getPlayerByFilter, 
+  getRooms, 
+  setNewPlayer,
+  getUsers
+} from "../../context";
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -52,16 +59,16 @@ export default function PlayerStats() {
     })
 
   }
-
  
   React.useEffect(async () => {
     await getPlayers(dispatch);
+    await getUsers(dispatch);
     await getRooms(dispatch);
   }, []);
 
 
   React.useEffect(() => {
-    state.players.length ? setPlayerList(state.players) : setPlayerList([]);
+    state.users.length ? setPlayerList(state.users) : setPlayerList([]);
   }, [state, selectedDate, player]);
 
   React.useEffect(() => {
@@ -78,7 +85,7 @@ export default function PlayerStats() {
 
     const options = {
       _id: player._id,
-      playerName: player.playerName,
+      playerName: player.name,
       shkUsername: player.shkUsername,
       dateFrom: dateFrom,
       dateTo: dateTo,
@@ -214,7 +221,7 @@ export default function PlayerStats() {
              color: '#111315',
              fontFamily:"Barlow",
             "&:hover": {borderColor:"#2debab", background:"#2debab"}}} 
-            onClick={handleSubmit} disabled={player._id ? false : true}>
+            onClick={handleSubmit} disabled={(player._id ? false : true) && room.roomName !== ""}>
               Apply
             </Button>
             <Button

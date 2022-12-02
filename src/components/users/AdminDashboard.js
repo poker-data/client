@@ -1,24 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { Box, Button, TablePagination, TextField } from '@mui/material';
-import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { useAuthState, useAuthDispatch } from '../../context';
-import { getIdUser, getUsers, logicalDeleteUser } from '../../context/actions';
+import { getIdUser, getUsers } from '../../context/actions';
 import { useStylesForm } from './useStylesForm';
 import MenuAppBar from '../MenuAppBar';
-import Popup from '../utils/Popup';
-import swal from 'sweetalert';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { alertDelete, alertDeleteUser } from './Alerts';
+import { alertDeleteUser } from './Alerts';
 
 function AdminDashboard() {
   const history = useHistory();

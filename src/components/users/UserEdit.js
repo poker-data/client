@@ -1,13 +1,10 @@
 import { useAuthState, useAuthDispatch } from '../../context';
 import React, { useState, useEffect } from 'react';
 import {
-  alertEdit,
-  alertEditUser,
-  alertPassword,
-  alertRegister,
+  alertEdit
 } from './Alerts';
 import { useHistory, useParams } from 'react-router-dom';
-
+import "./User.css" 
 import {
   Button,
   Grid,
@@ -17,9 +14,6 @@ import {
   FormControl,
   InputLabel,
   Select,
-  Checkbox,
-  Tabs,
-  Tab,
   Typography,
 } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
@@ -27,7 +21,7 @@ import { useStylesForm } from './useStylesForm';
 import { getCountries, getUsers, userUpdate } from '../../context/actions';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import IconButton from "@mui/material/IconButton";
-
+import logo from '../../assets/Horizontal.png';
 
 function UserEdit() {
   const state = useAuthState();
@@ -41,9 +35,7 @@ function UserEdit() {
   const [level, setLevel] = useState('');
   const [country, setCountry] = useState('');
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [admin, setAdmin] = useState('');
-  const [checked, setChecked] = useState(false);
   const [shkUsername, setShkUsername] = useState('');
   const [loading, setLoading] = useState('');
 
@@ -101,16 +93,16 @@ function UserEdit() {
           width={'50vw'}
           marginTop={'5vh'}
         >
-          <Stack
-            className={styles.title}
+            <Stack
             sx={{
-              justifyContent: 'space-between',
-              fontFamily:"Barlow",
-              color:"#2debab"
+              marginBottom: "4%",
+              alignItems: "center",
+              justifyContent: "center",
             }}
-          >
-            EDITAR USUARIO
-          </Stack>
+              >
+                <img src={logo}  alt= "bbzlatam.app" className='image'/>
+
+        </Stack>
           <IconButton
                 size="large"
                 edge="start"
@@ -276,7 +268,7 @@ function UserEdit() {
                 alignItems:"center",
              }}
             >
-              <Grid className={styles.buttonR}>
+            
                 <Button
                 size="large"
                 sx={{ float:"left", 
@@ -290,7 +282,7 @@ function UserEdit() {
                 "&:hover": {borderColor:"#2debab", background:"#2debab"}}} 
                 onClick={handleSubmit}
                 >ACEPTAR</Button>
-              </Grid>
+         
             </Stack>
           </Box>
         </Box>

@@ -21,7 +21,6 @@ export const useStylesForm = makeStyles({
     padding: "0.5rem",
   },
   buttonL: {
-    padding: "0.5rem",
   },
 });
 

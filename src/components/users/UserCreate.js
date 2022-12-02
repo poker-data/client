@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Dialog } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import { useLocation } from 'react-router';
 import {
-  // modifyUserBy_id,
   useAuthState,
   useAuthDispatch,
 } from '../../context';
-import { useStylesForm } from './useStylesForm';
 import MenuItem from '@mui/material/MenuItem';
 import {
   Button,
@@ -20,14 +16,15 @@ import {
   InputLabel,
   Select,
   Checkbox,
-  Tabs,
-  Tab,
   Typography,
 } from '@mui/material';
-import { alertEditUser, alertEmailExist, alertPassword, alertRegister } from './Alerts';
+import { alertEmailExist, alertPassword, alertRegister } from './Alerts';
 import { getCountries, getUsers, userRegister } from '../../context/actions';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import IconButton from "@mui/material/IconButton";
+import logo from '../../assets/Horizontal.png';
+import "./User.css" 
+import { useStylesForm } from './useStylesForm';
 
 const UserCreate = () => {
   const state = useAuthState();
@@ -43,7 +40,6 @@ const UserCreate = () => {
   const [admin, setAdmin] = useState('');
   const [checked, setChecked] = useState(false);
   const [shkUsername, setShkUsername] = useState('');
-  const [value, setValue] = useState(0);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -76,7 +72,6 @@ const UserCreate = () => {
         } else if(newUser.info.error){
           alertEmailExist()
         }
-
       }
     } catch (error) {
       // console.log(error);
@@ -103,19 +98,7 @@ const UserCreate = () => {
     value: PropTypes.number.isRequired,
   };
 
-  function a11yProps(index) {
-    return {
-      id: `simple-tab-${index}`,
-      'aria-controls': `simple-tabpanel-${index}`,
-    };
-  }
-
   
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
   function TabPanel(props) {
     const { children, value, index, ...other } = props;
     return (
@@ -135,14 +118,16 @@ const UserCreate = () => {
     );
   }
 
-  useEffect(async () => {
-    await getCountries(dispatch);
+  useEffect( () => {
+    const fetchData = async () => {
+      await getCountries(dispatch);
+    }
+    fetchData();
   }, []);
+
 
   return (
     
-
-
     <Box display="grid" 
     sx={{    
       background:"#111315"
@@ -159,7 +144,7 @@ const UserCreate = () => {
         width={'50vw'}
         marginTop="5vh"
       >
-        <Stack
+     {/*    <Stack
             className={styles.title}
             sx={{
               justifyContent: 'space-between',
@@ -168,7 +153,17 @@ const UserCreate = () => {
             }}
           >
             CREAR NUEVO USUARIO
-          </Stack>
+          </Stack> */}
+            <Stack
+            sx={{
+              marginBottom: "4%",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+              >
+                <img src={logo}  alt= "bbzlatam.app" className='image'/>
+
+        </Stack>
          <IconButton
     size="large"
     edge="start"
@@ -361,7 +356,13 @@ const UserCreate = () => {
               </FormControl>
               
             </Grid>
-
+            <Stack
+              className={styles.buttonsContainer}
+              sx={{ 
+                background:"#111315",
+                alignItems:"center",
+             }}
+            >
             <Button
               size="large"
               sx={{ 
@@ -383,7 +384,7 @@ const UserCreate = () => {
               >
                 ACEPTAR
               </Button>
-
+              </Stack>
 
 
           </Grid>     

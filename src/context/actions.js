@@ -266,7 +266,7 @@ export async function getUsers(dispatch, payload) {
     dispatch({ type: "GET_USERS", payload: data });
     return data;
   } catch (error) {
-    dispatch({ type: "LOGIN_ERROR", error: error });
+    console.log(error)
   }
 }
 
