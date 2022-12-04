@@ -221,7 +221,7 @@ export default function PlayerStats() {
              color: '#111315',
              fontFamily:"Barlow",
             "&:hover": {borderColor:"#2debab", background:"#2debab"}}} 
-            onClick={handleSubmit} disabled={(player._id ? false : true) && room.roomName === ""}>
+            onClick={handleSubmit} disabled={player._id ? false : true}>
               Apply
             </Button>
             <Button
