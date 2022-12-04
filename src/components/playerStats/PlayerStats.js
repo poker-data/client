@@ -97,13 +97,13 @@ export default function PlayerStats() {
 
 
   const rows = playerList?.map((player) => {
-    return { id: player._id, Name: player.playerName, shkUsername: player.shkUsername }
+    return { id: player._id, Name: player.name, shkUsername: player.shkUsername }
   })
 
 
   const columns = [
     { field: 'Name', headerName: 'Nombre', width: 200 },
-    { field: 'shkUsername', headerName: 'Usuario', width: 200 },
+    { field: 'shkUsername', headerName: 'Usuario Shk', width: 200 },
   ];
 
   //addPlayer
@@ -221,7 +221,7 @@ export default function PlayerStats() {
              color: '#111315',
              fontFamily:"Barlow",
             "&:hover": {borderColor:"#2debab", background:"#2debab"}}} 
-            onClick={handleSubmit} disabled={(player._id ? false : true) && room.roomName !== ""}>
+            onClick={handleSubmit} disabled={(player._id ? false : true) && room.roomName === ""}>
               Apply
             </Button>
             <Button
