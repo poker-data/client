@@ -6,8 +6,6 @@ import Grid from '@mui/material/Grid';
 import PlayersDT from "../components/playerStats/PlayersDT";
 import LineChart from "../components/charts/LineChart";
 
-
-
 function PlayerDashboard() {
   const state = useAuthState();
 

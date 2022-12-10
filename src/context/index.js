@@ -11,7 +11,8 @@ import {
     getGroups,
     setNewGroup,
     getGroupDataByFilter,
-    getTournamentData
+    getTournamentData,
+    getUsers
   } from "./actions";
   
   import { AuthProvider, useAuthDispatch, useAuthState } from "./context";
@@ -33,4 +34,5 @@ import {
     setNewGroup,
     getGroupDataByFilter,
     getTournamentData,
+    getUsers
   };
