@@ -7,7 +7,11 @@ COPY . /app
 RUN yarn build
 # STAGE 2
 FROM nginx:stable-alpine
+
+COPY ./app/nginx.conf /etc/nginx/nginx.conf
+## Remove default nginx index page
+RUN rm -rf /usr/share/nginx/html/*
+
 COPY --from=build /app/build /usr/share/nginx/html
-COPY --from=build /app/nginx.config /etc/nginx/conf.d/default.conf
-EXPOSE 90
+EXPOSE 3000 80
 CMD ["nginx", "-g", "daemon off;"]
