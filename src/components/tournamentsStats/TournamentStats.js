@@ -121,10 +121,10 @@ const TournamentStats = () => {
       var dataTournaments = state?.tournamentsdata?.stats??[]
       var newData;
       switch(level) {
-        case "optimal": newData = dataTournaments.filter( element => parseFloat(element.field) <= 200 && parseFloat(element.guarantee) > 100);
+        case "optimal": newData = dataTournaments.filter( element => parseFloat(element.field) <= 250 && parseFloat(element.guarantee) > 100);
         setTitleName('Optima');
         break;
-        case "suboptimalone": newData = dataTournaments.filter( element => parseFloat(element.field) <= 500 && parseFloat(element.field) >= 201);
+        case "suboptimalone": newData = dataTournaments.filter( element => parseFloat(element.field) <= 500 && parseFloat(element.field) >= 251);
         setTitleName('Suboptima 1');
         break;
         case "suboptimaltwo": newData = dataTournaments.filter( element => parseFloat(element.guarantee) <= 100);
