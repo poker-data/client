@@ -1,16 +1,34 @@
-# STAGE 1
-FROM node:16-alpine AS build
+# Etapa de construcción
+FROM node:14 as build-stage
+
 WORKDIR /app
-COPY package.json ./
-RUN yarn install
-COPY . /app
-RUN yarn build
-FROM nginx:stable-alpine
 
-COPY nginx.conf /etc/nginx/nginx.conf
-## Remove default nginx index page
-RUN rm -rf /usr/share/nginx/html/*
+# Copia los archivos de la aplicación
+COPY package*.json ./
+COPY package-lock.json ./
 
-COPY --from=build /app/build /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+# Instala las dependencias
+RUN npm install
+
+# Copia el código fuente
+COPY . .
+
+# Compila la aplicación
+RUN npm run build
+
+# Etapa de producción
+FROM node:14 as production-stage
+
+WORKDIR /app
+
+# Copia los archivos compilados de la etapa de construcción
+COPY --from=build-stage /app/build ./build
+
+# Instala un servidor HTTP simple para servir la aplicación
+RUN npm install -g serve
+
+# Expone el puerto 3000
+EXPOSE 3000
+
+# Comando para ejecutar el servidor HTTP
+CMD ["serve", "-s", "build", "-l", "3000"]
