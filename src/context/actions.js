@@ -1,12 +1,15 @@
 import { ROOT_URL } from "../Config/constants";
 import axios from "axios";
 
+const instance = axios.create({
+  baseURL: ROOT_URL, // Reemplaza con la dirección IP de tu servidor EC2
+});
 export async function loginUser(dispatch, loginPayload) {
 
   try {
     dispatch({ type: "REQUEST_LOGIN" });
 
-    const response = await axios.post(`${ROOT_URL}/login`, loginPayload);
+    const response = await instance.post(`/login`, loginPayload);
 
     const data = response.data
 
@@ -43,7 +46,7 @@ export async function getPlayerStats(dispatch, name, body) {
     body: JSON.stringify(body)
   };
 
-  const response = await fetch(`${ROOT_URL}/api/playerData/${name}`, requestOptions);
+  const response = await fetch(`/api/playerData/${name}`, requestOptions);
   const data = await response.json();
   const finalData = []
   data.info.Response.PlayerResponse.PlayerView.Player.Statistics.StatisticalDataSet[0].Data.map(stat => finalData.push(stat["Y"]));
@@ -61,7 +64,7 @@ export async function getPlayers(dispatch) {
   };
 
   try {
-    const response = await fetch(`${ROOT_URL}/api/getPlayers`, requestOptions);
+    const response = await fetch(`/api/getPlayers`, requestOptions);
     const data = await response.json();
     dispatch({ type: "GET_PLAYERS", payload: data });
     return data;
@@ -77,7 +80,7 @@ export const getPlayerByFilter = async (dispatch, options) => {
 
   try {
   
-    const url = `${ROOT_URL}/api/playerDataFiltered/${name}`;
+    const url = `/api/playerDataFiltered/${name}`;
 
     const requestOptions = {
       method: "POST",
@@ -97,7 +100,7 @@ export const getPlayerByFilter = async (dispatch, options) => {
 export const getDataFromDefaultFilters = async (dispatch, options) => {
   try {
 
-    const url = `${ROOT_URL}/api/getDefaultGroupFiltersData`;
+    const url = `/api/getDefaultGroupFiltersData`;
 
     const requestOptions = {
       method: "POST",
@@ -120,7 +123,7 @@ export async function getRooms(dispatch) {
     headers: { "Content-Type": "application/json", "token": JSON.parse(localStorage.getItem("currentUser")).token },
   };
   try {
-    const response = await fetch(`${ROOT_URL}/api/getRooms`, requestOptions);
+    const response = await fetch(`/api/getRooms`, requestOptions);
     const data = await response.json();
     dispatch({ type: "GET_ROOMS", payload: data });
     return data;
@@ -136,7 +139,7 @@ export async function getDefaultFilterList(dispatch) {
     headers: { "Content-Type": "application/json", "token": JSON.parse(localStorage.getItem("currentUser")).token },
   };
   try {
-    const response = await fetch(`${ROOT_URL}/api/getDefaultFilters`, requestOptions);
+    const response = await fetch(`/api/getDefaultFilters`, requestOptions);
     const data = await response.json();
     dispatch({ type: "DEFAULT_FILTER_LIST", payload: data });
     return data;
@@ -154,7 +157,7 @@ export async function setNewPlayer(values) {
     body: JSON.stringify(values)
   };
   try {
-    const response = await fetch(`${ROOT_URL}/api/setPlayerData`, requestOptions);
+    const response = await fetch(`/api/setPlayerData`, requestOptions);
     const data = await response.json();
     return data;
   } catch (error) {
@@ -168,7 +171,7 @@ export async function getGroups(dispatch) {
     headers: { "Content-Type": "application/json", "token": JSON.parse(localStorage.getItem("currentUser")).token },
   };
   try {
-    const response = await fetch(`${ROOT_URL}/api/getGroups`, requestOptions);
+    const response = await fetch(`/api/getGroups`, requestOptions);
     const data = await response.json();
     dispatch({ type: "GROUPS", payload: data });
     return data;
@@ -186,7 +189,7 @@ export async function setNewGroup(values) {
     body: JSON.stringify(values)
   };
   try {
-    const response = await fetch(`${ROOT_URL}/api/setGroup`, requestOptions);
+    const response = await fetch(`/api/setGroup`, requestOptions);
     const data = await response.json();
     return data;
   } catch (error) {
@@ -199,7 +202,7 @@ export const getGroupDataByFilter = async (dispatch, options) => {
 
   try {
 
-    const url = `${ROOT_URL}/api/getDefaultGroupFiltersData`;
+    const url = `/api/getDefaultGroupFiltersData`;
 
     const requestOptions = {
       method: "POST",
@@ -221,7 +224,7 @@ export const getTournamentData = async (dispatch, options) => {
 
   try {
 
-    const url = `${ROOT_URL}/api/getTournamentsData`
+    const url = `/api/getTournamentsData`
 
     const requestOptions = {
       method: "POST",
@@ -245,7 +248,7 @@ export const userRegister = async (payload) => {
     body: JSON.stringify(payload)
   }
   try {
-    const response = await fetch(`${ROOT_URL}/register`, requestOptions)
+    const response = await fetch(`/register`, requestOptions)
     const data = await response.json()
     return data
 
@@ -261,7 +264,7 @@ export async function getUsers(dispatch, payload) {
     body: JSON.stringify(payload)
   };
   try {
-    const response = await fetch(`${ROOT_URL}/api/admindashboard/users`, requestOptions);
+    const response = await fetch(`/api/admindashboard/users`, requestOptions);
     const data = await response.json();
     dispatch({ type: "GET_USERS", payload: data });
     return data;
@@ -276,7 +279,7 @@ export async function getCountries(dispatch) {
     headers: { "Content-Type": "application/json", "token": JSON.parse(localStorage.getItem("currentUser")).token},
   };
   try {
-    const response = await fetch(`${ROOT_URL}/api/getRegions`, requestOptions);
+    const response = await fetch(`/api/getRegions`, requestOptions);
     //console.log(response)
     const data = await response.json();
     dispatch({ type: "GET_COUNTRIES", payload: data });
@@ -292,7 +295,7 @@ export async function getIdUser(dispatch, id) {
     headers: { "Content-Type": "application/json", "token": JSON.parse(localStorage.getItem("currentUser")).token},
   };
   try {
-    const response = await fetch(`${ROOT_URL}/api/admindashboard/users`, requestOptions);
+    const response = await fetch(`/api/admindashboard/users`, requestOptions);
     const data = await response.json();
     const userIda = await data.info.filter(u => u._id === id)
     dispatch({ type: "GET_ID_USER", payload: userIda });
@@ -308,7 +311,7 @@ export async function logicalDeleteUser(dispatch, id) {
     headers: { "Content-Type": "application/json", "token": JSON.parse(localStorage.getItem("currentUser")).token},
   };
   try {
-    const response = await fetch(`${ROOT_URL}/api/users/${id}`, requestOptions);
+    const response = await fetch(`/api/users/${id}`, requestOptions);
     const data = await response.json();
     return data;
   } catch (error) {
@@ -324,7 +327,7 @@ export async function userUpdate(dispatch, id, payload) {
   };
   //console.log(requestOptions.body)
   try {
-    const response = await fetch(`${ROOT_URL}/api/useredit/${id}`, requestOptions);
+    const response = await fetch(`/api/useredit/${id}`, requestOptions);
     const data = await response.json();
     return data;
   } catch (error) {
@@ -337,7 +340,7 @@ export const getRemainingRequests = async (dispatch, options) => {
 
   try {
 
-    const url = `${ROOT_URL}/api/remainingRequest`
+    const url = `/api/remainingRequest`
 
     const requestOptions = {
       method: "POST",
