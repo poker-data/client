@@ -145,25 +145,6 @@ export default function MenuAppBar({ handleBtnClick }) {
                     <KeyboardBackspaceIcon />
 
                   </IconButton>
-                  <Typography
-                    variant="h6"
-                    component="div"
-                    className="main-title"
-                    sx={{
-                      flexGrow: 1,
-                      fontSize: "30px",
-                      marginBottom: "4%",
-                      borderBottom: 1,
-                      borderColor: "white",
-                      color: "white",
-                      "@media screen and (max-width: 768px)": {
-                        fontSize: "14px",
-                      },
-                    }}
-                    onClick={handleHomeClick}
-                  >
-                    Home
-                  </Typography>
 
 
 
