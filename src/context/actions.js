@@ -6,7 +6,7 @@ export async function loginUser(dispatch, loginPayload) {
   try {
     dispatch({ type: "REQUEST_LOGIN" });
 
-    const response = await axios.post(`${ROOT_URL}/login`, loginPayload);
+    const response = await axios.post(`${ROOT_URL}/api/login`, loginPayload);
 
     const data = response.data
 
